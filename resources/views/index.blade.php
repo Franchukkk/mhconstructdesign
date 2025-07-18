@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
-  @vite(['resources/js/scripts.js'])
-
   <section class="hero-block items-center" id="about">
     <div class="wrapper">
     <div class="hero-block__content">
