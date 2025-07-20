@@ -3,92 +3,132 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BlogPost;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage; // <-- додати для роботи з файлами
+use App\Models\BlogPost;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
 {
+    private function checkAdmin()
+    {
+        if (!Auth::user() || !Auth::user()->is_admin) {
+            abort(Response::HTTP_FORBIDDEN, 'Access denied');
+        }
+    }
+
     public function index()
     {
+        $this->checkAdmin();
         $posts = BlogPost::orderByDesc('created_at')->paginate(10);
         return view('admin.blog.index', compact('posts'));
     }
 
     public function create()
     {
+        $this->checkAdmin();
         return view('admin.blog.create');
     }
 
     public function store(Request $request)
     {
-        $validated = $this->validateData($request);
+        $this->checkAdmin();
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'nullable|image|max:5048',
+            'body' => 'nullable|string',
+        ]);
 
         if ($request->hasFile('image')) {
-            // Збереження файлу в папку storage/app/public/blog_images
-            $validated['image'] = $request->file('image')->store('blog_images', 'public');
+            $data['image'] = $request->file('image')->store('blog_images', 'public');
         }
 
-        if (empty($validated['slug'])) {
-            $validated['slug'] = Str::slug($validated['title']);
-        }
+        BlogPost::create($data);
 
-        $post = BlogPost::create($validated);
-
-        return redirect()->route('admin.blog.index')->with('success', 'Стаття створена');
+        return redirect()->route('admin.blog.create')->with('success', 'Стаття створена!');
     }
 
     public function edit(BlogPost $post)
     {
+        $this->checkAdmin();
         return view('admin.blog.edit', compact('post'));
     }
 
     public function update(Request $request, BlogPost $post)
     {
-        $validated = $this->validateData($request, $post->id);
+        $this->checkAdmin();
+
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'nullable|image|max:5048',
+            'body' => 'nullable|string',
+        ]);
 
         if ($request->hasFile('image')) {
-            // Опційно видалити старе зображення
+            // Видалити стару картинку
             if ($post->image) {
                 Storage::disk('public')->delete($post->image);
             }
 
-            $validated['image'] = $request->file('image')->store('blog_images', 'public');
+            $data['image'] = $request->file('image')->store('blog_images', 'public');
         }
 
-        if (empty($validated['slug'])) {
-            $validated['slug'] = Str::slug($validated['title']);
+        $post->update($data);
+
+        return redirect()->route('admin.blog.edit', $post)->with('success', 'Стаття оновлена!');
+    }
+
+
+    public function uploadImage(Request $request)
+    {
+        $this->checkAdmin();
+
+        $request->validate([
+            'upload' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ]);
+
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+
+            // Прибираємо всі символи, крім латиниці, цифр, дефісу, підкреслення та крапки
+            $safeName = preg_replace('/[^A-Za-z0-9\-_\.]/', '', $file->getClientOriginalName());
+
+            // Додаємо timestamp, щоб уникнути колізій імен
+            $filename = time() . '_' . $safeName;
+
+            // Зберігаємо файл у потрібну папку
+            $path = $file->storeAs('blog_body_images', $filename, 'public');
+
+            return response()->json([
+                'url' => asset('storage/' . $path),
+                'uploaded' => 1,
+                'fileName' => $filename,
+            ]);
         }
 
-        $post->update($validated);
-
-        return redirect()->route('admin.blog.index')->with('success', 'Стаття оновлена');
+        return response()->json(['error' => 'No file uploaded'], 400);
     }
 
     public function destroy(BlogPost $post)
     {
-        // Опційно видалити файл при видаленні посту
-        if ($post->image) {
-            Storage::disk('public')->delete($post->image);
+        // Витягуємо зображення з HTML-контенту
+        preg_match_all('/<img[^>]+src="([^">]+)"/', $post->body, $matches);
+
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $imageUrl) {
+                // Приводимо URL до шляху у файловій системі
+                $path = str_replace('/storage/', '', parse_url($imageUrl, PHP_URL_PATH));
+
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
         }
 
         $post->delete();
 
-        return redirect()->route('admin.blog.index')->with('success', 'Статтю видалено');
+        return redirect()->route('admin.blog.index')->with('success', 'Стаття видалена разом із зображеннями.');
     }
 
-    private function validateData(Request $request, $id = null)
-    {
-        return $request->validate([
-            'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|unique:blog_posts,slug,' . $id,
-            'image' => 'nullable|file|image|max:2048',
-            'preview_text' => 'nullable|string|max:500',
-            'body' => 'nullable|string',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string|max:255',
-            'published_at' => 'nullable|date',
-        ]);
-    }
 }

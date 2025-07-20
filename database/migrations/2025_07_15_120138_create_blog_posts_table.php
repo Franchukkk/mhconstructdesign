@@ -9,18 +9,18 @@ return new class extends Migration {
     {
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
+
             $table->string('title'); // Заголовок
-            $table->string('slug')->unique(); // URL типу /blog/my-article
+            $table->string('slug')->unique(); // URL-слаг
+
             $table->string('image')->nullable(); // Обкладинка
-            $table->string('preview_text')->nullable(); // Короткий анонс
-            $table->text('body')->nullable(); // Основний текст статті
+            $table->text('body')->nullable(); // Основний текст (HTML)
 
-            // SEO (опційно)
-            $table->string('meta_title')->nullable();
-            $table->string('meta_description')->nullable();
+            // SEO
+            $table->string('meta_title')->nullable(); // <= 60 символів
+            $table->string('meta_description')->nullable(); // <= 160 символів
 
-            $table->timestamp('published_at')->nullable();
-            $table->timestamps(); // created_at + updated_at
+            $table->timestamps(); // created_at, updated_at
         });
     }
 

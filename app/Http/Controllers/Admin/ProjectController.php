@@ -81,67 +81,68 @@ class ProjectController extends Controller
     }
 
     public function update(Request $request, Project $project)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255|unique:projects,title,' . $project->id,
-            'description' => 'nullable|string',
-            'hero_image' => 'nullable|image|max:2048',
-            'area' => 'nullable|string|max:255',
-            'implementation_time' => 'nullable|string|max:255',
-            'design_time' => 'nullable|string|max:255',
-            'style' => 'nullable|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string|max:255',
+{
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'hero_image' => 'nullable|image|max:2048',
+        'area' => 'nullable|string|max:255',
+        'implementation_time' => 'nullable|string|max:255',
+        'design_time' => 'nullable|string|max:255',
+        'style' => 'nullable|string|max:255',
+        'location' => 'nullable|string|max:255',
+        'gallery' => 'nullable|array',
+        'gallery.*.design_image' => 'nullable|image|max:2048',
+        'gallery.*.real_image' => 'nullable|image|max:2048',
+        'gallery.*.description' => 'nullable|string|max:1000',
+    ]);
 
-            'gallery' => 'nullable|array',
-            'gallery.*.design_image' => 'nullable|image|max:2048',
-            'gallery.*.real_image' => 'nullable|image|max:2048',
-            'gallery.*.description' => 'nullable|string',
-        ]);
+    // Оновлення полів проєкту
+    $project->title = $validatedData['title'];
+    $project->description = $validatedData['description'] ?? null;
 
-        // Якщо змінився заголовок, оновлюємо slug
-        if ($project->title !== $validated['title']) {
-            $validated['slug'] = Str::slug($validated['title']);
-        }
-
-        if (empty($validated['meta_title'])) {
-            $validated['meta_title'] = $validated['title'];
-        }
-
-        if (empty($validated['meta_description']) && !empty($validated['description'])) {
-            $validated['meta_description'] = Str::limit(strip_tags($validated['description']), 160);
-        }
-
-        // Обробляємо нове головне зображення, якщо завантажено
-        if ($request->hasFile('hero_image')) {
-            $validated['hero_image'] = $request->file('hero_image')->store('projects/hero_images', 'public');
-        }
-
-        $project->update($validated);
-
-        // Обробка галереї
-        if ($request->has('gallery') && is_array($request->input('gallery'))) {
-            foreach ($request->input('gallery') as $index => $galleryItem) {
-                $designFile = $request->file("gallery.$index.design_image");
-                $realFile = $request->file("gallery.$index.real_image");
-
-                $designPath = $designFile ? $designFile->store('projects/gallery/design', 'public') : null;
-                $realPath = $realFile ? $realFile->store('projects/gallery/real', 'public') : null;
-
-                // Створюємо новий елемент галереї, якщо є хоч щось
-                if ($designPath || $realPath || !empty($galleryItem['description'])) {
-                    $project->galleryItems()->create([
-                        'design_image' => $designPath,
-                        'real_image' => $realPath,
-                        'description' => $galleryItem['description'] ?? null,
-                    ]);
-                }
-            }
-        }
-
-        return redirect()->route('admin.projects.index')->with('success', 'Проект оновлено');
+    // Оновлюємо hero_image якщо передано
+    if ($request->hasFile('hero_image')) {
+        $project->hero_image = $request->file('hero_image')->store('projects/hero_images', 'public');
     }
+
+    $project->area = $validatedData['area'] ?? null;
+    $project->implementation_time = $validatedData['implementation_time'] ?? null;
+    $project->design_time = $validatedData['design_time'] ?? null;
+    $project->style = $validatedData['style'] ?? null;
+    $project->location = $validatedData['location'] ?? null;
+
+    $project->save();
+
+    // Видаляємо всі записи галереї (як раніше)
+    $project->galleryItems()->delete();
+
+    if ($request->has('gallery')) {
+        foreach ($request->input('gallery') as $index => $galleryItem) {
+            $designFile = $request->file("gallery.$index.design_image");
+            $realFile = $request->file("gallery.$index.real_image");
+
+            // Якщо завантажено нові файли - зберігаємо їх
+            $designPath = $designFile ? $designFile->store('projects/gallery/design', 'public') : ($galleryItem['old_design_image'] ?? null);
+            $realPath = $realFile ? $realFile->store('projects/gallery/real', 'public') : ($galleryItem['old_real_image'] ?? null);
+
+            // Створюємо запис, якщо хоча б є одна з картинок або опис
+            if (!$designPath && !$realPath && empty($galleryItem['description'])) {
+                continue; // Якщо немає нічого — пропускаємо
+            }
+
+            $project->galleryItems()->create([
+                'design_image' => $designPath,
+                'real_image' => $realPath,
+                'description' => $galleryItem['description'] ?? null,
+            ]);
+        }
+    }
+
+    return redirect()->route('admin.projects.index')->with('success', 'Проєкт успішно оновлено!');
+}
+
+
 
 
     public function destroy(Project $project)

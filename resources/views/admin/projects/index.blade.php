@@ -7,16 +7,33 @@
     <style>
         .admin-title {
             font-weight: 700;
-            font-size: 2.4rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
+            font-size: 30rem;
+            /* 30px */
+            margin-bottom: 20rem;
+            /* 20px */
+            letter-spacing: 1.2rem;
+            /* 1.2px */
             color: var(--color-primary);
         }
+
         .add-project-btn {
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 20rem;
+            /* 20px */
             background-color: lightblue;
-            border: 2px solid darkcyan;
+            border: 2.5rem solid darkcyan;
+            /* 2.5px */
+            padding: 14rem 24rem;
+            /* 14px вертикально, 24px горизонтально */
+            font-size: 18rem;
+            /* 18px */
+            cursor: pointer;
+            color: black;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: inline-block;
+            user-select: none;
+            border-radius: 6rem;
+            /* 6px */
         }
 
         .add-project-btn:hover {
@@ -32,38 +49,67 @@
         .admin-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            min-width: 600px;
+            margin-bottom: 24rem;
+            /* 24px */
+            box-shadow: 0 0 15rem rgba(0, 0, 0, 0.1);
+            /* 15px тінь */
+            min-width: 720rem;
+            /* 720px */
+            font-size: 16rem;
+            /* 16px текст в таблиці */
         }
+
         .admin-table th {
             background-color: #f8f9fa;
-            padding: 1rem;
+            padding: 16rem;
+            /* 16px */
             text-align: left;
-            border-bottom: 2px solid #dee2e6;
+            border-bottom: 3rem solid #dee2e6;
+            /* 3px */
             white-space: nowrap;
+            font-weight: 600;
         }
+
         .admin-table td {
-            padding: 1rem;
+            padding: 16rem;
+            /* 16px */
             background: #fff;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1.5rem solid #dee2e6;
+            /* 1.5px */
         }
+
         .action-btn {
-            font-size: 0.85rem;
-            padding: 0.35rem 0.7rem;
-            margin-right: 0.5rem;
+            font-size: 14rem;
+            /* 14px */
+            padding: 10rem 16rem;
+            /* 10px 16px */
+            margin-right: 8rem;
+            /* 8px */
             white-space: nowrap;
+            border-radius: 4rem;
+            /* 4px */
+            cursor: pointer;
+            user-select: none;
+            display: inline-block;
+            transition: background-color 0.2s ease;
         }
+
         .empty-message {
             text-align: center;
-            padding: 2rem 0;
+            padding: 24rem 0;
+            /* 24px вертикально */
             font-style: italic;
             color: var(--color-muted);
+            font-size: 16rem;
+            /* 16px */
         }
+
         .pagination-container {
-            margin-top: 2rem;
+            margin-top: 24rem;
+            /* 24px */
         }
     </style>
+
 
     <h1 class="admin-title">
         Проєкти портфоліо
@@ -96,7 +142,8 @@
                                 Редагувати
                             </a>
 
-                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" onsubmit="return confirm('Видалити цей проєкт?');" style="display:inline;">
+                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
+                                onsubmit="return confirm('Видалити цей проєкт?');" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
 

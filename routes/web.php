@@ -76,50 +76,20 @@ Route::prefix('admin')->middleware(['web', 'auth'])->name('admin.')->group(funct
         }
         return app(ProjectController::class)->destroy($project);
     })->name('projects.destroy');
+});
 
-    Route::get('blog', function () {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            abort(403, 'Access denied');
-        }
-        return app(AdminBlogController::class)->index();
-    })->name('blog.index');
-
-    Route::get('blog/create', function () {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            abort(403, 'Access denied');
-        }
-        return app(AdminBlogController::class)->create();
-    })->name('blog.create');
-
-    Route::post('blog', function (Request $request) {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            abort(403, 'Access denied');
-        }
-        return app(AdminBlogController::class)->store($request);
-    })->name('blog.store');
-
-    Route::get('blog/{post}/edit', function (BlogPost $post) {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            abort(403, 'Access denied');
-        }
-        return app(AdminBlogController::class)->edit($post);
-    })->name('blog.edit');
-
-    Route::put('blog/{post}', function (Request $request, BlogPost $post) {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            abort(403, 'Access denied');
-        }
-        return app(AdminBlogController::class)->update($request, $post);
-    })->name('blog.update');
-
-    Route::delete('blog/{post}', function (BlogPost $post) {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            abort(403, 'Access denied');
-        }
-        return app(AdminBlogController::class)->destroy($post);
-    })->name('blog.destroy');
+Route::prefix('admin')->middleware(['web', 'auth'])->name('admin.')->group(function () {
+    Route::get('blog', [AdminBlogController::class, 'index'])->name('blog.index');
+    Route::get('blog/create', [AdminBlogController::class, 'create'])->name('blog.create');
+    Route::post('blog', [AdminBlogController::class, 'store'])->name('blog.store');
+    Route::post('blog/upload', [AdminBlogController::class, 'uploadImage'])->name('blog.upload');
+    Route::get('blog/{post}/edit', [AdminBlogController::class, 'edit'])->name('blog.edit');
+    Route::put('blog/{post}', [AdminBlogController::class, 'update'])->name('blog.update');
+    Route::delete('blog/{post}', [AdminBlogController::class, 'destroy'])->name('blog.destroy');
+    Route::post('blog/upload', [AdminBlogController::class, 'uploadImage'])->name('blog.upload');
 
 });
+
 
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');

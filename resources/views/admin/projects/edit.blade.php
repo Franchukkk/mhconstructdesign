@@ -2,70 +2,128 @@
 
 @section('content')
     <style>
-        .admin-container {
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 24px;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
-        }
         .form-label {
             font-weight: 600;
-            color: #495057;
+            color: #333;
+            font-size: 16.8rem;
+            /* 14 *1.2 = 16.8px */
+            margin-bottom: 7.2rem;
+            /* 6 *1.2 = 7.2px */
+            display: inline-block;
         }
+
         .form-control {
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            padding: 8px 12px;
+            border-radius: 4.8rem;
+            /* 4 *1.2 = 4.8px */
+            border: 1.2rem solid #ddd;
+            /* 1 *1.2 = 1.2px */
+            padding: 9.6rem 14.4rem;
+            /* 8*1.2=9.6px, 12*1.2=14.4px */
+            font-size: 16.8rem;
+            /* 14 *1.2 = 16.8px */
+            line-height: 1.5;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
+
         .form-control:focus {
             border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+            box-shadow: 0 0 0 2.4rem rgba(0, 123, 255, 0.25);
+            /* 2rem *1.2=2.4px */
+            outline: none;
         }
+
         .text-danger {
-            font-size: 14px;
-            margin-top: 5px;
+            font-size: 14.4rem;
+            /* 12 *1.2 = 14.4px */
+            margin-top: 4.8rem;
+            /* 4 *1.2 = 4.8px */
+            color: #dc3545;
         }
-        .gallery-item {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+
         .btn {
-            padding: 8px 16px;
-            border-radius: 4px;
+            padding: 9.6rem 19.2rem;
+            /* 8*1.2=9.6px, 16*1.2=19.2px */
+            border-radius: 4.8rem;
+            /* 4 *1.2 =4.8px */
             font-weight: 500;
+            font-size: 16.8rem;
+            /* 14 *1.2 =16.8px */
+            cursor: pointer;
+            border: 1.2rem solid transparent;
+            /* 1 *1.2=1.2px */
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            display: inline-block;
+            text-align: center;
+            user-select: none;
+            line-height: 1.5;
         }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
         }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
         .btn-secondary {
             background-color: #6c757d;
             border-color: #6c757d;
+            color: #fff;
         }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
         .btn-danger {
             background-color: #dc3545;
             border-color: #dc3545;
-        }
-        .btn-info {
-            background-color: #17a2b8;
-            border-color: #17a2b8;
             color: #fff;
         }
-        img {
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
         }
+
+        .gallery-pair {
+            background-color: #f8f9fa;
+            border-radius: 4.8rem;
+            /* 4 *1.2=4.8px */
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 18rem;
+            /* 15 *1.2=18px */
+            font-size: 28.8rem;
+            /* 24 *1.2=28.8px */
+        }
+
         h3 {
-            color: #495057;
-            margin: 20px 0;
-            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 12rem;
+            /* 10 *1.2=12px */
+            font-size: 21.6rem;
+            /* 18 *1.2=21.6px */
         }
     </style>
 
@@ -79,8 +137,7 @@
             <!-- Заголовок -->
             <div class="mb-3">
                 <label for="title" class="form-label">Заголовок</label>
-                <input type="text" name="title" id="title" class="form-control" 
-                    value="{{ old('title', $project->title) }}" required>
+                <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $project->title) }}" required>
                 @error('title')<div class="text-danger">{{ $message }}</div>@enderror
             </div>
 
@@ -147,6 +204,7 @@
                             </div>
                         @endif
                         <input type="file" name="gallery[{{ $index }}][design_image]" accept="image/*" class="form-control mb-2">
+                        <input type="hidden" name="gallery[{{ $index }}][old_design_image]" value="{{ $item['design_image'] ?? '' }}">
 
                         <label>Реальне фото (real_image)</label>
                         @if(!empty($item['real_image']) && !str_starts_with($item['real_image'], 'data:'))
@@ -155,6 +213,7 @@
                             </div>
                         @endif
                         <input type="file" name="gallery[{{ $index }}][real_image]" accept="image/*" class="form-control mb-2">
+                        <input type="hidden" name="gallery[{{ $index }}][old_real_image]" value="{{ $item['real_image'] ?? '' }}">
 
                         <label>Опис</label>
                         <textarea name="gallery[{{ $index }}][description]" class="form-control">{{ old("gallery.$index.description", $item['description'] ?? '') }}</textarea>

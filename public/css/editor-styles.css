@@ -1,0 +1,51 @@
+h1 {
+    color: #121212;
+    font-family: Poppins, sans-serif;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 90px;
+    text-transform: uppercase;
+    margin-bottom: 27px;
+  }
+  
+  h2 {
+    color: #121212;
+    font-family: Poppins, sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 60px;
+    text-transform: uppercase;
+    margin-bottom: 34px;
+  }
+  
+  h3 {
+    color: #121212;
+    font-family: Poppins, sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 45px;
+    text-transform: uppercase;
+    margin-bottom: 29px;
+  }
+  
+  p {
+    color: #121212;
+    font-family: Poppins, sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 32px;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+  }
+  
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin-bottom: 94px;
+  }
+  
