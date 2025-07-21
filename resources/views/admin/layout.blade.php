@@ -116,7 +116,7 @@
             .custom-burger {
                 display: none;
             }
-            
+
         }
 
         .custom-burger .bar {
@@ -126,7 +126,67 @@
             border-radius: 2px;
             transition: all 0.3s ease;
         }
+
+        .pagination {
+            display: flex;
+            width: 100%;
+            list-style: none;
+            padding: 0;
+            margin-top: 24rem;
+            gap: 8rem;
+        }
+
+        .pagination .page-item {
+            display: inline-block;
+
+        }
+
+        .pagination .page-link {
+            display: block;
+            padding: 8rem 16rem;
+            font-size: 14rem;
+            font-weight: 500;
+            border: 1rem solid #ddd;
+            border-radius: 6rem;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            border-radius: 5px !important;
+        }
+
+        @media screen and (max-width: 600px){
+            .pagination .page-link {
+                color: #fff;
+                background-color: #007bff;
+            }
+        }
+
+        .pagination .page-link:hover {
+            background-color: #e0e0e0;
+            color: #000;
+            border-color: #bbb;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            background-color: #f0f0f0;
+            color: #aaa;
+            cursor: not-allowed;
+            border-color: #e0e0e0;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        @media (min-width: 576px) {
+            .pagination .page-link {
+                font-size: 16rem;
+                padding: 10rem 20rem;
+            }
+        }
     </style>
+
 </head>
 
 <body>
