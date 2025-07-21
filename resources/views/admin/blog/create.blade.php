@@ -119,6 +119,10 @@
         .success-message {
             font-size: 18rem;
         }
+
+        .mb-2 img {
+            width: 100%;
+        }
     </style>
 
     <h1>Нова стаття</h1>

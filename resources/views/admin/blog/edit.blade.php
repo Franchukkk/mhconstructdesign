@@ -119,6 +119,10 @@
         .success-message {
             font-size: 18rem;
         }
+
+        .mb-2 img {
+            width: 100%;
+        }
     </style>
 <div class="container mx-auto py-8 max-w-4xl">
     <h1 class="text-2xl font-bold mb-6">Редагування статті</h1>

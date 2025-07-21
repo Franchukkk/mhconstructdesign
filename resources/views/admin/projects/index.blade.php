@@ -127,7 +127,7 @@
                     <th scope="col">Заголовок</th>
                     <th scope="col">Слаг</th>
                     <th scope="col">Дата створення</th>
-                    <th scope="col" style="min-width: 160px;">Дії</th>
+                    <th scope="col" style="min-width: 160px;" colspan="2">Дії</th>
                 </tr>
             </thead>
             <tbody>
@@ -137,16 +137,16 @@
                         <td>{{ $project->slug }}</td>
                         <td>{{ $project->created_at->format('d.m.Y') }}</td>
                         <td>
-
                             <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning action-btn">
                                 Редагувати
                             </a>
-
+                        </td>
+                        <td>
                             <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
                                 onsubmit="return confirm('Видалити цей проєкт?');" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-
+    
                                 <button type="submit" class="btn btn-danger action-btn">
                                     Видалити
                                 </button>

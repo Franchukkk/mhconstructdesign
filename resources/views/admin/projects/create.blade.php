@@ -2,6 +2,9 @@
 
 @section('content')
     <style>
+        label {
+            font-size: 16rem;
+        }
         .form-label {
             font-weight: 600;
             color: #333;
@@ -125,6 +128,144 @@
             font-size: 21.6rem;
             /* 18 *1.2=21.6px */
         }
+
+        .gallery-pair {
+            padding: 12rem;
+        }
+
+        .file-dropzone {
+            width: 100%;
+            border: 2.4rem dashed #ccc;
+            padding: 36rem;
+            text-align: center;
+            border-radius: 12rem;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+            width: 100%;
+        }
+
+        button[type="submit"] {
+            margin-right: 10rem;
+            margin-bottom: 5rem;
+        }
+
+        @media screen and (min-width: 480px) {
+            .file-dropzone, .dropzone {
+                max-width: 300px;
+            }
+
+            button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+                width: auto;
+                margin-right: 0;
+                margin-bottom: 0;
+            }
+
+            
+        }
+
+        .file-dropzone:hover {
+            border-color: #007bff;
+            background-color: #f0f8ff;
+        }
+
+        .file-dropzone span {
+            font-size: 16.8rem;
+            color: #555;
+            margin-top: 9.6rem;
+        }
+
+        .icon-upload {
+            width: 38.4rem;
+            height: 38.4rem;
+            color: #007bff;
+        }
+
+        .file-dropzone.dragover {
+            border-color: #28a745;
+            background-color: #e6ffee;
+        }
+
+        .file-dropzone.dragover .icon-upload {
+            color: #28a745;
+        }
+
+        .file-dropzone.dragover span {
+            color: #28a745;
+        }
+
+        .file-dropzone img {
+            margin-top: 14.4rem;
+            max-width: 100%;
+            max-height: 192rem;
+            border-radius: 8.4rem;
+            object-fit: contain;
+            box-shadow: 0 2.4rem 9.6rem rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-pair img {
+            box-shadow: 0 1.2rem 6rem rgba(0, 0, 0, 0.1);
+            object-fit: contain;
+        }
+
+        .dropzone {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 150px;
+            padding: 2rem;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+            background-color: #fafafa;
+        }
+
+        .dropzones-flex>div {
+            width: 100%;
+        }
+
+        .dropzone.dragover {
+            border-color: #28a745;
+            background-color: #e6ffed;
+        }
+
+        .dropzone-text {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .dropzone-input {
+            display: none;
+        }
+
+        .upload-icon {
+            margin-bottom: 6px;
+            color: #999;
+        }
+
+        .dropzones-flex {
+            display: flex;
+            gap: 20rem;
+            flex-wrap: wrap;
+        }
+
+        .mb-3 {
+            margin-bottom: 13rem !important;
+        }
+        .mb-2 {
+            margin-bottom: 10rem !important;
+        }
     </style>
 
 
@@ -148,22 +289,35 @@
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        <!-- Hero Image -->
+        <!-- Hero Image Upload -->
         <div class="mb-3">
-            <label for="hero_image" class="form-label">Головне зображення (Hero Image)</label>
-            <input type="file" name="hero_image" id="hero_image" class="form-control" accept="image/*">
+            <label class="form-label">Головне зображення (Hero Image)</label>
+            <label for="hero_image" class="file-dropzone" id="dropzone">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-upload" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <span class="dropzone-text">Перетягніть або натисніть для вибору зображення</span>
+                <img id="preview-image" src="#" alt="Попередній перегляд" style="display: none;" />
+                <input type="file" name="hero_image" id="hero_image" accept="image/*" hidden>
+            </label>
+
+
             @error('hero_image')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
+
         <!-- Технічний блок -->
         <div class="mb-3">
-            <label for="area" class="form-label">Площа</label>
+            <label for="area" class="form-label">Площа (м<sup>2</sup>)</label>
             <input type="text" name="area" id="area" class="form-control" value="{{ old('area') }}">
             @error('area')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
         <div class="mb-3">
-            <label for="implementation_time" class="form-label">Час реалізації</label>
+            <label for="implementation_time" class="form-label">Час реалізації (міс)</label>
             <input type="text" name="implementation_time" id="implementation_time" class="form-control"
                 value="{{ old('implementation_time') }}">
             @error('implementation_time')<div class="text-danger">{{ $message }}</div>@enderror
@@ -207,23 +361,40 @@
     <script>
         let galleryIndex = 0;
 
+        const createDropzone = (inputName, index, label) => {
+            return `
+                <label>${label}</label>
+                <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                    
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
+                        </svg>
+                        <br>
+                        <span class="dropzone-text">Перетягніть або натисніть для завантаження</span>
+                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" required class="dropzone-input">
+                        <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                    </div>
+                </div>
+            `;
+        };
+
         document.getElementById('add-gallery-item').addEventListener('click', function () {
             const container = document.getElementById('gallery-items');
             const html = `
-                        <div class="gallery-pair mb-3 border p-3">
-                            <label>Рендер (design_image):</label>
-                            <input type="file" name="gallery[${galleryIndex}][design_image]" accept="image/*" required class="form-control mb-2">
+                <div class="gallery-pair mb-3 border">
+                    <div class="dropzones-flex">
+                    <div>${createDropzone('design_image', galleryIndex, 'Рендер:')}</div>
+                    <div>${createDropzone('real_image', galleryIndex, 'Реальне фото:')}</div>
+                    </div>
+                    <label class="form-label">Опис (опціонально):</label>
+                    <textarea name="gallery[${galleryIndex}][description]" rows="2" class="form-control mb-2"></textarea>
 
-                            <label>Реальне фото (real_image):</label>
-                            <input type="file" name="gallery[${galleryIndex}][real_image]" accept="image/*" required class="form-control mb-2">
-
-                            <label class="form-label">Опис (опціонально):</label>
-                            <textarea name="gallery[${galleryIndex}][description]" rows="2" class="form-control mb-2"></textarea>
-
-                            <button type="button" class="btn btn-danger remove-gallery-item">Видалити</button>
-                        </div>
-                    `;
+                    <button type="button" class="btn btn-danger remove-gallery-item">Видалити</button>
+                </div>
+            `;
             container.insertAdjacentHTML('beforeend', html);
+            initDropzones();
             galleryIndex++;
         });
 
@@ -232,5 +403,81 @@
                 e.target.closest('.gallery-pair').remove();
             }
         });
+
+        function initDropzones() {
+            const dropzones = document.querySelectorAll('.dropzone');
+
+            dropzones.forEach(dropzone => {
+                const input = dropzone.querySelector('input[type="file"]');
+                const previewId = dropzone.getAttribute('data-preview-id');
+                const previewImage = document.getElementById(previewId);
+                const dropzoneText = dropzone.querySelector('.dropzone-text');
+
+                function handleFile(file) {
+                    if (file && file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            previewImage.src = e.target.result;
+                            previewImage.style.display = 'block';
+                            dropzoneText.style.display = 'none';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                input.addEventListener('change', function () {
+                    if (input.files.length > 0) {
+                        handleFile(input.files[0]);
+                    }
+                });
+
+                dropzone.addEventListener('dragover', function (e) {
+                    e.preventDefault();
+                    dropzone.classList.add('dragover');
+                });
+
+                dropzone.addEventListener('dragleave', function () {
+                    dropzone.classList.remove('dragover');
+                });
+
+                dropzone.addEventListener('drop', function (e) {
+                    e.preventDefault();
+                    dropzone.classList.remove('dragover');
+
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        input.files = files;
+                        handleFile(files[0]);
+                    }
+                });
+
+                dropzone.addEventListener('click', function () {
+                    input.click();
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initDropzones);
+
+        // Hero image preview
+        document.getElementById('hero_image').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview-image');
+            const dropzoneText = document.querySelector('#dropzone .dropzone-text');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                    dropzoneText.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+
     </script>
+
+
 @endsection
