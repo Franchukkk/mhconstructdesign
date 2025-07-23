@@ -638,7 +638,7 @@ footer {
 
 .swiper {
     display: block !important;
-    padding-top: 50rem;
+    padding-top: 50rem !important;
 
     @include media(662) {
         display: none !important;
@@ -647,8 +647,8 @@ footer {
 
 .swiper-button-prev,
 .swiper-button-next {
-    color: #F7CA7C;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+    color: #F7CA7C !important;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6)) !important;
 }
 
 .page-title-container {
