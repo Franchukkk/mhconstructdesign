@@ -1,21 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-  <h1>Our Journal</h1>
-  <p>Insights, tips, and behind-the-scenes stories from the world of interior design and construction.</p>
+  <section class="blog wrapper">
+    <div class="page-title-container">
+    <h1>blog</h1>
+    <p>Here we write our art articles — insights, tips, and behind-the-scenes stories from the world of
+      interior design and construction.</p>
+    </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    @foreach($posts as $post)
-      <div class="card">
-        <a href="{{ route('blog.show', $post->slug) }}">
-          <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
-          <h2>{{ $post->title }}</h2>
-          <p>{{ $post->preview_text }}</p>
-          <span>Read more →</span>
-        </a>
+    <div class="row product-card g-3">
+    @if($posts->count() > 0)
+      @foreach($posts as $post)
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+      <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+      <strong>{{ $post->title }}</strong>
+      <p>{{ $post->preview_heading }}</p>
+      <a href="{{ route('portfolio.show', $post->slug) }}">read this</a>
       </div>
-    @endforeach
-  </div>
+      @endforeach
+    @else
+    <div class="col-12 text-center">
+      <p>No articles available at the moment...</p>
+    </div>
+    @endif
+    </div>
 
-  {{ $posts->links() }} {{-- Пагінація --}}
+    <div class="pagination">
+    {{ $posts->links('vendor.pagination.numbers-only') }}
+    </div>
+
+  </section>
+  <section class="get-involved wrapper">
+    <div class="row items-center g-5">
+    <div class="col-12 col-md-4 col-lg-4">
+      <h2>Get Involved</h2>
+      <p>Our talented squad is eager to make your dream space a reality.
+      Don’t wait — let’s start making magic together!</p>
+      <a class="button-primary" href="">Get in Touch</a>
+    </div>
+    <div class="col-12 col-md-8 col-lg-8">
+      <img src="{{ asset("images/get-involved-img.webp") }}" alt="">
+    </div>
+    </div>
+  </section>
 @endsection

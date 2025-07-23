@@ -3,40 +3,46 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="portfolio-index container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Наше Портфоліо</h1>
-
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach($projects as $project)
-                <a href="{{ route('portfolio.show', $project->slug) }}" class="block group border rounded overflow-hidden shadow hover:shadow-lg transition">
-                    <div class="relative overflow-hidden">
-                        @if($project->main_image)
-                            <img 
-                                src="{{ asset('storage/' . $project->main_image) }}" 
-                                alt="{{ $project->title }}" 
-                                class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                            >
-                        @else
-                            <div class="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                                Немає зображення
-                            </div>
-                        @endif
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <h2 class="text-lg font-semibold">{{ $project->title }}</h2>
-                        </div>
-                    </div>
-
-                    <div class="p-4">
-                        <p class="text-gray-700 line-clamp-2">
-                            {{ Str::limit(strip_tags($project->description), 100) }}
-                        </p>
-                    </div>
-                </a>
-            @endforeach
+    <section class="portfolio wrapper">
+        <div class="page-title-container">
+            <h1>portfolio</h1>
+            <p>Browse through a curated selection of our residential projects. Each one tells a story of design,
+                craftsmanship, and transformation.</p>
         </div>
 
-        <div class="mt-8">
-            {{ $projects->links() }}
+        <div class="row product-card g-3">
+            @if($projects->count() > 0)
+                @foreach($projects as $project)
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <a href="{{ route('portfolio.show', $project->slug) }}">
+                            <img src="{{ asset('storage/' . $project->hero_image) }}" alt="{{ $project->title }}">
+                            <a>{{ $project->title }}</a>
+                        </a>
+                    </div>
+                @endforeach
+            @else
+                <div class="col-12 text-center">
+                    <p>No projects available at the moment...</p>
+                </div>
+            @endif
+        </div>
+
+        <div class="pagination">
+            {{ $projects->links('vendor.pagination.numbers-only') }}
+        </div>
+
+    </section>
+    <section class="get-involved wrapper">
+        <div class="row items-center g-5">
+            <div class="col-12 col-md-4 col-lg-4">
+                <h2>Get Involved</h2>
+                <p>Our talented squad is eager to make your dream space a reality.
+                    Don’t wait — let’s start making magic together!</p>
+                <a class="button-primary" href="">Get in Touch</a>
+            </div>
+            <div class="col-12 col-md-8 col-lg-8">
+                <img src="{{ asset("images/get-involved-img.webp") }}" alt="">
+            </div>
         </div>
     </section>
 @endsection
