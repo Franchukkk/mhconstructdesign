@@ -11,86 +11,60 @@
         </div>
     </section>
     <section class="portfolio wrapper" id="portfolio">
-        <div class="row g-5 items-center portfolio-cards">
-            <div class="col-12 col-md-4 col-lg-4">
-                <h2>portfolio</h2>
-                <p>take a look at this short description and enjoy its beauty. And this sentence too. It is here, by the
-                    way, only
-                    to increase the volume of the text...</p>
-                <a class="button-primary" href="">Get Started</a>
-            </div>
-            <div class="col-12 col-md-8 col-lg-8">
-                <a href="">
-                    <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                </a>
-                <a href="#">HANOVER WAY</a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-8 col-lg-8">
-                <a href="">
-                    <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                </a>
-                <a href="#">HANOVER WAY</a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
-                <a href="">
-                    <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                </a>
-                <a href="#">HANOVER WAY</a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
-                <a href="">
-                    <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                </a>
-                <a href="#">HANOVER WAY</a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-8 col-lg-8">
-                <a href="">
-                    <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                </a>
-                <a href="#">HANOVER WAY</a>
-            </div>
-        </div>
-        <div class="swiper get-involved-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide col-12">
-                    <a href="">
-                        <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                    </a>
-                    <a href="#">HANOVER WAY</a>
-                </div>
-                <div class="swiper-slide col-12">
-                    <a href="">
-                        <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                    </a>
-                    <a href="#">HANOVER WAY</a>
-                </div>
-                <div class="swiper-slide col-12">
-                    <a href="">
-                        <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                    </a>
-                    <a href="#">HANOVER WAY</a>
-                </div>
-                <div class="swiper-slide col-12">
-                    <a href="">
-                        <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                    </a>
-                    <a href="#">HANOVER WAY</a>
-                </div>
-                <div class="swiper-slide col-12">
-                    <a href="">
-                        <img src="{{ asset('images/get-involved-img.webp') }}" alt="">
-                    </a>
-                    <a href="#">HANOVER WAY</a>
+        <div class="row g-5 portfolio-cards">
+            <div class="col-12 col-md-4 col-lg-4 items-center">
+                <div>
+                    <h2>portfolio</h2>
+                    <p>take a look at this short description and enjoy its beauty. And this sentence too...</p>
+                    <a class="button-primary" href="">Get Started</a>
                 </div>
             </div>
 
-            <!-- Стрілки -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            @foreach ($projects as $index => $project)
+                @if ($index > 4) @break @endif
+
+                @php
+                    // Встановлюємо класи відповідно до позиції
+                    $classes = match ($index) {
+                        0 => 'col-12 col-md-8 col-lg-8',
+                        1 => 'col-12 col-sm-6 col-md-8 col-lg-8',
+                        2 => 'col-12 col-sm-6 col-md-4 col-lg-4',
+                        3 => 'col-12 col-sm-6 col-md-4 col-lg-4',
+                        4 => 'col-12 col-sm-6 col-md-8 col-lg-8',
+                        default => 'col-12',
+                    };
+                @endphp
+
+                <div class="{{ $classes }}">
+                    <a href="">
+                        <img src="{{ asset('storage/' . $project["hero_image"]) }}" alt="">
+                    </a>
+                    <a href="#">{{ $project['title'] ?? '' }}</a>
+                </div>
+            @endforeach
         </div>
 
-        <a href="/portfolio">Full Portfolio</a>
+        @if(count($projects))
+            <div class="swiper get-involved-swiper">
+                <div class="swiper-wrapper">
+                    @foreach ($projects as $project)
+                        <div class="swiper-slide col-12">
+                            <a href="">
+                                <img src="{{ asset('storage/' . $project["hero_image"]) }}" alt="">
+                            </a>
+                            <a href="#">{{ $project['title'] ?? '' }}</a>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        @endif
+
+        <a href="{{ route('portfolio.index') }}">Full Portfolio</a>
     </section>
+
     <section class="services" id="services">
         <div class="wrapper">
             <h2>Services</h2>

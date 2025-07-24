@@ -16,7 +16,7 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                         <a href="{{ route('portfolio.show', $project->slug) }}">
                             <img src="{{ asset('storage/' . $project->hero_image) }}" alt="{{ $project->title }}">
-                            <a>{{ $project->title }}</a>
+                            <a href="{{ route('portfolio.show', $project->slug) }}">{{ $project->title }}</a>
                         </a>
                     </div>
                 @endforeach

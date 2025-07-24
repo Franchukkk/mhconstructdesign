@@ -254,11 +254,16 @@ a.burger {
 
     h1 {
         color: #FFF;
-        font-size: 64rem;
+        font-size: 68rem;
         line-height: 60rem;
         font-weight: 300;
         text-transform: uppercase;
         margin-bottom: 30rem;
+
+        @include media(600) {
+            font-size: 64rem;
+            line-height: 60rem;
+        }
 
         br {
             @include media(1440) {
@@ -276,11 +281,15 @@ a.burger {
     p {
         max-width: 982rem;
         color: #FFF;
-        font-size: 24rem;
+        font-size: 30rem;
         font-weight: 300;
         line-height: 1em;
         text-transform: uppercase;
         margin-bottom: 36rem;
+
+        @include media(600) {
+            font-size: 24rem;
+        }
     }
 
     a {
@@ -388,14 +397,25 @@ h2 {
     position: sticky;
     top: 200rem;
     width: 100%;
-    max-height: 500rem;
+    height: 380rem;
     object-fit: cover;
+    object-position: top center;
     margin-bottom: 40rem;
+
+    @include media(620) {
+        height: calc(80vh - 200rem);
+    }
 
     @include media(882) {
         margin-bottom: 0rem;
     }
 }
+
+.step-image-top-right {
+    object-position: top right;
+}
+
+
 
 .how-we-work {
     margin-bottom: 100rem;
@@ -443,7 +463,12 @@ h2 {
 
     img {
         width: 100%;
+        min-height: 300rem;
         object-fit: cover;
+
+        @include media(620) {
+            min-height: auto;
+        }
     }
 
     .row {
@@ -515,15 +540,15 @@ footer {
 }
 
 .inst {
-    background-image: url(images/inst.svg);
+    background-image: url(/images/inst.svg);
 }
 
 .fb {
-    background-image: url(images/fb.svg);
+    background-image: url(/images/fb.svg);
 }
 
 .lidin {
-    background-image: url(images/lindin.svg);
+    background-image: url(/images/lindin.svg);
 }
 
 .copy {
@@ -574,6 +599,14 @@ footer {
 .portfolio {
     margin-bottom: 192rem;
 
+    .col-12 a:not(.button-primary) {
+        width: 100%;
+    }
+
+    .col-md-4 img {
+        height: 450rem;
+    }
+
     &>a {
         display: block;
         text-align: right;
@@ -593,7 +626,7 @@ footer {
     img {
         display: block;
         width: 100%;
-        min-height: 500rem;
+        height: 500rem;
         object-fit: cover;
         margin-bottom: 7rem;
     }
@@ -690,6 +723,7 @@ footer {
         min-height: auto;
         width: 100%;
         margin-bottom: 17rem;
+        object-fit: cover;
     }
 
     strong,
@@ -762,5 +796,14 @@ footer {
     margin-bottom: 201rem;
     .page-title-container {
         max-width: 651rem;
+    }
+}
+
+
+@media screen and (max-width: 450px){
+    .button-border,
+    .button-transparent,
+    .button-primary {
+        font-size: 28rem;
     }
 }

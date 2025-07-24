@@ -21,24 +21,22 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
-
     <header class="header-line">
         <div class="wrapper flex-between items-center">
             <div class="logo-navigation items-center">
-                <a href="/">
+                <a href="{{ route('home') }}">
                     <img src="{{ asset('images/logo.png') }}" alt="M&H Design Studio">
                 </a>
                 <nav class="mb-none">
                     <ul class="d-flex">
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#portfolio">Portfolio</a></li>
-                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="{{ route('home') . "#about" }}">About</a></li>
+                        <li><a href="{{ route('home') . "#services" }}">Services</a></li>
+                        <li><a href="{{ route('home') . "#portfolio" }}">Portfolio</a></li>
+                        <li><a href="{{ route('blog.index') }}">Blog</a></li>
                     </ul>
                 </nav>
             </div>
@@ -53,10 +51,10 @@
     </header>
     <div class="burger-menu" id="burgerMenu">
         <ul class="d-flex">
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#services">Services</a></li>
-            <li><a href="index.html#portfolio">Portfolio</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="{{ route('home') . "#about" }}">About</a></li>
+            <li><a href="{{ route('home') . "#services" }}">Services</a></li>
+            <li><a href="{{ route('home') . "#portfolio" }}">Portfolio</a></li>
+            <li><a href="{{ route('blog.index') }}">Blog</a></li>
         </ul>
     </div>
 
@@ -181,7 +179,7 @@
 
                     steps.forEach(step => {
                         const rect = step.getBoundingClientRect();
-                        if (rect.top >= 0 && rect.top < window.innerHeight / 3) {
+                        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
                             currentStep = step;
                         }
                     });
@@ -190,6 +188,10 @@
                         const newSrc = currentStep.getAttribute('data-img-src');
                         if (newSrc && stepImage.src !== newSrc) {
                             stepImage.src = newSrc;
+                            console.log(newSrc.split('/').pop());
+                            if (newSrc.split('/').pop() == "step5.webp") {
+                                stepImage.classList.add("step-image-top-right")
+                            }
                         }
                     }
                 }
