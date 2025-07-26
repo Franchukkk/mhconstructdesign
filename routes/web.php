@@ -94,3 +94,7 @@ Route::prefix('admin')->middleware(['web', 'auth'])->name('admin.')->group(funct
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
+
+Route::view('/terms-of-use', 'terms-of-use')->name('terms.of.use');

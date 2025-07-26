@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
     <title>{{ $meta_title ?? 'M&H Design Studio' }}</title>
     @vite(['resources/js/app.js'])
 
@@ -92,9 +92,9 @@
                     &copy; M&H Construction and Design. All rights reserved.
                 </p>
                 <ul class="confidentiality items-center">
-                    <li><a href="#">privacy policy</a></li>
+                    <li><a href="{{ route('privacy.policy') }}">privacy policy</a></li>
                     <li class="stick"></li>
-                    <li><a href="#">terms of use</a></li>
+                    <li><a href="{{ route('terms.of.use') }}">terms of use</a></li>
                 </ul>
             </div>
         </div>

@@ -15,7 +15,7 @@
       <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
       <strong>{{ $post->title }}</strong>
       <p>{{ $post->preview_heading }}</p>
-      <a href="{{ route('portfolio.show', $post->slug) }}">read this</a>
+      <a href="{{ route('blog.show', $post->slug) }}">read this</a>
       </div>
       @endforeach
     @else
