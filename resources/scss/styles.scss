@@ -543,6 +543,10 @@ footer {
 .lidin {
     background-size: contain;
     background-repeat: no-repeat;
+    filter: brightness(2);
+    &:hover {
+        filter: brightness(1);
+    }
 }
 
 .inst {
