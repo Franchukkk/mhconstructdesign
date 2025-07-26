@@ -828,63 +828,90 @@ footer {
     }
 }
 
-.article {
-    padding-top: 196rem;
-
-    h1 {
-        margin-bottom: 180rem;
-    }
-}
-
 .blog-article {
     max-width: 993rem;
 
 
     h2 {
-        color: #121212 !important;
-        font-family: Poppins, sans-serif !important;
-        font-size: 64rem !important;
-        font-weight: 300 !important;
-        line-height: 60rem !important;
-        text-transform: uppercase !important;
-        margin-bottom: 34rem !important;
+        color: #121212;
+        font-family: Poppins, sans-serif;
+        font-size: 64rem;
+        font-weight: 300;
+        line-height: 0.93em;
+        text-transform: uppercase;
+        margin-bottom: 34rem;
     }
 
     h3 {
-        color: #121212 !important;
-        font-family: Poppins, sans-serif !important;
-        font-size: 48rem !important;
-        font-weight: 300 !important;
-        line-height: 45rem !important;
-        text-transform: uppercase !important;
-        margin-bottom: 29rem !important;
+        color: #121212;
+        font-family: Poppins, sans-serif;
+        font-size: 48rem;
+        font-weight: 300;
+        line-height: 0.93em;
+        text-transform: uppercase;
+        margin-bottom: 29rem;
     }
 
     h4 {
-        color: #121212 !important;
-        font-family: Poppins, sans-serif !important;
-        font-size: 32rem !important;
-        font-weight: 300 !important;
-        line-height: 45rem !important;
-        text-transform: uppercase !important;
-        margin-bottom: 29rem !important;
+        color: #121212;
+        font-family: Poppins, sans-serif;
+        font-size: 32rem;
+        font-weight: 300;
+        line-height: 1.4em;
+        text-transform: uppercase;
+        margin-bottom: 29rem;
     }
 
     p {
-        color: #121212 !important;
-        font-family: Poppins, sans-serif !important;
-        font-size: 32rem !important;
-        font-weight: 300 !important;
-        line-height: 32rem !important;
-        text-transform: uppercase !important;
-        margin-bottom: 35rem !important;
+        color: #121212;
+        font-family: Poppins, sans-serif;
+        font-size: 32rem;
+        font-weight: 300;
+        line-height: 1em;
+        text-transform: uppercase;
+        margin-bottom: 35rem;
     }
 
     img {
         width: 100%;
+        height: auto !important;
         max-width: 993rem !important;
         aspect-ratio: 1 / 1 !important;
         object-fit: cover !important;
+    }
+}
+
+.article {
+    padding-top: 196rem;
+
+    h1 {
+        font-size: 65rem;
+        margin-bottom: 100rem;
+        @include media(620) {
+            margin-bottom: 180rem;
+            font-size: 96rem;
+        }
+    }
+
+    h2 {
+        font-size: 40rem;
+        @include media(620) {
+            font-size: 64rem;
+        }
+    }
+
+    h3 {
+        font-size: 35rem;
+        @include media(620) {
+            font-size: 48rem;
+        }
+    }
+
+    p {
+        font-size: 30rem;
+        @include media(620) {
+            font-size: 32rem;
+        }
     }
 }
 
