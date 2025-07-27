@@ -1,13 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ContactRequest;
+use Illuminate\Support\Facades\Http;
 
 class ContactRequestController extends Controller
 {
+    public function index()
+    {
+        return view('contact-request');
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -27,12 +33,9 @@ class ContactRequestController extends Controller
         $validated['ip_address'] = $request->ip();
         $validated['user_agent'] = $request->userAgent();
 
-        $contact = ContactRequest::create($validated);
+        ContactRequest::create($validated);
 
-        return response()->json([
-            'message' => 'Contact request saved successfully',
-            'data' => $contact
-        ], 201);
+        return redirect()->back()->with('success', 'Your request has been successfully sent!');
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Exports\ContactRequestsExport;
+use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\SiteController;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
@@ -98,3 +99,9 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
 
 Route::view('/terms-of-use', 'terms-of-use')->name('terms.of.use');
+
+// Показати форму запиту
+Route::get('/contact-request', [ContactRequestController::class, 'index'])->name('contact-request.form');
+
+// Обробка форми (POST)
+Route::post('/contact-request', [ContactRequestController::class, 'store'])->name('contact-request.submit');

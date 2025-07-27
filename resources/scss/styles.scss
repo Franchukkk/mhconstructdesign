@@ -544,6 +544,7 @@ footer {
     background-size: contain;
     background-repeat: no-repeat;
     filter: brightness(2);
+
     &:hover {
         filter: brightness(1);
     }
@@ -891,6 +892,7 @@ footer {
     h1 {
         font-size: 65rem;
         margin-bottom: 100rem;
+
         @include media(620) {
             margin-bottom: 180rem;
             font-size: 96rem;
@@ -899,6 +901,7 @@ footer {
 
     h2 {
         font-size: 40rem;
+
         @include media(620) {
             font-size: 64rem;
         }
@@ -906,6 +909,7 @@ footer {
 
     h3 {
         font-size: 35rem;
+
         @include media(620) {
             font-size: 48rem;
         }
@@ -913,6 +917,7 @@ footer {
 
     p {
         font-size: 30rem;
+
         @include media(620) {
             font-size: 32rem;
         }
@@ -923,8 +928,10 @@ footer {
     h1 {
         font-size: 80rem;
     }
+
     max-width: 993rem;
     margin-bottom: 100rem;
+
     h2 {
         font-size: 40rem;
         margin-top: 60rem;
@@ -936,7 +943,13 @@ footer {
         font-weight: 500;
         margin: 20rem 0;
     }
-    p, ul, li, strong, address, h3{
+
+    p,
+    ul,
+    li,
+    strong,
+    address,
+    h3 {
         font-size: 25rem;
     }
 
@@ -950,5 +963,153 @@ footer {
 
     address {
         margin-top: 30rem;
+    }
+}
+
+.contact-request {
+    padding-top: 193rem;
+    margin-bottom: 200rem;
+
+    img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+    }
+
+    h1 {
+        color: #121212;
+        font-size: 48rem;
+        font-weight: 300;
+        line-height: 1em;
+        text-transform: uppercase;
+        margin-bottom: 86rem;
+    }
+
+    form {
+        p {
+            color: #121212;
+            font-size: 20rem;
+            font-weight: 300;
+            line-height: 1.2em;
+            text-transform: uppercase;
+            margin-bottom: 5rem;
+        }
+
+        input:not(input[type=checkbox]),
+        select {
+            display: flex;
+            align-items: center;
+            outline: none;
+            appearance: none;
+            border-radius: 0;
+            width: 100%;
+            border: 2rem solid #000;
+            height: 70rem;
+            padding: 0 20rem;
+            color: rgba(18, 18, 18, 1);
+            font-family: Poppins;
+            font-size: 22rem;
+            font-weight: 300;
+            line-height: 1em;
+            text-transform: capitalize;
+        }
+
+        input[type=email].email {
+            text-transform: lowercase;
+
+            &:placeholder-shown {
+                text-transform: none;
+            }
+        }
+
+        select {
+            line-height: 1.2em;
+            background: url(/images/arrow.svg) no-repeat right 6rem center;
+            background-size: 50rem;
+        }
+
+        button {
+            width: 212rem;
+            appearance: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    .g-101 {
+        --bs-gutter-x: 101rem !important;
+        --bs-gutter-y: 101rem !important;
+    }
+
+    .g-29 {
+        --bs-gutter-x: 29rem !important;
+        --bs-gutter-y: 25rem !important;
+    }
+
+    .gap-29 {
+        column-gap: 29rem;
+        row-gap: 15px;
+    }
+
+    .mb-25 {
+        margin-bottom: 25rem;
+    }
+
+    .mb-105 {
+        margin-bottom: 70rem;
+        @include media(500) {
+            margin-bottom: 105rem;
+        }
+    }
+
+    .checkbox {
+        display: flex;
+        align-items: center;
+        column-gap: 8rem;
+        min-width: 98px;
+        color: #121212;
+        font-size: 20rem;
+        font-weight: 275;
+        line-height: 1.05em;
+        text-transform: capitalize;
+
+        input[type=checkbox] {
+            width: 20rem;
+            height: 20rem;
+            border-radius: 10rem;
+            border: 1rem solid #121212;
+            appearance: none;
+
+            &:checked {
+                background-color: #121212;
+            }
+        }
+    }
+
+    .alert {
+        font-size: 20rem;
+    }
+}
+
+.contact-request-description {
+    color: #121212;
+    text-align: center;
+    font-size: 32rem;
+    font-weight: 275;
+    line-height: 35rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 120rem;
+
+    @include media(500) {
+        margin-bottom: 186rem;
+    }
+}
+
+.checkboxes-mb {
+    flex-direction: column;
+
+    @include media(500) {
+        flex-direction: row;
     }
 }
