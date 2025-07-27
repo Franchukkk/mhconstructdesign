@@ -193,7 +193,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('admin.projects.index') }}">M&H Панель</a>
+            <a class="navbar-brand" href="{{ route('admin.projects.index') }}">M&H Panel</a>
             <button class="custom-burger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="bar"></span>
@@ -205,11 +205,11 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.projects.*') ? 'active' : '' }}"
-                            href="{{ route('admin.projects.index') }}">Проєкти</a>
+                            href="{{ route('admin.projects.index') }}">Projects</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}"
-                            href="{{ route('admin.blog.index') }}">Блог</a>
+                            href="{{ route('admin.blog.index') }}">Blog</a>
                     </li>
                 </ul>
 
@@ -221,7 +221,7 @@
                         </form>
                         <a class="nav-link" href="#"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Вийти
+                            Log out
                         </a>
                     </li>
                 </ul>

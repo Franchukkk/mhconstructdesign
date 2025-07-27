@@ -1,7 +1,6 @@
 @extends('admin.layout')
 
 @section('content')
-    {{-- === СТИЛІ === --}}
     <style>
         label {
             font-size: 16rem;
@@ -169,30 +168,26 @@
         }
     </style>
 
-    {{-- === HTML ФОРМА === --}}
-    <h1>Редагувати проєкт: {{ $project->title }}</h1>
+    <h1>Edit project: {{ $project->title }}</h1>
 
     <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
-        {{-- Заголовок --}}
         <div class="mb-3">
-            <label class="form-label">Заголовок</label>
+            <label class="form-label">Title</label>
             <input type="text" name="title" class="form-control" value="{{ old('title', $project->title) }}" required>
             @error('title')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        {{-- Опис --}}
         <div class="mb-3">
-            <label class="form-label">Опис</label>
+            <label class="form-label">Description</label>
             <textarea name="description" class="form-control">{{ old('description', $project->description) }}</textarea>
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        {{-- Hero Image --}}
         <div class="mb-3">
-            <label class="form-label">Головне зображення (Hero Image)</label>
+            <label class="form-label">Hero Image</label>
             <label for="hero_image" class="file-dropzone" id="dropzone">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon-upload" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -201,7 +196,7 @@
                     <polyline points="17 8 12 3 7 8" />
                     <line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
-                <span class="dropzone-text">Перетягніть або натисніть для вибору зображення</span>
+                <span class="dropzone-text">Click to select an image</span>
                 <img id="preview-image" src="{{ $project->hero_image ? asset('storage/' . $project->hero_image) : '#' }}"
                     alt="Попередній перегляд" style="{{ $project->hero_image ? '' : 'display: none;' }}" />
                 <input type="file" name="hero_image" id="hero_image" accept="image/*" hidden>
@@ -209,8 +204,7 @@
             @error('hero_image')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        {{-- Інші поля --}}
-        @foreach (['area' => 'Площа (м²)', 'implementation_time' => 'Час реалізації (міс)', 'design_time' => 'Час розробки', 'style' => 'Стиль', 'location' => 'Адреса'] as $field => $label)
+        @foreach (['area' => 'Area (m²)', 'implementation_time' => 'Implementation Time (months)', 'design_time' => 'Project Development Time', 'style' => 'Style', 'location' => 'Address'] as $field => $label)
             <div class="mb-3">
                 <label class="form-label">{{ $label }}</label>
                 <input type="text" name="{{ $field }}" class="form-control" value="{{ old($field, $project->$field) }}">
@@ -218,20 +212,19 @@
             </div>
         @endforeach
 
-        {{-- Галерея --}}
-        <h3>Галерея (Рендер / Реальне фото)</h3>
-        <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Додати порівняння</button>
+        <h3>Gallery (Render / Real Photo)</h3>
+        <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Add Comparison</button>
 
         <div id="gallery-items">
             @foreach(old('gallery', $project->galleryItems->toArray()) as $index => $item)
                 <div class="gallery-pair">
                     <div class="dropzones-flex">
-                        @foreach (['design_image' => 'Рендер', 'real_image' => 'Реальне фото'] as $input => $text)
+                        @foreach (['design_image' => 'Render', 'real_image' => 'Real picture'] as $input => $text)
                             <div>
                                 <label>{{ $text }}</label>
                                 <div class="dropzone mb-2" data-preview-id="{{ $input }}-preview-{{ $index }}">
                                     <div>
-                                        <span class="dropzone-text">Перетягніть або натисніть для завантаження</span>
+                                        <span class="dropzone-text">Click to select an image</span>
                                         @if(!empty($item[$input]))
                                             <img src="{{ asset('storage/' . $item[$input]) }}"
                                                 id="{{ $input }}-preview-{{ $index }}" class="preview-image"
@@ -250,23 +243,20 @@
                         @endforeach
                     </div>
 
-                    <label class="form-label">Опис</label>
+                    <label class="form-label">Description</label>
                     <textarea name="gallery[{{ $index }}][description]" class="form-control">{{ old("gallery.$index.description", $item['description'] ?? '') }}</textarea>
 
-                    <button type="button" class="btn btn-danger remove-gallery-item mt-2">Видалити</button>
+                    <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
                 </div>
             @endforeach
         </div>
 
-        {{-- Кнопки --}}
-        <button type="submit" class="btn btn-success">Зберегти</button>
-        <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Відмінити</a>
+        <button type="submit" class="btn btn-success">Create</button>
+        <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 
-    {{-- === СКРИПТИ === --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Hero image preview
             document.getElementById('hero_image').addEventListener('change', function (e) {
                 const file = e.target.files[0];
                 const preview = document.getElementById('preview-image');
@@ -283,14 +273,13 @@
                 }
             });
 
-            // Галерея
             let galleryIndex = {{ count(old('gallery', $project->galleryItems)) }};
             const createDropzone = (inputName, index, label) => {
                 return `
                     <label>${label}</label>
                     <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
                         <div>
-                            <span class="dropzone-text">Перетягніть або натисніть для завантаження</span>
+                            <span class="dropzone-text">Click to select an image</span>
                             <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
                             <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
                         </div>
@@ -303,12 +292,12 @@
                 const html = `
                     <div class="gallery-pair">
                         <div class="dropzones-flex">
-                            <div>${createDropzone('design_image', galleryIndex, 'Рендер')}</div>
-                            <div>${createDropzone('real_image', galleryIndex, 'Реальне фото')}</div>
+                            <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
+                            <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
                         </div>
-                        <label class="form-label">Опис</label>
+                        <label class="form-label">Description</label>
                         <textarea name="gallery[${galleryIndex}][description]" class="form-control mb-2"></textarea>
-                        <button type="button" class="btn btn-danger remove-gallery-item">Видалити</button>
+                        <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', html);

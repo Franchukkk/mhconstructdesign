@@ -232,7 +232,14 @@
         }
 
         .dropzones-flex>div {
-            width: 100%;
+            width: 280px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .dropzones-flex>div {
+                width: 100%;
+            }
+            
         }
 
         .dropzone.dragover {
@@ -270,28 +277,28 @@
 
 
 
-    <h1>Додати новий проєкт</h1>
+    <h1>Create new project</h1>
 
     <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <!-- Заголовок -->
         <div class="mb-3">
-            <label for="title" class="form-label">Заголовок</label>
+            <label for="title" class="form-label">Title</label>
             <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required>
             @error('title')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
         <!-- Опис -->
         <div class="mb-3">
-            <label for="description" class="form-label">Опис</label>
+            <label for="description" class="form-label">Description</label>
             <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
         <!-- Hero Image Upload -->
         <div class="mb-3">
-            <label class="form-label">Головне зображення (Hero Image)</label>
+            <label class="form-label">Hero Image</label>
             <label for="hero_image" class="file-dropzone" id="dropzone">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon-upload" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -299,7 +306,7 @@
                     <polyline points="17 8 12 3 7 8" />
                     <line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
-                <span class="dropzone-text">Перетягніть або натисніть для вибору зображення</span>
+                <span class="dropzone-text">Click to select an image</span>
                 <img id="preview-image" src="#" alt="Попередній перегляд" style="display: none;" />
                 <input type="file" name="hero_image" id="hero_image" accept="image/*" hidden>
             </label>
@@ -311,32 +318,32 @@
 
         <!-- Технічний блок -->
         <div class="mb-3">
-            <label for="area" class="form-label">Площа (м<sup>2</sup>)</label>
+            <label for="area" class="form-label">Area (м<sup>2</sup>)</label>
             <input type="text" name="area" id="area" class="form-control" value="{{ old('area') }}">
             @error('area')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
         <div class="mb-3">
-            <label for="implementation_time" class="form-label">Час реалізації (міс)</label>
+            <label for="implementation_time" class="form-label">Implementation Time (months)</label>
             <input type="text" name="implementation_time" id="implementation_time" class="form-control"
                 value="{{ old('implementation_time') }}">
             @error('implementation_time')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
         <div class="mb-3">
-            <label for="design_time" class="form-label">Час розробки проекту</label>
+            <label for="design_time" class="form-label">Project Development Time</label>
             <input type="text" name="design_time" id="design_time" class="form-control" value="{{ old('design_time') }}">
             @error('design_time')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
         <div class="mb-3">
-            <label for="style" class="form-label">Стиль</label>
+            <label for="style" class="form-label">Style</label>
             <input type="text" name="style" id="style" class="form-control" value="{{ old('style') }}">
             @error('style')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
         <div class="mb-3">
-            <label for="location" class="form-label">Адреса</label>
+            <label for="location" class="form-label">Address</label>
             <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}">
             @error('location')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
@@ -345,17 +352,17 @@
 
         <!-- Галерея -->
         <div id="gallery-container" class="mb-4">
-            <h3>Галерея (Рендер / Реальне фото)</h3>
+            <h3>Gallery (Render / Real Photo)</h3>
 
-            <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Додати порівняння</button>
+            <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Add Comparison</button>
 
             <div id="gallery-items">
                 {{-- Сюди JS додаватиме поля --}}
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success">Створити</button>
-        <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Відмінити</a>
+        <button type="submit" class="btn btn-success">Create</button>
+        <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 
     <script>
@@ -371,7 +378,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
                         </svg>
                         <br>
-                        <span class="dropzone-text">Перетягніть або натисніть для завантаження</span>
+                        <span class="dropzone-text">Click to select an image</span>
                         <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" required class="dropzone-input">
                         <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
                     </div>
@@ -384,13 +391,13 @@
             const html = `
                 <div class="gallery-pair mb-3 border">
                     <div class="dropzones-flex">
-                    <div>${createDropzone('design_image', galleryIndex, 'Рендер:')}</div>
-                    <div>${createDropzone('real_image', galleryIndex, 'Реальне фото:')}</div>
+                    <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
+                    <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
                     </div>
-                    <label class="form-label">Опис (опціонально):</label>
+                    <label class="form-label">Description (optional):</label>
                     <textarea name="gallery[${galleryIndex}][description]" rows="2" class="form-control mb-2"></textarea>
 
-                    <button type="button" class="btn btn-danger remove-gallery-item">Видалити</button>
+                    <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
                 </div>
             `;
             container.insertAdjacentHTML('beforeend', html);

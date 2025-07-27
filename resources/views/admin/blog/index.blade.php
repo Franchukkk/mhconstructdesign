@@ -91,17 +91,17 @@
 
 
 
-    <h1>Блог</h1>
+    <h1>Blog</h1>
 
-    <a href="{{ route('admin.blog.create') }}" class="btn btn-success mb-3">Нова стаття</a>
+    <a href="{{ route('admin.blog.create') }}" class="btn btn-success mb-3">New article</a>
 
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Заголовок</th>
-                    <th>Слаг</th>
-                    <th>Опубліковано</th>
+                    <th>Title</th>
+                    <th>Slug</th>
+                    <th>Date</th>
                     <th></th>
                 </tr>
             </thead>
@@ -112,12 +112,12 @@
                         <td>{{ $post->slug}}</td>
                         <td>{{ $post->created_at }}</td>
                         <td>
-                            <a href="{{ route('admin.blog.edit', $post) }}" class="btn btn-sm btn-primary">Редагувати</a>
+                            <a href="{{ route('admin.blog.edit', $post) }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('admin.blog.destroy', $post) }}" method="POST" class="d-inline"
                                 onsubmit="return confirm('Ви впевнені?')">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger">Видалити</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         </td>
                     </tr>

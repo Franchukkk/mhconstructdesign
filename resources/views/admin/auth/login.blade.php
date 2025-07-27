@@ -11,8 +11,8 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
 
-            <p class="text-center mb-2">M&H Панель керування</p>
-            <h2 class="text-center mb-4">Вхід</h2>
+            <p class="text-center mb-2">M&H Control Panel</p>
+            <h2 class="text-center mb-4">Login</h2>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -28,11 +28,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label">Пароль:</label>
+                    <label for="password" class="form-label">Password:</label>
                     <input type="password" name="password" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Увійти</button>
+                <button type="submit" class="btn btn-primary w-100">Log in</button>
             </form>
 
         </div>

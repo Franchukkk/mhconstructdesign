@@ -166,7 +166,7 @@
 
     </style>
 
-    <h1>Нова стаття</h1>
+    <h1>New article</h1>
 
     @if(session('success'))
         <div class="success-message">{{ session('success') }}</div>
@@ -176,12 +176,12 @@
         @csrf
 
         <div>
-            <label>Заголовок</label>
+            <label>Title</label>
             <input type="text" name="title" required>
         </div>
 
         <div>
-            <label class="form-label">Обкладинка</label>
+            <label class="form-label">Cover image</label>
             <div id="cover-dropzone"
                 style="cursor: pointer; border: 2rem dashed #ccc; border-radius: 10rem; padding: 20rem; text-align: center; background: #fff; position: relative;">
                 <div class="dropzone-inner"
@@ -194,7 +194,7 @@
                     </svg>
 
                     <!-- Text -->
-                    <span class="dropzone-text" style="font-size: 16rem; color: #777;">Натисніть або перетягніть файл</span>
+                    <span class="dropzone-text" style="font-size: 16rem; color: #777;">Click to select an image</span>
                 </div>
 
                 <!-- Image preview -->
@@ -206,11 +206,11 @@
 
 
         <div>
-            <label>Контент</label>
+            <label>Content</label>
             <textarea name="body" id="editor" style="height: 400rem;"></textarea>
         </div>
 
-        <button type="submit">Зберегти</button>
+        <button type="submit">Create</button>
     </form>
 
 

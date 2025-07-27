@@ -175,7 +175,7 @@
         }
     </style>
     <div class="container mx-auto py-8 max-w-4xl">
-        <h1 class="text-2xl font-bold mb-6">Редагування статті</h1>
+        <h1 class="text-2xl font-bold mb-6">Edit article</h1>
 
         @if(session('success'))
             <div class="bg-green-200 text-green-800 p-4 rounded mb-4">
@@ -190,7 +190,7 @@
 
             <!-- Назва -->
             <div>
-                <label for="title" class="block font-medium mb-1">Заголовок</label>
+                <label for="title" class="block font-medium mb-1">Title</label>
                 <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}"
                     class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:border-blue-300">
                 @error('title')
@@ -200,7 +200,7 @@
 
             <!-- Зображення -->
             <div>
-                <label for="image" class="block font-medium mb-1">Головне зображення</label>
+                <label for="image" class="block font-medium mb-1">Cover image</label>
 
                 <div id="cover-dropzone"
                     style="cursor: pointer; border: 2rem dashed #ccc; border-radius: 10rem; padding: 20rem; text-align: center; background: #fff; position: relative;">
@@ -212,8 +212,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0L8 12m4-4v12" />
                         </svg>
-                        <span class="dropzone-text" style="font-size: 16rem; color: #777;">Натисніть або перетягніть
-                            файл</span>
+                        <span class="dropzone-text" style="font-size: 16rem; color: #777;">Click to select an image</span>
                     </div>
 
                     <!-- Image preview -->
@@ -232,7 +231,7 @@
 
             <!-- Body -->
             <div>
-                <label for="editor" class="block font-medium mb-1">Текст статті</label>
+                <label for="editor" class="block font-medium mb-1">Content</label>
                 <textarea name="body" id="editor">{{ old('body', $post->body) }}</textarea>
                 @error('body')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -240,7 +239,7 @@
             </div>
 
             <button type="submit">
-                Зберегти зміни
+                Save
             </button>
         </form>
     </div>

@@ -112,22 +112,22 @@
 
 
     <h1 class="admin-title">
-        Проєкти портфоліо
+        Portfolio Projects
     </h1>
 
 
     <a href="{{ route('admin.projects.create') }}" class="btn add-project-btn">
-        Додати новий проєкт
+        Create new project
     </a>
 
     <div class="table-responsive">
         <table role="table" aria-label="Список проєктів" tabindex="0" aria-live="polite" class="admin-table">
             <thead>
                 <tr>
-                    <th scope="col">Заголовок</th>
-                    <th scope="col">Слаг</th>
-                    <th scope="col">Дата створення</th>
-                    <th scope="col" style="min-width: 160px;" colspan="2">Дії</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Slug</th>
+                    <th scope="col">Date</th>
+                    <th scope="col" style="min-width: 160px;" colspan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -138,7 +138,7 @@
                         <td>{{ $project->created_at->format('d.m.Y') }}</td>
                         <td>
                             <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning action-btn">
-                                Редагувати
+                                Edit
                             </a>
                         </td>
                         <td>
@@ -148,7 +148,7 @@
                                 @method('DELETE')
     
                                 <button type="submit" class="btn btn-danger action-btn">
-                                    Видалити
+                                    Delete
                                 </button>
                             </form>
                         </td>
@@ -157,7 +157,7 @@
                     <tr>
 
                         <td colspan="4" class="empty-message">
-                            Проєктів немає
+                            There are no projects yet.
                         </td>
                     </tr>
                 @endforelse
