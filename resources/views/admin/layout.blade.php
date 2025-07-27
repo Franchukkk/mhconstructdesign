@@ -211,6 +211,10 @@
                         <a class="nav-link {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}"
                             href="{{ route('admin.blog.index') }}">Blog</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.requests.*') ? 'active' : '' }}"
+                            href="{{ route('admin.requests.index') }}">Requests</a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto">

@@ -38,7 +38,7 @@
                 <h2>Get Involved</h2>
                 <p>Our talented squad is eager to make your dream space a reality.
                     Don’t wait — let’s start making magic together!</p>
-                <a class="button-primary" href="">Get in Touch</a>
+                <a class="button-primary" href="{{ route("contact-request.form") }}">Get in Touch</a>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
                 <img src="{{ asset("images/get-involved-img.webp") }}" alt="">

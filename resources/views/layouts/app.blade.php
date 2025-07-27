@@ -40,7 +40,7 @@
                     </ul>
                 </nav>
             </div>
-            <a class="mb-none button-border" href="#">Contact Us</a>
+            <a class="mb-none button-border" href="{{ route('contact-request.form') }}">Contact Us</a>
             <a href="#" class="burger" id="burger">
                 <span></span>
                 <span></span>

@@ -2,6 +2,7 @@
 
 use App\Exports\ContactRequestsExport;
 use App\Http\Controllers\ContactRequestController;
+use App\Http\Controllers\Admin\ContactRequestController as AdminContactRequestController;
 use App\Http\Controllers\SiteController;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,7 @@ Route::get('/', [SiteController::class, 'index'])->name('home');
 
 Route::get('/export-contact-requests', function () {
     return Excel::download(new ContactRequestsExport, 'contact_requests.xlsx');
-});
+})->name('export.contact.requests');
 
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
 Route::get('/portfolio/{slug}', [PortfolioController::class, 'show'])->name('portfolio.show');
@@ -35,6 +36,13 @@ Route::prefix('admin')->middleware(['web', 'auth'])->name('admin.')->group(funct
         }
         return app(ProjectController::class)->index();
     })->name('projects.index');
+
+    Route::get('requests', function () {
+        if (!Auth::check() || !Auth::user()->is_admin) {
+            abort(403, 'Access denied');
+        }
+        return app(AdminContactRequestController::class)->index();;
+    })->name('requests.index');
 
     Route::get('/', function () {
         if (!Auth::user() || !Auth::user()->is_admin) {
