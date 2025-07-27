@@ -12,6 +12,7 @@
 
 html {
     font-size: 0.6px;
+    scroll-behavior: smooth;
 
     @include media(1024) {
         font-size: 0.75px;
@@ -42,6 +43,14 @@ a {
     max-width: 1718rem;
     width: 89.479%;
     margin: 0 auto;
+}
+
+.d-sm-block {
+    display: none;
+
+    @include media(600) {
+        display: block;
+    }
 }
 
 .d-flex {
@@ -674,14 +683,6 @@ footer {
                 text-decoration: none;
             }
         }
-    }
-}
-
-.portfolio-cards .col-12:not(:first-child) {
-    display: none;
-
-    @include media(662) {
-        display: block;
     }
 }
 

@@ -29,8 +29,8 @@
                         0 => 'col-12 col-md-8 col-lg-8',
                         1 => 'col-12 col-sm-6 col-md-8 col-lg-8',
                         2 => 'col-12 col-sm-6 col-md-4 col-lg-4',
-                        3 => 'col-12 col-sm-6 col-md-4 col-lg-4',
-                        4 => 'col-12 col-sm-6 col-md-8 col-lg-8',
+                        3 => 'col-12 col-sm-6 col-md-4 col-lg-4 d-sm-block',
+                        4 => 'col-12 col-sm-6 col-md-8 col-lg-8 d-sm-block',
                         default => 'col-12',
                     };
                 @endphp
@@ -43,24 +43,6 @@
                 </div>
             @endforeach
         </div>
-
-        @if(count($projects))
-            <div class="swiper get-involved-swiper">
-                <div class="swiper-wrapper">
-                    @foreach ($projects as $project)
-                        <div class="swiper-slide col-12">
-                            <a href="">
-                                <img src="{{ asset('storage/' . $project["hero_image"]) }}" alt="">
-                            </a>
-                            <a href="#">{{ $project['title'] ?? '' }}</a>
-                        </div>
-                    @endforeach
-                </div>
-
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        @endif
 
         <a href="{{ route('portfolio.index') }}">Full Portfolio</a>
     </section>
@@ -272,19 +254,4 @@
             </div>
         </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        const swiper = new Swiper('.get-involved-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 24,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            loop: true,
-        });
-    </script>
-
-
 @endsection

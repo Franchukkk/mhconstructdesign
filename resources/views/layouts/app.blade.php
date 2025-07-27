@@ -20,8 +20,6 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -101,129 +99,154 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const links = document.querySelectorAll('nav a[href^="index.html#"], nav a[href^="#"]');
-            const sections = [];
-            const stepImage = document.querySelector('.step-image');
-            const steps = document.querySelectorAll('.step-card');
+    document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll('nav a[href^="index.html#"], nav a[href^="#"]');
+        const sections = [];
+        const stepImage = document.querySelector('.step-image');
+        const steps = document.querySelectorAll('.step-card');
 
-            let sliderInterval;
+        const burger = document.getElementById('burger');
+        const menu = document.getElementById('burgerMenu');
+        const headerLine = document.querySelector('.header-line');
+        const burgerLinks = document.querySelectorAll('#burgerMenu a[href*="#"]');
 
-            links.forEach(link => {
-                const href = link.getAttribute("href");
-                const id = href.split("#")[1];
-                const section = document.getElementById(id);
-                if (section) sections.push({ id, element: section });
+        let sliderInterval;
 
-                link.addEventListener("click", function (e) {
-                    const currentPage = window.location.pathname.split("/").pop();
-                    if (currentPage === "" || currentPage === "index.html") {
-                        e.preventDefault();
-                        history.pushState(null, null, "#" + id);
-                        window.scrollTo({
-                            top: section.offsetTop - 80,
-                            behavior: "smooth"
-                        });
-                    }
-                });
-            });
+        links.forEach(link => {
+            const href = link.getAttribute("href");
+            const id = href.split("#")[1];
+            const section = document.getElementById(id);
+            if (section) sections.push({ id, element: section });
 
-            function activateScrollMode() {
-                window.addEventListener("scroll", handleScroll);
-                handleScroll();
-            }
-
-            function deactivateScrollMode() {
-                window.removeEventListener("scroll", handleScroll);
-            }
-
-            function startSlider() {
-                if (!stepImage || steps.length === 0) return;
-                let index = 0;
-                const images = Array.from(steps).map(step => step.getAttribute('data-img-src')).filter(Boolean);
-
-                stepImage.src = images[index];
-
-                sliderInterval = setInterval(() => {
-                    index = (index + 1) % images.length;
-                    stepImage.src = images[index];
-                }, 3000);
-            }
-
-            function stopSlider() {
-                clearInterval(sliderInterval);
-            }
-
-            function handleScroll() {
-                let currentId = "";
-                const scrollY = window.scrollY + 100;
-
-                sections.forEach(({ id, element }) => {
-                    if (element.offsetTop <= scrollY && element.offsetTop + element.offsetHeight > scrollY) {
-                        currentId = id;
-                    }
-                });
-
-                links.forEach(link => {
-                    const href = link.getAttribute("href");
-                    const linkId = href.split("#")[1];
-                    if (linkId === currentId) {
-                        link.classList.add("active");
-                    } else {
-                        link.classList.remove("active");
-                    }
-                });
-
-                if (window.innerWidth >= 767 && stepImage && steps.length) {
-                    let currentStep = null;
-
-                    steps.forEach(step => {
-                        const rect = step.getBoundingClientRect();
-                        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-                            currentStep = step;
-                        }
+            link.addEventListener("click", function (e) {
+                const currentPage = window.location.pathname.split("/").pop();
+                if (currentPage === "" || currentPage === "index.html") {
+                    e.preventDefault();
+                    history.pushState(null, null, "#" + id);
+                    window.scrollTo({
+                        top: section.offsetTop - 80,
+                        behavior: "smooth"
                     });
-
-                    if (currentStep) {
-                        const newSrc = currentStep.getAttribute('data-img-src');
-                        if (newSrc && stepImage.src !== newSrc) {
-                            stepImage.src = newSrc;
-                            console.log(newSrc.split('/').pop());
-                            if (newSrc.split('/').pop() == "step5.webp") {
-                                stepImage.classList.add("step-image-top-right")
-                            }
-                        }
-                    }
                 }
-            }
-
-            function checkMode() {
-                if (window.innerWidth < 883) {
-                    deactivateScrollMode();
-                    stopSlider();
-                    startSlider();
-                } else {
-                    stopSlider();
-                    activateScrollMode();
-                }
-            }
-
-            window.addEventListener("resize", checkMode);
-            checkMode();
-
-            const burger = document.getElementById('burger');
-            const menu = document.getElementById('burgerMenu');
-            const headerLine = document.querySelector('.header-line');
-
-            burger.addEventListener('click', function (e) {
-                e.preventDefault();
-                burger.classList.toggle('active');
-                menu.classList.toggle('active');
-                headerLine.classList.toggle('active');
             });
         });
 
-    </script>
+        burgerLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                const id = href.split('#')[1];
+                const target = document.getElementById(id);
+
+                if (target) {
+                    e.preventDefault();
+
+                    burger.classList.remove('active');
+                    menu.classList.remove('active');
+                    headerLine.classList.remove('active');
+
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: "smooth"
+                        });
+                    }, 100);
+                }
+            });
+        });
+
+        function activateScrollMode() {
+            window.addEventListener("scroll", handleScroll);
+            handleScroll();
+        }
+
+        function deactivateScrollMode() {
+            window.removeEventListener("scroll", handleScroll);
+        }
+
+        function startSlider() {
+            if (!stepImage || steps.length === 0) return;
+            let index = 0;
+            const images = Array.from(steps).map(step => step.getAttribute('data-img-src')).filter(Boolean);
+
+            stepImage.src = images[index];
+
+            sliderInterval = setInterval(() => {
+                index = (index + 1) % images.length;
+                stepImage.src = images[index];
+            }, 3000);
+        }
+
+        function stopSlider() {
+            clearInterval(sliderInterval);
+        }
+
+        function handleScroll() {
+            let currentId = "";
+            const scrollY = window.scrollY + 100;
+
+            sections.forEach(({ id, element }) => {
+                if (element.offsetTop <= scrollY && element.offsetTop + element.offsetHeight > scrollY) {
+                    currentId = id;
+                }
+            });
+
+            links.forEach(link => {
+                const href = link.getAttribute("href");
+                const linkId = href.split("#")[1];
+                if (linkId === currentId) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+
+            if (window.innerWidth >= 767 && stepImage && steps.length) {
+                let currentStep = null;
+
+                steps.forEach(step => {
+                    const rect = step.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                        currentStep = step;
+                    }
+                });
+
+                if (currentStep) {
+                    const newSrc = currentStep.getAttribute('data-img-src');
+                    if (newSrc && stepImage.src !== newSrc) {
+                        stepImage.src = newSrc;
+                        console.log(newSrc.split('/').pop());
+                        if (newSrc.split('/').pop() == "step5.webp") {
+                            stepImage.classList.add("step-image-top-right")
+                        }
+                    }
+                }
+            }
+        }
+
+        function checkMode() {
+            if (window.innerWidth < 883) {
+                deactivateScrollMode();
+                stopSlider();
+                startSlider();
+            } else {
+                stopSlider();
+                activateScrollMode();
+            }
+        }
+
+        window.addEventListener("resize", checkMode);
+        checkMode();
+
+        burger.addEventListener('click', function (e) {
+            e.preventDefault();
+            burger.classList.toggle('active');
+            menu.classList.toggle('active');
+            headerLine.classList.toggle('active');
+            document.body.classList.toggle('lock'); // якщо використовується для блокування скролу
+        });
+    });
+</script>
+
 
 </body>
 
