@@ -6,7 +6,7 @@
                 <h1>Fully Serviced. <br> Fully Personalized.</h1>
                 <p>Welcome to M&H Construction and Design. We specialize in thoughtful interior design and seamless project
                     execution — transforming concepts into real, stunning spaces.</p>
-                <a href="" class="button-primary">Book a Consultation</a>
+                <a href="{{ route("contact-request.form") }}" class="button-primary">Book a Consultation</a>
             </div>
         </div>
     </section>
@@ -16,7 +16,7 @@
                 <div>
                     <h2>portfolio</h2>
                     <p>take a look at this short description and enjoy its beauty. And this sentence too...</p>
-                    <a class="button-primary" href="">Get Started</a>
+                    <a class="button-primary" href="{{ route("contact-request.form") }}">Get Started</a>
                 </div>
             </div>
 

@@ -27,6 +27,11 @@ body {
     background-color: #fff;
 }
 
+.overflow-x-hidden {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 a {
     display: inline-block;
     text-decoration: none;
@@ -1068,10 +1073,14 @@ footer {
         column-gap: 8rem;
         min-width: 98px;
         color: #121212;
-        font-size: 20rem;
+        font-size: 24rem;
         font-weight: 275;
         line-height: 1.05em;
         text-transform: capitalize;
+
+        @include media(500) {
+            font-size: 20rem;
+        }
 
         input[type=checkbox] {
             width: 20rem;
