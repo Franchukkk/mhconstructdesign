@@ -39,7 +39,7 @@
                     <a href="">
                         <img src="{{ asset('storage/' . $project["hero_image"]) }}" alt="">
                     </a>
-                    <a href="#">{{ $project['title'] ?? '' }}</a>
+                    <a href="{{ route('portfolio.show', $project["slug"]) }}">{{ $project['title'] ?? '' }}</a>
                 </div>
             @endforeach
         </div>

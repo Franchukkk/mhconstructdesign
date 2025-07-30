@@ -394,9 +394,6 @@
                     <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
                     <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
                     </div>
-                    <label class="form-label">Description (optional):</label>
-                    <textarea name="gallery[${galleryIndex}][description]" rows="2" class="form-control mb-2"></textarea>
-
                     <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
                 </div>
             `;

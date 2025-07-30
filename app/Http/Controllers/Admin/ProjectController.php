@@ -63,8 +63,8 @@ class ProjectController extends Controller
                 $realPath = $item['real_image']->store('projects/gallery/real', 'public');
 
                 $project->galleryItems()->create([
-                    'design_image' => $designPath,
-                    'real_image' => $realPath,
+                    'design_image' => $designPath ?? '',
+                    'real_image' => $realPath ?? '',
                     'description' => $item['description'] ?? null,
                 ]);
             }
@@ -74,13 +74,20 @@ class ProjectController extends Controller
     }
 
     public function edit(Project $project)
-    {
-        // Завантажуємо пов’язану галерею
-        $project->load('galleryItems');
-        return view('admin.projects.edit', compact('project'));
-    }
+{
+    $project->load('galleryItems');
+    // Не сортуємо, або сортуємо за order, якщо є
 
-    public function update(Request $request, Project $project)
+    return view('admin.projects.edit', [
+        'project' => $project,
+        'gallery' => $project->galleryItems,
+    ]);
+}
+
+
+    
+
+public function update(Request $request, Project $project)
 {
     $validatedData = $request->validate([
         'title' => 'required|string|max:255',
@@ -92,55 +99,88 @@ class ProjectController extends Controller
         'style' => 'nullable|string|max:255',
         'location' => 'nullable|string|max:255',
         'gallery' => 'nullable|array',
+        'gallery.*.id' => 'nullable|integer',
         'gallery.*.design_image' => 'nullable|image|max:2048',
         'gallery.*.real_image' => 'nullable|image|max:2048',
         'gallery.*.description' => 'nullable|string|max:1000',
+        'gallery.*.old_design_image' => 'nullable|string',
+        'gallery.*.old_real_image' => 'nullable|string',
     ]);
 
-    // Оновлення полів проєкту
+    // Оновлення основних полів проекту
     $project->title = $validatedData['title'];
     $project->description = $validatedData['description'] ?? null;
-
-    // Оновлюємо hero_image якщо передано
-    if ($request->hasFile('hero_image')) {
-        $project->hero_image = $request->file('hero_image')->store('projects/hero_images', 'public');
-    }
-
     $project->area = $validatedData['area'] ?? null;
     $project->implementation_time = $validatedData['implementation_time'] ?? null;
     $project->design_time = $validatedData['design_time'] ?? null;
     $project->style = $validatedData['style'] ?? null;
     $project->location = $validatedData['location'] ?? null;
 
+    if ($request->hasFile('hero_image')) {
+        // Опціонально: можна видалити старе зображення, якщо потрібно
+        // Storage::disk('public')->delete($project->hero_image);
+        $project->hero_image = $request->file('hero_image')->store('projects/hero_images', 'public');
+    }
+
     $project->save();
 
-    // Видаляємо всі записи галереї (як раніше)
-    $project->galleryItems()->delete();
+    $incomingGallery = $validatedData['gallery'] ?? [];
 
-    if ($request->has('gallery')) {
-        foreach ($request->input('gallery') as $index => $galleryItem) {
-            $designFile = $request->file("gallery.$index.design_image");
-            $realFile = $request->file("gallery.$index.real_image");
+    // Збираємо всі id з incoming даних, щоб видалити неіснуючі
+    $incomingIds = collect($incomingGallery)->pluck('id')->filter()->all();
 
-            // Якщо завантажено нові файли - зберігаємо їх
-            $designPath = $designFile ? $designFile->store('projects/gallery/design', 'public') : ($galleryItem['old_design_image'] ?? null);
-            $realPath = $realFile ? $realFile->store('projects/gallery/real', 'public') : ($galleryItem['old_real_image'] ?? null);
+    // Видаляємо старі галерейні елементи, яких немає у нових даних
+    $project->galleryItems()->whereNotIn('id', $incomingIds)->delete();
 
-            // Створюємо запис, якщо хоча б є одна з картинок або опис
-            if (!$designPath && !$realPath && empty($galleryItem['description'])) {
-                continue; // Якщо немає нічого — пропускаємо
+    foreach ($incomingGallery as $item) {
+        $designPath = null;
+        $realPath = null;
+
+        // Якщо завантажено новий файл для design_image
+        if (isset($item['design_image']) && $item['design_image'] instanceof \Illuminate\Http\UploadedFile) {
+            $designPath = $item['design_image']->store('projects/gallery/design', 'public');
+        } else {
+            // Якщо файл не завантажений — залишаємо старий шлях (якщо є)
+            $designPath = $item['old_design_image'] ?? null;
+        }
+
+        // Аналогічно для real_image
+        if (isset($item['real_image']) && $item['real_image'] instanceof \Illuminate\Http\UploadedFile) {
+            $realPath = $item['real_image']->store('projects/gallery/real', 'public');
+        } else {
+            $realPath = $item['old_real_image'] ?? null;
+        }
+
+        // Пропускаємо пусті записи без зображень і опису
+        if (!$designPath && !$realPath && empty($item['description'])) {
+            continue;
+        }
+
+        if (!empty($item['id'])) {
+            // Оновлюємо існуючий елемент
+            $galleryItem = $project->galleryItems()->find($item['id']);
+            if ($galleryItem) {
+                $galleryItem->update([
+                    'design_image' => $designPath ?? '',
+                    'real_image' => $realPath ?? '',
+                    'description' => $item['description'] ?? null,
+                ]);
             }
-
+        } else {
+            // Створюємо новий елемент галереї
             $project->galleryItems()->create([
-                'design_image' => $designPath,
-                'real_image' => $realPath,
-                'description' => $galleryItem['description'] ?? null,
+                'design_image' => $designPath ?? '',
+                'real_image' => $realPath ?? '',
+                'description' => $item['description'] ?? null,
             ]);
         }
     }
 
     return redirect()->route('admin.projects.index')->with('success', 'Проєкт успішно оновлено!');
 }
+
+
+
 
 
 

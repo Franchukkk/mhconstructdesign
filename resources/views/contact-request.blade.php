@@ -10,11 +10,11 @@
                 IT’S TIME TO CREATE A HOME THAT NURTURES YOUR SOUL. <br>
                 SCHEDULE YOUR DISCOVERY CALL BELOW <br>
             </p>
-    
+
             @if(session('success'))
                 <p class="alert" style="color: green;">{{ session('success') }}</p>
             @endif
-    
+
             @if($errors->any())
                 <ul style="color: red;">
                     @foreach($errors->all() as $error)
@@ -22,101 +22,117 @@
                     @endforeach
                 </ul>
             @endif
-    
+
             <div class="row g-101">
                 <div class="col-12 col-lg-6">
                     <h1>Let’s talk about your project</h1>
                     <form id="contactForm" action="{{ route('contact-request.submit') }}" method="POST">
                         @csrf
-    
-                        <div class="row g-29 mb-25">
-                            <div class="col-12 col-lg-6">
-                                <label>
-                                    <p>Full name</p>
-                                    <input type="text" name="full_name" placeholder="Tony Stark" value="{{ old('full_name') }}"
-                                        required>
+                        <div id="formStep1">
+                            <div class="row g-29 mb-25">
+                                <div class="col-12 col-lg-6">
+                                    <label>
+                                        <p>Full name</p>
+                                        <input type="text" name="full_name" placeholder="Tony Stark"
+                                            value="{{ old('full_name') }}" required>
+                                    </label>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label>
+                                        <p>Email</p>
+                                        <input class="email" type="email" name="email" placeholder="Stark@gmail.com"
+                                            value="{{ old('email') }}" required>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row g-29 mb-25">
+                                <div class="col-12 col-lg-6">
+                                    <label>
+                                        <p>Phone number</p>
+                                        <input id="phoneInput" type="tel" name="phone" placeholder="(000) 000-0000"
+                                            value="{{ old('phone') }}">
+                                        <p id="phoneError" style="color: red; margin-top: 10px; font-size: 20rem;"></p>
+                                    </label>
+
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label>
+                                        <p>How did you hear about “m&H”?</p>
+                                        <select name="how_heard">
+                                            <option value="From Friends" @selected(old('how_heard') == 'From Friends')>From
+                                                Friends
+                                            </option>
+                                            <option value="Instagram" @selected(old('how_heard') == 'Instagram')>Instagram
+                                            </option>
+                                            <option value="Google" @selected(old('how_heard') == 'Google')>Google</option>
+                                            <option value="Other" @selected(old('how_heard') == 'Other')>Other</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row mb-25">
+                                <div class="col-12">
+                                    <label>
+                                        <p>Property Address</p>
+                                        <input type="text" name="page_url" id="page_url"
+                                            placeholder="23 Main Street, Anytown, CA 91234" value="{{ old('page_url') }}">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p class="mb-25">What can we help you with?</p>
+                            <div class="d-flex checkboxes-mb gap-29 mb-25">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="services_selected[]" value="Remodel"
+                                        @checked(is_array(old('services_selected')) && in_array('Remodel', old('services_selected')))>
+                                    Remodel
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="services_selected[]" value="Design Walk Through Service"
+                                        @checked(is_array(old('services_selected')) && in_array('Design Walk Through Service', old('services_selected')))>
+                                    Design Walk Through Service
                                 </label>
                             </div>
-                            <div class="col-12 col-lg-6">
-                                <label>
-                                    <p>Email</p>
-                                    <input class="email" type="email" name="email" placeholder="Stark@gmail.com"
-                                        value="{{ old('email') }}" required>
+
+                            <div class="d-flex checkboxes-mb gap-29 mb-105">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="services_selected[]" value="New Build"
+                                        @checked(is_array(old('services_selected')) && in_array('New Build', old('services_selected')))>
+                                    New Build
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="services_selected[]" value="Full-service design"
+                                        @checked(is_array(old('services_selected')) && in_array('Full-service design', old('services_selected')))>
+                                    Full-service design for furnishings/decor/artwork
                                 </label>
                             </div>
+
+                            <button id="nextBtn" class="button-primary" type="button">Next</button>
                         </div>
-    
-                        <div class="row g-29 mb-25">
-                            <div class="col-12 col-lg-6">
-                                <label>
-                                    <p>Phone number</p>
-                                    <input id="phoneInput" type="tel" name="phone" placeholder="(000) 000-0000"
-                                        value="{{ old('phone') }}">
-                                    <p id="phoneError" style="color: red; margin-top: 10px; font-size: 20rem;"></p>
-                                </label>
-    
+                        <div id="formStep2" style="display: none;">
+                            <div class="row mb-25">
+                                <div class="col-12">
+                                    <label>
+                                        <p>Project details</p>
+                                        <textarea name="project_details" placeholder="Tell us more..."
+                                            required>{{ old('project_details') }}</textarea>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-12 col-lg-6">
-                                <label>
-                                    <p>How did you hear about “m&H”?</p>
-                                    <select name="how_heard">
-                                        <option value="From Friends" @selected(old('how_heard') == 'From Friends')>From Friends
-                                        </option>
-                                        <option value="Instagram" @selected(old('how_heard') == 'Instagram')>Instagram</option>
-                                        <option value="Google" @selected(old('how_heard') == 'Google')>Google</option>
-                                        <option value="Other" @selected(old('how_heard') == 'Other')>Other</option>
-                                    </select>
-                                </label>
-                            </div>
+
+                            <button class="button-primary" type="submit">Submit</button>
                         </div>
-                        <div class="row mb-25">
-                            <div class="col-12">
-                                <label>
-                                    <p>Property Address</p>
-                                    <input type="text" name="page_url" id="page_url"
-                                        placeholder="23 Main Street, Anytown, CA 91234" value="{{ old('page_url') }}">
-                                </label>
-                            </div>
-                        </div>
-    
-                        <p class="mb-25">What can we help you with?</p>
-                        <div class="d-flex checkboxes-mb gap-29 mb-25">
-                            <label class="checkbox">
-                                <input type="checkbox" name="services_selected[]" value="Remodel"
-                                    @checked(is_array(old('services_selected')) && in_array('Remodel', old('services_selected')))>
-                                Remodel
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" name="services_selected[]" value="Design Walk Through Service"
-                                    @checked(is_array(old('services_selected')) && in_array('Design Walk Through Service', old('services_selected')))>
-                                Design Walk Through Service
-                            </label>
-                        </div>
-    
-                        <div class="d-flex checkboxes-mb gap-29 mb-105">
-                            <label class="checkbox">
-                                <input type="checkbox" name="services_selected[]" value="New Build"
-                                    @checked(is_array(old('services_selected')) && in_array('New Build', old('services_selected')))>
-                                New Build
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" name="services_selected[]" value="Full-service design"
-                                    @checked(is_array(old('services_selected')) && in_array('Full-service design', old('services_selected')))>
-                                Full-service design for furnishings/decor/artwork
-                            </label>
-                        </div>
-    
+
                         <!-- Hidden Fields -->
                         <input type="hidden" name="gclid" id="gclid">
                         <input type="hidden" name="client_id" id="client_id">
                         <input type="hidden" name="referrer" id="referrer">
-    
-                        <button class="button-primary" type="submit">Next</button>
                     </form>
                 </div>
-    
-                <div class="col-12 col-lg-6">
-                    <img src="{{ asset('images/contact.webp') }}" alt="">
+
+                <div class="col-12 col-lg-6" id="contactImageParentContainer">
+                    <img id="contactImage" src="{{ asset('images/contact.webp') }}" alt="">
                 </div>
             </div>
         </section>
@@ -129,41 +145,67 @@
         }
 
         const gclid = getQueryParam('gclid');
-        if (gclid) {
-            localStorage.setItem('gclid', gclid);
-        }
+        if (gclid) localStorage.setItem('gclid', gclid);
 
         const clientId = getQueryParam('client_id');
-        if (clientId) {
-            localStorage.setItem('client_id', clientId);
-        }
+        if (clientId) localStorage.setItem('client_id', clientId);
 
-        // Set hidden values before submit
-        document.getElementById('contactForm').addEventListener('submit', function () {
-            document.getElementById('gclid').value = localStorage.getItem('gclid') || '';
-            document.getElementById('client_id').value = localStorage.getItem('client_id') || '';
-            document.getElementById('referrer').value = document.referrer || '';
-            document.getElementById('page_url').value = window.location.href;
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const contactForm = document.getElementById('contactForm');
+            const nextBtn = document.getElementById('nextBtn');
+            const step1 = document.getElementById('formStep1');
+            const step2 = document.getElementById('formStep2');
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const phoneInput = document.getElementById('phoneInput');
-        const phoneError = document.getElementById('phoneError');
+            const phoneInput = document.getElementById('phoneInput');
+            const phoneError = document.getElementById('phoneError');
 
-        phoneInput.addEventListener('input', function () {
-            this.value = this.value.replace(/[^0-9()\-\s+]/g, '');
-            phoneError.textContent = '';
-        });
-
-        phoneInput.addEventListener('blur', function () {
-            const digits = this.value.replace(/\D/g, '');
-            if (digits.length < 10) {
-                phoneError.textContent = 'Please enter at least 10 digits in your phone number.';
-            } else {
+            phoneInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^0-9()\-\s+]/g, '');
                 phoneError.textContent = '';
-            }
+            });
+
+            phoneInput.addEventListener('blur', function () {
+                const digits = this.value.replace(/\D/g, '');
+                if (digits.length < 10) {
+                    phoneError.textContent = 'Please enter at least 10 digits in your phone number.';
+                } else {
+                    phoneError.textContent = '';
+                }
+            });
+
+            nextBtn.addEventListener('click', function () {
+                const requiredFields = contactForm.querySelectorAll('#formStep1 input[required], #formStep1 select[required]');
+                let valid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.border = '1px solid red';
+                        valid = false;
+                    } else {
+                        field.style.border = '';
+                    }
+                });
+
+                const digits = phoneInput.value.replace(/\D/g, '');
+                if (digits.length < 10) {
+                    phoneError.textContent = 'Please enter at least 10 digits in your phone number.';
+                    valid = false;
+                }
+
+                if (valid) {
+                    step1.style.display = 'none';
+                    step2.style.display = 'block';
+                }
+            });
+
+            contactForm.addEventListener('submit', function () {
+                document.getElementById('gclid').value = localStorage.getItem('gclid') || '';
+                document.getElementById('client_id').value = localStorage.getItem('client_id') || '';
+                document.getElementById('referrer').value = document.referrer || '';
+                document.getElementById('page_url').value = window.location.href;
+            });
         });
-    });
-</script>
+    </script>
+
 
 @endsection

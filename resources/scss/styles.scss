@@ -460,7 +460,7 @@ h2 {
         --bs-gutter-y: 20rem !important;
     }
 
-    margin-bottom: 100rem;
+    margin-bottom: 200rem;
 
     h2 {
         margin-bottom: 27rem;
@@ -1007,7 +1007,8 @@ footer {
         }
 
         input:not(input[type=checkbox]),
-        select {
+        select,
+        textarea {
             display: flex;
             align-items: center;
             outline: none;
@@ -1023,6 +1024,12 @@ footer {
             font-weight: 300;
             line-height: 1em;
             text-transform: capitalize;
+        }
+
+        textarea {
+            padding: 20rem;
+            min-height: 300rem;
+            resize: none;
         }
 
         input[type=email].email {
@@ -1069,6 +1076,7 @@ footer {
 
     .mb-105 {
         margin-bottom: 70rem;
+
         @include media(500) {
             margin-bottom: 105rem;
         }
@@ -1127,5 +1135,75 @@ footer {
 
     @include media(500) {
         flex-direction: row;
+    }
+}
+
+.project {
+    padding-top: 193rem;
+
+    h1 {
+        color: #121212;
+        font-size: 96rem;
+        font-weight: 300;
+        line-height: 0.83em;
+        margin-bottom: 90rem;
+        text-transform: uppercase;
+    }
+}
+
+.project-description-row {
+    --bs-gutter-x: 50rem !important;
+    --bs-gutter-y: 50rem !important;
+    margin-bottom: 191rem;
+
+    p {
+        color: #121212;
+        font-size: 32rem;
+        font-weight: 300;
+        line-height: 1em;
+        margin-bottom: 85rem;
+        text-transform: uppercase;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #121212;
+        font-size: 18rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 2.22em;
+        margin-bottom: 40.5rem;
+        text-transform: uppercase;
+
+        tr {
+            border-top: 0.5rem solid rgba(18, 18, 18, 0.70);
+            border-bottom: 0.5rem solid rgba(18, 18, 18, 0.70);
+
+            td:last-child {
+                text-align: right;
+            }
+        }
+    }
+
+    img {
+        width: 0;
+        object-fit: cover;
+    }
+}
+
+.project-gallery {
+
+    h2,
+    h3 {
+        text-align: center;
+    }
+
+    h3 {
+        color: #1E1E1E;
+        font-size: 48rem;
+        font-weight: 300;
+        line-height: 1.33em;
+        text-transform: uppercase;
     }
 }

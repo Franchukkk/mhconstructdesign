@@ -51,14 +51,49 @@
             line-height: 1.5;
         }
 
-        .btn-success { background-color: #28a745; border-color: #28a745; color: #fff; }
-        .btn-success:hover { background-color: #218838; border-color: #1e7e34; }
-        .btn-secondary { background-color: #6c757d; border-color: #6c757d; color: #fff; }
-        .btn-secondary:hover { background-color: #5a6268; border-color: #545b62; }
-        .btn-primary { background-color: #007bff; border-color: #007bff; color: #fff; }
-        .btn-primary:hover { background-color: #0069d9; border-color: #0062cc; }
-        .btn-danger { background-color: #dc3545; border-color: #dc3545; color: #fff; }
-        .btn-danger:hover { background-color: #c82333; border-color: #bd2130; }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
 
         h1 {
             color: #2c3e50;
@@ -144,7 +179,9 @@
             margin-bottom: 13rem;
         }
 
-        button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+        button[type="button"]:not(.navbar button),
+        button[type="submit"],
+        .btn-secondary {
             width: 100%;
         }
 
@@ -154,17 +191,21 @@
         }
 
         @media screen and (min-width: 480px) {
-            .file-dropzone, .dropzone {
+
+            .file-dropzone,
+            .dropzone {
                 max-width: 300px;
             }
 
-            button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+            button[type="button"]:not(.navbar button),
+            button[type="submit"],
+            .btn-secondary {
                 width: auto;
                 margin-right: 0;
                 margin-bottom: 0;
             }
 
-            
+
         }
     </style>
 
@@ -190,8 +231,8 @@
             <label class="form-label">Hero Image</label>
             <label for="hero_image" class="file-dropzone" id="dropzone">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon-upload" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    width="38" height="38">
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="38"
+                    height="38">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                     <polyline points="17 8 12 3 7 8" />
                     <line x1="12" y1="3" x2="12" y2="15" />
@@ -216,8 +257,38 @@
         <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Add Comparison</button>
 
         <div id="gallery-items">
-            @foreach(old('gallery', $project->galleryItems->toArray()) as $index => $item)
+            @php
+                $oldGallery = old('gallery');
+
+                if ($oldGallery) {
+                    // oldGallery існує — це масив, який користувач надіслав
+                    // Спершу беремо існуючу галерею (з бази)
+                    $existingGallery = $gallery->toArray();
+
+                    // Об'єднуємо масиви так, щоб нові (з old) йшли після існуючих
+                    // Але якщо хочеш зберегти старі елементи з old, можна використати array_replace або просте злиття
+
+                    // Наприклад, просто беремо існуючі + старі (з форм) — важливо уникати дублювання
+                    // Тож зробимо так:
+                    $galleryToShow = $existingGallery;
+
+                    // Перебираємо oldGallery і додаємо ті, яких нема в $existingGallery (порівнюємо по опису, чи дизайну)
+                    foreach ($oldGallery as $oldItem) {
+                        // Якщо хочеш додати без дублювань, зроби перевірку, інакше просто додаємо
+                        $galleryToShow[] = $oldItem;
+                    }
+                } else {
+                    $galleryToShow = $gallery->toArray();
+                }
+            @endphp
+
+
+
+            @foreach($galleryToShow as $index => $item)
                 <div class="gallery-pair">
+                    {{-- сюди додай --}}
+                    <input type="hidden" name="gallery[{{ $index }}][id]" value="{{ $item['id'] ?? '' }}">
+
                     <div class="dropzones-flex">
                         @foreach (['design_image' => 'Render', 'real_image' => 'Real picture'] as $input => $text)
                             <div>
@@ -226,15 +297,14 @@
                                     <div>
                                         <span class="dropzone-text">Click to select an image</span>
                                         @if(!empty($item[$input]))
-                                            <img src="{{ asset('storage/' . $item[$input]) }}"
-                                                id="{{ $input }}-preview-{{ $index }}" class="preview-image"
-                                                style="max-width: 100%; border-radius: 8px;" />
+                                            <img src="{{ asset('storage/' . $item[$input]) }}" id="{{ $input }}-preview-{{ $index }}"
+                                                class="preview-image" style="max-width: 100%; border-radius: 8px;" />
                                         @else
                                             <img id="{{ $input }}-preview-{{ $index }}" class="preview-image"
                                                 style="display: none; max-width: 100%; border-radius: 8px;" />
                                         @endif
-                                        <input type="file" name="gallery[{{ $index }}][{{ $input }}]"
-                                            accept="image/*" class="dropzone-input">
+                                        <input type="file" name="gallery[{{ $index }}][{{ $input }}]" accept="image/*"
+                                            class="dropzone-input">
                                         <input type="hidden" name="gallery[{{ $index }}][old_{{ $input }}]"
                                             value="{{ $item[$input] ?? '' }}">
                                     </div>
@@ -243,12 +313,10 @@
                         @endforeach
                     </div>
 
-                    <label class="form-label">Description</label>
-                    <textarea name="gallery[{{ $index }}][description]" class="form-control">{{ old("gallery.$index.description", $item['description'] ?? '') }}</textarea>
-
                     <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
                 </div>
             @endforeach
+
         </div>
 
         <button type="submit" class="btn btn-success">Create</button>
@@ -257,57 +325,80 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('hero_image').addEventListener('change', function (e) {
-                const file = e.target.files[0];
-                const preview = document.getElementById('preview-image');
-                const dropzoneText = document.querySelector('#dropzone .dropzone-text');
+            let galleryIndex = {{ count($gallery) }};
+            const galleryContainer = document.getElementById('gallery-items');
 
-                if (file && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        preview.src = event.target.result;
-                        preview.style.display = 'block';
-                        dropzoneText.style.display = 'none';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            let galleryIndex = {{ count(old('gallery', $project->galleryItems)) }};
             const createDropzone = (inputName, index, label) => {
                 return `
-                    <label>${label}</label>
-                    <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
-                        <div>
-                            <span class="dropzone-text">Click to select an image</span>
-                            <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                            <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
-                        </div>
-                    </div>
-                `;
+                                    <label>${label}</label>
+                                    <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                                        <div>
+                                            <span class="dropzone-text">Click to select an image</span>
+                                            <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                            <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                        </div>
+                                    </div>
+                                `;
             };
 
+            // Функція для оновлення індексів усіх елементів після додавання або видалення
+            function refreshGalleryIndexes() {
+                const galleryPairs = galleryContainer.querySelectorAll('.gallery-pair');
+                galleryPairs.forEach((pair, index) => {
+                    // Оновлюємо індекси у всіх інпутах і id з preview
+                    const dropzones = pair.querySelectorAll('.dropzone');
+                    dropzones.forEach(dropzone => {
+                        const input = dropzone.querySelector('input[type="file"]');
+                        const oldPreviewId = dropzone.getAttribute('data-preview-id');
+                        const inputName = oldPreviewId.split('-preview-')[0]; // design_image або real_image
+
+                        // Оновлюємо data-preview-id
+                        const newPreviewId = `${inputName}-preview-${index}`;
+                        dropzone.setAttribute('data-preview-id', newPreviewId);
+
+                        // Оновлюємо name інпуту
+                        input.name = `gallery[${index}][${inputName}]`;
+
+                        // Оновлюємо id картинки превью
+                        const previewImage = dropzone.querySelector('.preview-image');
+                        previewImage.id = newPreviewId;
+
+                        // Оновлюємо label для картинки, якщо треба (не обов’язково)
+                    });
+
+                    // Оновити імена hidden інпутів (якщо у вас є hidden поля old_design_image, old_real_image)
+                    const hiddenOldDesign = pair.querySelector('input[name^="gallery"][name$="[old_design_image]"]');
+                    if (hiddenOldDesign) hiddenOldDesign.name = `gallery[${index}][old_design_image]`;
+
+                    const hiddenOldReal = pair.querySelector('input[name^="gallery"][name$="[old_real_image]"]');
+                    if (hiddenOldReal) hiddenOldReal.name = `gallery[${index}][old_real_image]`;
+                });
+
+                // Оновлюємо глобальний лічильник, щоб не було дублювань
+                galleryIndex = galleryContainer.querySelectorAll('.gallery-pair').length;
+            }
+
             document.getElementById('add-gallery-item').addEventListener('click', function () {
-                const container = document.getElementById('gallery-items');
                 const html = `
                     <div class="gallery-pair">
+                        <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
                         <div class="dropzones-flex">
                             <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
                             <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
                         </div>
-                        <label class="form-label">Description</label>
-                        <textarea name="gallery[${galleryIndex}][description]" class="form-control mb-2"></textarea>
-                        <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
+                        <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
                     </div>
                 `;
-                container.insertAdjacentHTML('beforeend', html);
+
+                galleryContainer.insertAdjacentHTML('beforeend', html);
                 initDropzones();
-                galleryIndex++;
+                refreshGalleryIndexes();
             });
 
-            document.getElementById('gallery-items').addEventListener('click', function (e) {
+            galleryContainer.addEventListener('click', function (e) {
                 if (e.target.classList.contains('remove-gallery-item')) {
                     e.target.closest('.gallery-pair').remove();
+                    refreshGalleryIndexes();
                 }
             });
 
@@ -333,22 +424,30 @@
                     }
 
                     input.addEventListener('change', () => input.files.length > 0 && handleFile(input.files[0]));
-                    dropzone.addEventListener('dragover', e => (e.preventDefault(), dropzone.classList.add('dragover')));
+                    dropzone.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        dropzone.classList.add('dragover');
+                    });
                     dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
                     dropzone.addEventListener('drop', function (e) {
                         e.preventDefault();
                         dropzone.classList.remove('dragover');
                         const files = e.dataTransfer.files;
                         if (files.length > 0) {
-                            input.files = files;
+                            const dataTransfer = new DataTransfer();
+                            dataTransfer.items.add(files[0]); // тільки один файл
+                            input.files = dataTransfer.files;
                             handleFile(files[0]);
                         }
                     });
+
                     dropzone.addEventListener('click', () => input.click());
                 });
             }
 
             initDropzones();
+            refreshGalleryIndexes();
         });
+
     </script>
 @endsection
