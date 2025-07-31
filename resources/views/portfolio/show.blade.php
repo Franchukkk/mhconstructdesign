@@ -34,30 +34,38 @@
                 <img src="{{ asset('storage/' . $project->hero_image) }}" alt="">
             </div>
         </div>
+        <div class="project-gallery">
+            <h2>FROM CONCEPT TO REALIZATION</h2>
+        </div>
+        @php
+            $images = $project->galleryItems
+                ->flatMap(fn($item) => [$item->design_image, $item->real_image])
+                ->filter(fn($path) => !empty($path))
+                ->values();
+        @endphp
 
-        @if ($project->galleryItems->isNotEmpty())
-            <div class="project-gallery" id="sliderWrapper">
-                <h2>FROM CONCEPT TO REALIZATION</h2>
+        <div class="portfolio">
+            @if ($images->isNotEmpty())
+                <div class="row g-5 project-gallery">
+                    @foreach ($images as $index => $image)
+                        @php
+                            $pairIndex = intdiv($index, 2);
+                            $isFirstInPair = $index % 2 === 0;
 
-                <div class="design-slider">
-                    @foreach($project_design_images as $item)
-                        <div class="swiper-slide">
-                            <img src="{{ asset('storage/' . $item->design_image) }}" alt="Design" class="img-fluid" />
+                            if ($pairIndex % 2 === 0) {
+                                $class = $isFirstInPair ? 'col-4' : 'col-8';
+                            } else {
+                                $class = $isFirstInPair ? 'col-8' : 'col-4';
+                            }
+                        @endphp
+
+                        <div class="{{ $class }}">
+                            <img src="{{ asset('storage/' . $image) }}" alt="Project Image" class="img-fluid w-100" />
                         </div>
                     @endforeach
                 </div>
-
-                <h3>REALIZATION</h3>
-
-                <div class="reality-slider">
-                    @foreach($project_real_images as $item)
-                        <div class="swiper-slide">
-                            <img src="{{ asset('storage/' . $item->real_image) }}" alt="Reality" class="img-fluid" />
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        @endif
+            @endif
+        </div>
     </section>
 
     <section class="get-involved wrapper">
@@ -73,53 +81,53 @@
         </div>
     </section>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" /> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
 
     <script>
-        $(document).ready(function () {
-            const designSlider = $('.design-slider').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: false,
-                dots: false,
-                pauseOnHover: false,
-                responsive: [
-                    { breakpoint: 992, settings: { slidesToShow: 2 } },
-                    { breakpoint: 768, settings: { slidesToShow: 1 } }
-                ]
-            });
+        // $(document).ready(function () {
+        //     const designSlider = $('.design-slider').slick({
+        //         slidesToShow: 3,
+        //         slidesToScroll: 1,
+        //         autoplay: true,
+        //         autoplaySpeed: 3000,
+        //         arrows: false,
+        //         dots: false,
+        //         pauseOnHover: false,
+        //         responsive: [
+        //             { breakpoint: 992, settings: { slidesToShow: 2 } },
+        //             { breakpoint: 768, settings: { slidesToShow: 1 } }
+        //         ]
+        //     });
 
-            const realitySlider = $('.reality-slider').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: false,
-                dots: false,
-                pauseOnHover: false,
-                responsive: [
-                    { breakpoint: 992, settings: { slidesToShow: 2 } },
-                    { breakpoint: 768, settings: { slidesToShow: 1 } }
-                ]
-            });
+        //     const realitySlider = $('.reality-slider').slick({
+        //         slidesToShow: 3,
+        //         slidesToScroll: 1,
+        //         autoplay: true,
+        //         autoplaySpeed: 3000,
+        //         arrows: false,
+        //         dots: false,
+        //         pauseOnHover: false,
+        //         responsive: [
+        //             { breakpoint: 992, settings: { slidesToShow: 2 } },
+        //             { breakpoint: 768, settings: { slidesToShow: 1 } }
+        //         ]
+        //     });
 
-            if (window.innerWidth > 991) {
-                $('.design-slider, .reality-slider').on('mouseenter', function () {
-                    designSlider.slick('slickPause');
-                    realitySlider.slick('slickPause');
-                });
+        //     if (window.innerWidth > 991) {
+        //         $('.design-slider, .reality-slider').on('mouseenter', function () {
+        //             designSlider.slick('slickPause');
+        //             realitySlider.slick('slickPause');
+        //         });
 
-                $('.design-slider, .reality-slider').on('mouseleave', function () {
-                    designSlider.slick('slickPlay');
-                    realitySlider.slick('slickPlay');
-                });
-            }
+        //         $('.design-slider, .reality-slider').on('mouseleave', function () {
+        //             designSlider.slick('slickPlay');
+        //             realitySlider.slick('slickPlay');
+        //         });
+        //     }
 
-        });
+        // });
 
         function adjustHeroImageHeight() {
             const textBlock = document.querySelector('.project-description-row > .col-lg-4');

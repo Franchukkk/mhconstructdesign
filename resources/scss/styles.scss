@@ -74,8 +74,14 @@ a {
 .button-border,
 .button-transparent,
 .button-primary {
+    text-align: center;
+    width: 100%;
     padding: 15rem 39rem;
     transition: .2s;
+
+    @include media(500) {
+        width: auto;
+    }
 }
 
 .button-border {
@@ -635,11 +641,24 @@ footer {
     }
 
     .col-md-4 img {
-        height: 450rem;
+        aspect-ratio: 1/1;
+        @include media (768) {
+            height: 450rem;
+            
+        }
+    }
+
+    .col-4 img,
+    .col-8 img {
+        height: 100%;
     }
 
     .col-md-8 img {
         aspect-ratio: 1100/500;
+    }
+
+    .col-8 img {
+        aspect-ratio: 1100/650;
     }
 
     &>a {
@@ -666,8 +685,13 @@ footer {
     }
 
     .g-5 {
-        --bs-gutter-x: 50rem !important;
-        --bs-gutter-y: 50rem !important;
+        --bs-gutter-x: 20rem !important;
+        --bs-gutter-y: 20rem !important;
+        
+        @include media(620) {
+            --bs-gutter-x: 50rem !important;
+            --bs-gutter-y: 50rem !important;
+        }
     }
 
     a:not(.button-primary, .page-link) {
@@ -842,8 +866,7 @@ footer {
         font-size: 96rem;
         font-style: normal;
         font-weight: 300;
-        line-height: 90rem;
-        /* 93.75% */
+        line-height: 0.93em;
         text-transform: uppercase;
     }
 }
@@ -1184,8 +1207,11 @@ footer {
         }
 
         tr {
-            border-top: 0.5rem solid rgba(18, 18, 18, 0.70);
-            border-bottom: 0.5rem solid rgba(18, 18, 18, 0.70);
+            border-top: 0.8px solid rgba(18, 18, 18, 0.70);
+            
+            &:last-child {
+                border-bottom: 0.8px solid rgba(18, 18, 18, 0.70);
+            }
 
             td:last-child {
                 text-align: right;
@@ -1200,7 +1226,6 @@ footer {
 }
 
 .project-gallery {
-    margin-bottom: 200rem;
     h2,
     h3 {
         text-align: center;
@@ -1219,6 +1244,10 @@ footer {
         line-height: 1.33em;
         text-transform: uppercase;
     }
+
+    img {
+        width: 100%;
+    }
 }
 
 
@@ -1236,9 +1265,7 @@ footer {
         width: calc(100% - 30rem);
         height: auto;
         object-fit: cover;
-        border-radius: 12px;
         cursor: pointer;
-        aspect-ratio: 1 / 1;
     }
 }
 
@@ -1246,5 +1273,12 @@ footer {
     .design-slider, .reality-slider {
         touch-action: none;
         pointer-events: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .portfolio .col-md-8 img,
+    .portfolio .col-md-4 img {
+        aspect-ratio: 1 / 1;
     }
 }
