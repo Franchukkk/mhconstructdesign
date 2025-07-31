@@ -24,7 +24,6 @@
                 @if ($index > 4) @break @endif
 
                 @php
-                    // Встановлюємо класи відповідно до позиції
                     $classes = match ($index) {
                         0 => 'col-12 col-md-8 col-lg-8',
                         1 => 'col-12 col-sm-6 col-md-8 col-lg-8',
@@ -36,7 +35,7 @@
                 @endphp
 
                 <div class="{{ $classes }}">
-                    <a href="">
+                    <a href="{{ route('portfolio.show', $project["slug"]) }}">
                         <img src="{{ asset('storage/' . $project["hero_image"]) }}" alt="">
                     </a>
                     <a href="{{ route('portfolio.show', $project["slug"]) }}">{{ $project['title'] ?? '' }}</a>

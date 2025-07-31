@@ -254,27 +254,18 @@
         @endforeach
 
         <h3>Gallery (Render / Real Photo)</h3>
-        <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Add Comparison</button>
+        <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Add</button>
 
         <div id="gallery-items">
             @php
                 $oldGallery = old('gallery');
 
                 if ($oldGallery) {
-                    // oldGallery існує — це масив, який користувач надіслав
-                    // Спершу беремо існуючу галерею (з бази)
                     $existingGallery = $gallery->toArray();
 
-                    // Об'єднуємо масиви так, щоб нові (з old) йшли після існуючих
-                    // Але якщо хочеш зберегти старі елементи з old, можна використати array_replace або просте злиття
-
-                    // Наприклад, просто беремо існуючі + старі (з форм) — важливо уникати дублювання
-                    // Тож зробимо так:
                     $galleryToShow = $existingGallery;
 
-                    // Перебираємо oldGallery і додаємо ті, яких нема в $existingGallery (порівнюємо по опису, чи дизайну)
                     foreach ($oldGallery as $oldItem) {
-                        // Якщо хочеш додати без дублювань, зроби перевірку, інакше просто додаємо
                         $galleryToShow[] = $oldItem;
                     }
                 } else {
@@ -286,7 +277,6 @@
 
             @foreach($galleryToShow as $index => $item)
                 <div class="gallery-pair">
-                    {{-- сюди додай --}}
                     <input type="hidden" name="gallery[{{ $index }}][id]" value="{{ $item['id'] ?? '' }}">
 
                     <div class="dropzones-flex">
@@ -341,32 +331,25 @@
                                 `;
             };
 
-            // Функція для оновлення індексів усіх елементів після додавання або видалення
             function refreshGalleryIndexes() {
                 const galleryPairs = galleryContainer.querySelectorAll('.gallery-pair');
                 galleryPairs.forEach((pair, index) => {
-                    // Оновлюємо індекси у всіх інпутах і id з preview
                     const dropzones = pair.querySelectorAll('.dropzone');
                     dropzones.forEach(dropzone => {
                         const input = dropzone.querySelector('input[type="file"]');
                         const oldPreviewId = dropzone.getAttribute('data-preview-id');
-                        const inputName = oldPreviewId.split('-preview-')[0]; // design_image або real_image
+                        const inputName = oldPreviewId.split('-preview-')[0];
 
-                        // Оновлюємо data-preview-id
                         const newPreviewId = `${inputName}-preview-${index}`;
                         dropzone.setAttribute('data-preview-id', newPreviewId);
 
-                        // Оновлюємо name інпуту
                         input.name = `gallery[${index}][${inputName}]`;
 
-                        // Оновлюємо id картинки превью
                         const previewImage = dropzone.querySelector('.preview-image');
                         previewImage.id = newPreviewId;
 
-                        // Оновлюємо label для картинки, якщо треба (не обов’язково)
                     });
 
-                    // Оновити імена hidden інпутів (якщо у вас є hidden поля old_design_image, old_real_image)
                     const hiddenOldDesign = pair.querySelector('input[name^="gallery"][name$="[old_design_image]"]');
                     if (hiddenOldDesign) hiddenOldDesign.name = `gallery[${index}][old_design_image]`;
 
@@ -374,7 +357,6 @@
                     if (hiddenOldReal) hiddenOldReal.name = `gallery[${index}][old_real_image]`;
                 });
 
-                // Оновлюємо глобальний лічильник, щоб не було дублювань
                 galleryIndex = galleryContainer.querySelectorAll('.gallery-pair').length;
             }
 
@@ -435,7 +417,7 @@
                         const files = e.dataTransfer.files;
                         if (files.length > 0) {
                             const dataTransfer = new DataTransfer();
-                            dataTransfer.items.add(files[0]); // тільки один файл
+                            dataTransfer.items.add(files[0]);
                             input.files = dataTransfer.files;
                             handleFile(files[0]);
                         }

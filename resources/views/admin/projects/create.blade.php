@@ -282,21 +282,18 @@
     <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <!-- Заголовок -->
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required>
             @error('title')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        <!-- Опис -->
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        <!-- Hero Image Upload -->
         <div class="mb-3">
             <label class="form-label">Hero Image</label>
             <label for="hero_image" class="file-dropzone" id="dropzone">
@@ -316,7 +313,6 @@
         </div>
 
 
-        <!-- Технічний блок -->
         <div class="mb-3">
             <label for="area" class="form-label">Area (м<sup>2</sup>)</label>
             <input type="text" name="area" id="area" class="form-control" value="{{ old('area') }}">
@@ -350,14 +346,12 @@
 
 
 
-        <!-- Галерея -->
         <div id="gallery-container" class="mb-4">
             <h3>Gallery (Render / Real Photo)</h3>
 
-            <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Add Comparison</button>
+            <button type="button" id="add-gallery-item" class="btn btn-primary mb-3">Add</button>
 
             <div id="gallery-items">
-                {{-- Сюди JS додаватиме поля --}}
             </div>
         </div>
 
@@ -463,7 +457,6 @@
 
         document.addEventListener('DOMContentLoaded', initDropzones);
 
-        // Hero image preview
         document.getElementById('hero_image').addEventListener('change', function (e) {
             const file = e.target.files[0];
             const preview = document.getElementById('preview-image');

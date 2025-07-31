@@ -34,23 +34,32 @@
                 <img src="{{ asset('storage/' . $project->hero_image) }}" alt="">
             </div>
         </div>
+
         @if ($project->galleryItems->isNotEmpty())
-            <div class="project-gallery">
+            <div class="project-gallery" id="sliderWrapper">
                 <h2>FROM CONCEPT TO REALIZATION</h2>
-                @foreach($project->galleryItems as $item)
-                    <div class="gallery-item">
-                        <img src="{{ asset('storage/' . $item->design_image) }}" alt="Design" class="design-image">
-                    </div>
-                @endforeach
-                <h3>realization</h3>
-                @foreach($project->galleryItems as $item)
-                    <div class="gallery-item">
-                        <img src="{{ asset('storage/' . $item->real_image) }}" alt="Reality" class="reality-image">
-                    </div>
-                @endforeach
+
+                <div class="design-slider">
+                    @foreach($project_design_images as $item)
+                        <div class="swiper-slide">
+                            <img src="{{ asset('storage/' . $item->design_image) }}" alt="Design" class="img-fluid" />
+                        </div>
+                    @endforeach
+                </div>
+
+                <h3>REALIZATION</h3>
+
+                <div class="reality-slider">
+                    @foreach($project_real_images as $item)
+                        <div class="swiper-slide">
+                            <img src="{{ asset('storage/' . $item->real_image) }}" alt="Reality" class="img-fluid" />
+                        </div>
+                    @endforeach
+                </div>
             </div>
         @endif
     </section>
+
     <section class="get-involved wrapper">
         <div class="row items-center g-5">
             <div class="col-12 col-md-4 col-lg-4">
@@ -64,28 +73,65 @@
         </div>
     </section>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
     <script>
-        window.addEventListener('load', function () {
+        $(document).ready(function () {
+            const designSlider = $('.design-slider').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: false,
+                dots: false,
+                pauseOnHover: false,
+                responsive: [
+                    { breakpoint: 992, settings: { slidesToShow: 2 } },
+                    { breakpoint: 768, settings: { slidesToShow: 1 } }
+                ]
+            });
+
+            const realitySlider = $('.reality-slider').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: false,
+                dots: false,
+                pauseOnHover: false,
+                responsive: [
+                    { breakpoint: 992, settings: { slidesToShow: 2 } },
+                    { breakpoint: 768, settings: { slidesToShow: 1 } }
+                ]
+            });
+
+            $('.design-slider, .reality-slider').on('mouseenter', function () {
+                designSlider.slick('slickPause');
+                realitySlider.slick('slickPause');
+            });
+
+            $('.design-slider, .reality-slider').on('mouseleave', function () {
+                designSlider.slick('slickPlay');
+                realitySlider.slick('slickPlay');
+            });
+        });
+
+        function adjustHeroImageHeight() {
             const textBlock = document.querySelector('.project-description-row > .col-lg-4');
             const imageBlock = document.querySelector('.project-description-row > .col-lg-8 img');
 
             if (textBlock && imageBlock) {
                 const textHeight = textBlock.offsetHeight;
-
                 imageBlock.style.height = textHeight + 'px';
                 imageBlock.style.objectFit = 'cover';
                 imageBlock.style.width = '100%';
             }
-        });
+        }
 
-        window.addEventListener('resize', function () {
-            const textBlock = document.querySelector('.project-description-row > .col-lg-4');
-            const imageBlock = document.querySelector('.project-description-row > .col-lg-8 img');
+        window.addEventListener('load', adjustHeroImageHeight);
+        window.addEventListener('resize', adjustHeroImageHeight);
 
-            if (textBlock && imageBlock) {
-                const textHeight = textBlock.offsetHeight;
-                imageBlock.style.height = textHeight + 'px';
-            }
-        });
     </script>
 @endsection
