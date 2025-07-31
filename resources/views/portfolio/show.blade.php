@@ -107,15 +107,18 @@
                 ]
             });
 
-            $('.design-slider, .reality-slider').on('mouseenter', function () {
-                designSlider.slick('slickPause');
-                realitySlider.slick('slickPause');
-            });
+            if (window.innerWidth > 991) {
+                $('.design-slider, .reality-slider').on('mouseenter', function () {
+                    designSlider.slick('slickPause');
+                    realitySlider.slick('slickPause');
+                });
 
-            $('.design-slider, .reality-slider').on('mouseleave', function () {
-                designSlider.slick('slickPlay');
-                realitySlider.slick('slickPlay');
-            });
+                $('.design-slider, .reality-slider').on('mouseleave', function () {
+                    designSlider.slick('slickPlay');
+                    realitySlider.slick('slickPlay');
+                });
+            }
+
         });
 
         function adjustHeroImageHeight() {

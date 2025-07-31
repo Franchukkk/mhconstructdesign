@@ -638,6 +638,10 @@ footer {
         height: 450rem;
     }
 
+    .col-md-8 img {
+        aspect-ratio: 1100/500;
+    }
+
     &>a {
         display: block;
         text-align: right;
@@ -1168,12 +1172,16 @@ footer {
         width: 100%;
         border-collapse: collapse;
         color: #121212;
-        font-size: 18rem;
+        font-size: 23rem;
         font-style: normal;
         font-weight: 300;
         line-height: 2.22em;
         margin-bottom: 40.5rem;
         text-transform: uppercase;
+
+        @include media(620) {
+            font-size: 18rem;
+        }
 
         tr {
             border-top: 0.5rem solid rgba(18, 18, 18, 0.70);
@@ -1234,3 +1242,9 @@ footer {
     }
 }
 
+@media (max-width: 768px) {
+    .design-slider, .reality-slider {
+        touch-action: none;
+        pointer-events: none;
+    }
+}
