@@ -9,7 +9,7 @@
                 <table>
                     <tr>
                         <td>Area</td>
-                        <td>{{$project->area}} m<sup>2</sup></td>
+                        <td>{{$project->area}} ft<sup>2</sup></td>
                     </tr>
                     <tr>
                         <td>Realisation</td>
@@ -34,15 +34,17 @@
                 <img src="{{ asset('storage/' . $project->hero_image) }}" alt="">
             </div>
         </div>
-        <div class="project-gallery">
-            <h2>FROM CONCEPT TO REALIZATION</h2>
-        </div>
         @php
             $images = $project->galleryItems
                 ->flatMap(fn($item) => [$item->design_image, $item->real_image])
                 ->filter(fn($path) => !empty($path))
                 ->values();
         @endphp
+        @if ($images->isNotEmpty())
+        <div class="project-gallery">
+            <h2>FROM CONCEPT TO REALIZATION</h2>
+        </div>
+        @endif
 
         <div class="portfolio">
             @if ($images->isNotEmpty())
@@ -132,12 +134,17 @@
         function adjustHeroImageHeight() {
             const textBlock = document.querySelector('.project-description-row > .col-lg-4');
             const imageBlock = document.querySelector('.project-description-row > .col-lg-8 img');
-
-            if (textBlock && imageBlock) {
-                const textHeight = textBlock.offsetHeight;
-                imageBlock.style.height = textHeight + 'px';
-                imageBlock.style.objectFit = 'cover';
+            if (window.innerWidth > 769) {
+    
+                if (textBlock && imageBlock) {
+                    const textHeight = textBlock.offsetHeight;
+                    imageBlock.style.height = textHeight + 'px';
+                    imageBlock.style.objectFit = 'cover';
+                    imageBlock.style.width = '100%';
+                }
+            } else {
                 imageBlock.style.width = '100%';
+                imageBlock.style.aspectRatio = '1 / 1'
             }
         }
 

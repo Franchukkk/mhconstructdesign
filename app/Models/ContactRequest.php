@@ -13,6 +13,8 @@ class ContactRequest extends Model
         'how_heard',
         'services_selected',
         'project_details',
+        'timeframe_flexibility',
+        'design_style_description',
         'gclid',
         'client_id',
         'referrer',
@@ -20,6 +22,7 @@ class ContactRequest extends Model
         'ip_address',
         'user_agent',
     ];
+
 
     protected $casts = [
         'services_selected' => 'array',

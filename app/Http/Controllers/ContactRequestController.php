@@ -24,11 +24,14 @@ class ContactRequestController extends Controller
             'services_selected' => 'nullable|array',
             'services_selected.*' => 'string|max:255',
             'project_details' => 'nullable|string',
+            'timeframe_flexibility' => 'nullable|string|max:255',
+            'design_style_description' => 'nullable|string|max:255',
             'gclid' => 'nullable|string|max:255',
             'client_id' => 'nullable|string|max:255',
             'referrer' => 'nullable|string|max:2048',
             'page_url' => 'nullable|string|max:2048',
         ]);
+
 
         $validated['ip_address'] = $request->ip();
         $validated['user_agent'] = $request->userAgent();

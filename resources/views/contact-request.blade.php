@@ -42,6 +42,7 @@
                                         <p>Email</p>
                                         <input class="email" type="email" name="email" placeholder="Stark@gmail.com"
                                             value="{{ old('email') }}" required>
+                                        <p id="emailError" style="color: red; margin-top: 10px; font-size: 20rem;"></p>
                                     </label>
                                 </div>
                             </div>
@@ -114,9 +115,15 @@
                             <div class="row mb-25">
                                 <div class="col-12">
                                     <label>
-                                        <p>Project details</p>
-                                        <textarea name="project_details" placeholder="Tell us more..."
+                                        <p>Could you please share more details about your project?</p>
+                                        <textarea name="project_details" placeholder="Type here"
                                             required>{{ old('project_details') }}</textarea>
+                                        <p>Timeframe & Flexibilit (This isn't required)</p>
+                                        <textarea name="timeframe_flexibility" placeholder="Type here"
+                                                  >{{ old('timeframe_flexibility') }}</textarea>
+                                        <p>How would you describe your design style? (This isn't required)</p>
+                                        <textarea name="design_style_description" placeholder="Type here"
+                                                  >{{ old('design_style_description') }}</textarea>
                                     </label>
                                 </div>
                             </div>
@@ -150,6 +157,11 @@
         const clientId = getQueryParam('client_id');
         if (clientId) localStorage.setItem('client_id', clientId);
 
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const contactForm = document.getElementById('contactForm');
             const nextBtn = document.getElementById('nextBtn');
@@ -158,6 +170,8 @@
 
             const phoneInput = document.getElementById('phoneInput');
             const phoneError = document.getElementById('phoneError');
+            const emailInput = contactForm.querySelector('input[name="email"]');
+            const emailError = document.getElementById('emailError');
 
             phoneInput.addEventListener('input', function () {
                 this.value = this.value.replace(/[^0-9()\-\s+]/g, '');
@@ -186,6 +200,16 @@
                     }
                 });
 
+                // Валідація email
+                if (!validateEmail(emailInput.value.trim())) {
+                    emailError.textContent = 'Please enter a valid email address.';
+                    emailInput.style.border = '1px solid red';
+                    valid = false;
+                } else {
+                    emailError.textContent = '';
+                    emailInput.style.border = '';
+                }
+
                 const digits = phoneInput.value.replace(/\D/g, '');
                 if (digits.length < 10) {
                     phoneError.textContent = 'Please enter at least 10 digits in your phone number.';
@@ -205,7 +229,9 @@
                 document.getElementById('page_url').value = window.location.href;
             });
         });
+
     </script>
+
 
 
 @endsection

@@ -6,8 +6,7 @@
     <section class="portfolio wrapper">
         <div class="page-title-container">
             <h1>portfolio</h1>
-            <p>Browse through a curated selection of our residential projects. Each one tells a story of design,
-                craftsmanship, and transformation.</p>
+            <p>Explore our curated portfolio of residential projects—each one a reflection of thoughtful design, expert craftsmanship, and inspired transformation. Discover what’s possible when vision meets precision.</p>
         </div>
 
         <div class="row product-card g-3">

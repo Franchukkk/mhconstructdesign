@@ -99,6 +99,11 @@
         a.page-url-link:hover {
             text-decoration: underline;
         }
+
+        .td-width {
+            min-width: 300px;
+        }
+
     </style>
 
     <div class="requests-wrapper">
@@ -116,6 +121,8 @@
                         <th>phone</th>
                         <th>how_heard</th>
                         <th>services_selected</th>
+                        <th>Project details</th>
+                        <th>Timeframe Flexibility</th>
                         <th>gclid</th>
                         <th>client_id</th>
                         <th>referrer</th>
@@ -128,13 +135,13 @@
                 </thead>
                 <tbody>
                     @forelse ($requests as $request)
-                        <tr>
+                        <tr class="table-row-main">
                             <td>{{ $request->id }}</td>
                             <td>{{ $request->full_name }}</td>
                             <td>{{ $request->email }}</td>
                             <td>{{ $request->phone ?? '-' }}</td>
                             <td>{{ $request->how_heard ?? '-' }}</td>
-                            <td>
+                            <td class="td-width">
                                 @if(is_array($request->services_selected))
                                     <ul class="services-list">
                                         @foreach($request->services_selected as $service)
@@ -145,9 +152,15 @@
                                     {{ $request->services_selected ?? '-' }}
                                 @endif
                             </td>
+                            <td class="td-width">
+                                {{ $request->project_details }}
+                            </td>
+                            <td class="td-width">
+                                {{ $request->timeframe_flexibility }}
+                            </td>
                             <td>{{ $request->gclid ?? '-' }}</td>
                             <td>{{ $request->client_id ?? '-' }}</td>
-                            <td>
+                            <td class="td-width">
                                 @if ($request->referrer)
                                     <a href="{{ $request->referrer }}" target="_blank" class="page-url-link">
                                         {{ parse_url($request->referrer, PHP_URL_HOST) }}
@@ -156,7 +169,7 @@
                                     -
                                 @endif
                             </td>
-                            <td>
+                            <td class="td-width">
                                 @if ($request->page_url)
                                     <a href="{{ $request->page_url }}" target="_blank" class="page-url-link">
                                         {{ parse_url($request->page_url, PHP_URL_PATH) ?: $request->page_url }}
@@ -166,7 +179,7 @@
                                 @endif
                             </td>
                             <td>{{ $request->ip_address ?? '-' }}</td>
-                            <td style="white-space: pre-wrap;">{{ $request->user_agent ?? '-' }}</td>
+                            <td class="td-width" style="white-space: pre-wrap;">{{ $request->user_agent ?? '-' }}</td>
                             <td>{{ $request->created_at->format('Y-m-d H:i') }}</td>
                             <td>{{ $request->updated_at->format('Y-m-d H:i') }}</td>
                         </tr>

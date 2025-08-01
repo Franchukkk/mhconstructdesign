@@ -19,7 +19,7 @@ class GenerateSitemap extends Command
             ->add(Url::create('/'))
             ->add(Url::create('/blog'));
 
-        BlogPost::whereNotNull('published_at')->get()->each(function ($post) use ($sitemap) {
+        BlogPost::whereNotNull('created_at')->get()->each(function ($post) use ($sitemap) {
             $sitemap->add(Url::create("/blog/{$post->slug}"));
         });
 

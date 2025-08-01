@@ -15,7 +15,8 @@
             <div class="col-12 col-md-4 col-lg-4 items-center">
                 <div>
                     <h2>portfolio</h2>
-                    <p>take a look at this short description and enjoy its beauty. And this sentence too...</p>
+                    <p>take a look at this short description and enjoy its beauty. And this sentence too. It is here, by the
+                        way, only to increase the volume of the text...</p>
                     <a class="button-primary" href="{{ route("contact-request.form") }}">Get Started</a>
                 </div>
             </div>
@@ -43,7 +44,7 @@
             @endforeach
         </div>
 
-        <a href="{{ route('portfolio.index') }}">Full Portfolio</a>
+        <a href="{{ route('portfolio.index') }}">view full portfolio</a>
     </section>
 
     <section class="services" id="services">
@@ -136,7 +137,18 @@
             <h2>how we work</h2>
             <div class="row how-we-work__steps">
                 <div class="col-12 col-md-6 step-image-container">
-                    <img class="step-image" src="{{ asset('images/steps-img.webp') }}" alt="step 1">
+                    <img class="step-image" src="{{ asset('images/step1.webp') }}" alt="step 1">
+                    <div class="swiper step-images-mobile-slider">
+                        <div class="swiper-wrapper">
+                            @for ($i = 1; $i <= 10; $i++)
+                                <div class="swiper-slide">
+                                    <img src="{{ asset("images/step{$i}.webp") }}" alt="">
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="col-12 col-md-6">
                     <h3 class="yellow-title">Design Project</h3>
@@ -174,8 +186,7 @@
                             <span class="number">4.</span>
                             <h3>Cost Estimation</h3>
                         </div>
-                        <p>We calculate the investment needed to implement the chosen design — from furniture and
-                            lighting to finishes and materials.
+                        <p>We outline the investment required to bring your design to life — including furniture, lighting, finishes, and materials.
                         </p>
                     </div>
                     <div class="step-card" data-img-src="{{ asset('images/step5.webp') }}">
@@ -253,4 +264,21 @@
             </div>
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        new Swiper('.step-images-mobile-slider', {
+            loop: true,
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+            },
+            speed: 3000,
+            grabCursor: false,
+        });
+    </script>
+
 @endsection
