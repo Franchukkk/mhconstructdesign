@@ -13,7 +13,7 @@
     <section class="portfolio wrapper" id="portfolio">
         <div class="row g-5 portfolio-cards">
             <div class="col-12 col-md-4 col-lg-4 items-center">
-                <div>
+                <div class="margin-bottom-mb">
                     <h2>portfolio</h2>
                     <p>take a look at this short description and enjoy its beauty. And this sentence too. It is here, by the
                         way, only to increase the volume of the text...</p>
