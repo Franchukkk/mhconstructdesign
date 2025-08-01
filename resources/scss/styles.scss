@@ -672,6 +672,16 @@ footer {
 
 .margin-bottom-mb {
     margin-bottom: 70rem;
+    @include media(620) {
+        margin-bottom: 0rem;
+    }
+}
+
+.get-involved .button-primary {
+    margin-bottom: 52rem;
+    @include media(620) {
+        margin-bottom: 0rem;
+    }
 }
 
 .portfolio {
@@ -1257,6 +1267,7 @@ footer {
         }
 
         tr {
+            border: none;
             border-top: 0.8px solid rgba(18, 18, 18, 0.70);
 
             &:last-child {
