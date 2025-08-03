@@ -40,13 +40,6 @@ class ProjectController extends Controller
             'gallery.*.description' => 'nullable|string',
         ]);
 
-        // DEBUG: подивитися всі дані запиту та валідацію
-        dd([
-            'all_request' => $request->all(),
-            'all_files' => $request->allFiles(),
-            'validated' => $validated,
-        ]);
-
         $validated['slug'] = Str::slug($validated['title']);
 
         if (empty($validated['meta_title'])) {
@@ -62,10 +55,10 @@ class ProjectController extends Controller
 
         $project = Project::create($validated);
 
-        if ($request->has('gallery')) {
-            foreach ($request->input('gallery', []) as $index => $item) {
-                $designFile = $request->file("gallery.$index.design_image");
-                $realFile = $request->file("gallery.$index.real_image");
+        if (!empty($validated['gallery'])) {
+            foreach ($validated['gallery'] as $item) {
+                $designFile = $item['design_image'] ?? null;
+                $realFile = $item['real_image'] ?? null;
 
                 if (!$designFile && !$realFile && empty($item['description'])) {
                     continue;
@@ -84,6 +77,7 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.projects.index')->with('success', 'Проект створено');
     }
+
 
 
 
