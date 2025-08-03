@@ -226,6 +226,7 @@
                 image: {
                     toolbar: [
                         'imageStyle:full',
+                        'imageTextAlternative' // додає поле для alt
                     ]
                 },
                 simpleUpload: {

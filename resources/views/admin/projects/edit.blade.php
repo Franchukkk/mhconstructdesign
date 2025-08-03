@@ -245,7 +245,7 @@
             @error('hero_image')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        @foreach (['area' => 'Area (m²)', 'implementation_time' => 'Implementation Time (months)', 'design_time' => 'Project Development Time', 'style' => 'Style', 'location' => 'Address'] as $field => $label)
+        @foreach (['area' => 'Area (ft²)', 'implementation_time' => 'Implementation Time (months)', 'design_time' => 'Project Development Time (weeks)', 'style' => 'Style', 'location' => 'Address'] as $field => $label)
             <div class="mb-3">
                 <label class="form-label">{{ $label }}</label>
                 <input type="text" name="{{ $field }}" class="form-control" value="{{ old($field, $project->$field) }}">

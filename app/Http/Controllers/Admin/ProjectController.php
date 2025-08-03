@@ -40,6 +40,8 @@ class ProjectController extends Controller
             'gallery.*.description' => 'nullable|string',
         ]);
 
+
+
         $validated['slug'] = Str::slug($validated['title']);
 
         if (empty($validated['meta_title'])) {

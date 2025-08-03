@@ -1,6 +1,8 @@
 @extends('admin.layout')
 
 @section('content')
+<?php phpinfo(); ?>
+
     <style>
         label {
             font-size: 16rem;
@@ -314,7 +316,7 @@
 
 
         <div class="mb-3">
-            <label for="area" class="form-label">Area (м<sup>2</sup>)</label>
+            <label for="area" class="form-label">Area (ft<sup>2</sup>)</label>
             <input type="text" name="area" id="area" class="form-control" value="{{ old('area') }}">
             @error('area')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
@@ -327,7 +329,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="design_time" class="form-label">Project Development Time</label>
+            <label for="design_time" class="form-label">Project Development Time (weeks)</label>
             <input type="text" name="design_time" id="design_time" class="form-control" value="{{ old('design_time') }}">
             @error('design_time')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
@@ -373,7 +375,7 @@
                         </svg>
                         <br>
                         <span class="dropzone-text">Click to select an image</span>
-                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" required class="dropzone-input">
+                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
                         <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
                     </div>
                 </div>
