@@ -1,8 +1,6 @@
 @extends('admin.layout')
 
 @section('content')
-<?php phpinfo(); ?>
-
     <style>
         label {
             font-size: 16rem;
