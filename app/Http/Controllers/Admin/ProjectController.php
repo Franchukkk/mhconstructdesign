@@ -40,6 +40,13 @@ class ProjectController extends Controller
             'gallery.*.description' => 'nullable|string',
         ]);
 
+        // DEBUG: подивитися всі дані запиту та валідацію
+        dd([
+            'all_request' => $request->all(),
+            'all_files' => $request->allFiles(),
+            'validated' => $validated,
+        ]);
+
         $validated['slug'] = Str::slug($validated['title']);
 
         if (empty($validated['meta_title'])) {
@@ -49,20 +56,17 @@ class ProjectController extends Controller
             $validated['meta_description'] = Str::limit(strip_tags($validated['description']), 160);
         }
 
-        // Зберігаємо hero_image, якщо завантажено
         if ($request->hasFile('hero_image')) {
             $validated['hero_image'] = $request->file('hero_image')->store('projects/hero_images', 'public');
         }
 
         $project = Project::create($validated);
 
-        // Зберігаємо галерею, якщо передана
         if ($request->has('gallery')) {
             foreach ($request->input('gallery', []) as $index => $item) {
                 $designFile = $request->file("gallery.$index.design_image");
                 $realFile = $request->file("gallery.$index.real_image");
 
-                // Пропускаємо порожні пари (нічого не завантажено і опису нема)
                 if (!$designFile && !$realFile && empty($item['description'])) {
                     continue;
                 }
@@ -80,6 +84,7 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.projects.index')->with('success', 'Проект створено');
     }
+
 
 
     public function edit(Project $project)
