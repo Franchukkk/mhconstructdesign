@@ -31,7 +31,7 @@
                 <a href="{{ route('contact-request.form') }}" class="button-primary">I Want The Same</a>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
-                <img src="{{ asset('storage/' . $project->hero_image) }}" alt="">
+                <img src="{{ asset('storage/' . ($project->portfolio_cover != null ? $project->portfolio_cover : $project->hero_image)) }}" alt="">
             </div>
         </div>
         @php

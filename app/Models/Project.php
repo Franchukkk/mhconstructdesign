@@ -9,6 +9,7 @@ class Project extends Model
 {
     protected $fillable = [
         'title', 'slug', 'description', 'hero_image',
+        'portfolio_cover', // <- додано сюди
         'area', 'implementation_time', 'design_time', 'style', 'location',
         'meta_title', 'meta_description'
     ];

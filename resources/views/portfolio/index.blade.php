@@ -14,7 +14,7 @@
                 @foreach($projects as $project)
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                         <a href="{{ route('portfolio.show', $project->slug) }}">
-                            <img src="{{ asset('storage/' . $project->hero_image) }}" alt="{{ $project->title }}">
+                            <img src="{{ asset('storage/' . ($project->portfolio_cover != null ? $project->portfolio_cover : $project->hero_image)) }}" alt="{{ $project->title }}">
                             <a href="{{ route('portfolio.show', $project->slug) }}">{{ $project->title }}</a>
                         </a>
                     </div>

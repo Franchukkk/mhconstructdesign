@@ -5,6 +5,7 @@
         label {
             font-size: 16rem;
         }
+
         .form-label {
             font-weight: 600;
             color: #333;
@@ -148,7 +149,9 @@
             justify-content: center;
         }
 
-        button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+        button[type="button"]:not(.navbar button),
+        button[type="submit"],
+        .btn-secondary {
             width: 100%;
         }
 
@@ -158,17 +161,21 @@
         }
 
         @media screen and (min-width: 480px) {
-            .file-dropzone, .dropzone {
+
+            .file-dropzone,
+            .dropzone {
                 max-width: 300px;
             }
 
-            button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+            button[type="button"]:not(.navbar button),
+            button[type="submit"],
+            .btn-secondary {
                 width: auto;
                 margin-right: 0;
                 margin-bottom: 0;
             }
 
-            
+
         }
 
         .file-dropzone:hover {
@@ -239,7 +246,7 @@
             .dropzones-flex>div {
                 width: 100%;
             }
-            
+
         }
 
         .dropzone.dragover {
@@ -270,6 +277,7 @@
         .mb-3 {
             margin-bottom: 13rem !important;
         }
+
         .mb-2 {
             margin-bottom: 10rem !important;
         }
@@ -311,6 +319,24 @@
 
             @error('hero_image')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
+
+        <div class="mb-3">
+            <label class="form-label">Portfolio Cover</label>
+            <label for="portfolio_cover" class="file-dropzone" id="dropzone-portfolio-cover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-upload" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <span class="dropzone-text">Click to select an image</span>
+                <img id="preview-portfolio-cover" src="#" alt="Попередній перегляд" style="display: none;" />
+                <input type="file" name="portfolio_cover" id="portfolio_cover" accept="image/*" hidden>
+            </label>
+
+            @error('portfolio_cover')<div class="text-danger">{{ $message }}</div>@enderror
+        </div>
+
 
 
         <div class="mb-3">
@@ -364,33 +390,33 @@
 
         const createDropzone = (inputName, index, label) => {
             return `
-                <label>${label}</label>
-                <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
-                    
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
-                        </svg>
-                        <br>
-                        <span class="dropzone-text">Click to select an image</span>
-                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                        <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
-                    </div>
-                </div>
-            `;
+                        <label>${label}</label>
+                        <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
+                                </svg>
+                                <br>
+                                <span class="dropzone-text">Click to select an image</span>
+                                <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                            </div>
+                        </div>
+                    `;
         };
 
         document.getElementById('add-gallery-item').addEventListener('click', function () {
             const container = document.getElementById('gallery-items');
             const html = `
-                <div class="gallery-pair mb-3 border">
-                    <div class="dropzones-flex">
-                    <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
-                    <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
-                    </div>
-                    <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
-                </div>
-            `;
+                        <div class="gallery-pair mb-3 border">
+                            <div class="dropzones-flex">
+                            <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
+                            <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
+                            </div>
+                            <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
+                        </div>
+                    `;
             container.insertAdjacentHTML('beforeend', html);
             initDropzones();
             galleryIndex++;
@@ -472,6 +498,23 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        document.getElementById('portfolio_cover').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview-portfolio-cover');
+            const dropzoneText = document.querySelector('#dropzone-portfolio-cover .dropzone-text');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                    dropzoneText.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
 
 
     </script>

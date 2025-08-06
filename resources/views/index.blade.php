@@ -15,8 +15,7 @@
             <div class="col-12 col-md-4 col-lg-4 items-center">
                 <div class="margin-bottom-mb">
                     <h2>portfolio</h2>
-                    <p>take a look at this short description and enjoy its beauty. And this sentence too. It is here, by the
-                        way, only to increase the volume of the text...</p>
+                    <p>Take a moment to explore our work and envision the possibilities we can create together</p>
                     <a class="button-primary" href="{{ route("contact-request.form") }}">Get Started</a>
                 </div>
             </div>
@@ -107,11 +106,10 @@
                         <span>0.4</span>
                     </div>
                     <div class="service__description col-12 col-md-6">
-                        <p>This service includes comprehensive specification preparation: materials, furniture, and lighting
-                            for each room.
-                            You’ll receive item photos, collection names, sizes, materials, costs, and more.
-                            Once the list is approved, we handle procurement and delivery — so everything arrives on-site,
-                            ready to install.</p>
+                        <p>This service covers detailed specifications for all materials, furniture, and lighting — room by
+                            room. Each item is documented with photos, collection names, finishes, sizes, quantities, and
+                            more. Once approved, we handle procurement and coordinate delivery to the site for a smooth,
+                            hassle-free installation.</p>
                     </div>
                 </div>
             </div>
@@ -124,10 +122,10 @@
                         <span>0.5</span>
                     </div>
                     <div class="service__description col-12 col-md-6">
-                        <p>From construction to final touches — we bring your interior to life with precision and care.
-                            Our team coordinates every stage of the build, working with trusted contractors and artisans to
-                            ensure flawless execution.
-                            You get full control without the stress — we handle the hard part.</p>
+                        <p>From construction to final touches — we bring your interior to life with precision and care. We
+                            coordinate every stage with trusted contractors and artisans to ensure flawless results.
+                            You stay in control — we handle the hard part.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -140,8 +138,7 @@
             <a href="#getInvolved" class="steps-skip" style="display: none;"></a>
             <div class="row how-we-work__steps">
                 <div class="col-12 col-md-6 step-image-container">
-                    <img class="step-image" src="{{ asset('images/step1.webp') }}" alt="step 1">
-                    <div class="swiper step-images-mobile-slider">
+                    <div class="swiper step-images-slider-desktop desktop-only">
                         <div class="swiper-wrapper">
                             @for ($i = 1; $i <= 10; $i++)
                                 <div class="swiper-slide">
@@ -151,8 +148,18 @@
                         </div>
                     </div>
 
-
+                    <div class="swiper step-images-mobile-slider mobile-only">
+                        <div class="swiper-wrapper">
+                            @for ($i = 1; $i <= 10; $i++)
+                                <div class="swiper-slide">
+                                    <img src="{{ asset("images/step{$i}.webp") }}" alt="">
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
                 </div>
+
+
                 <div class="col-12 col-md-6">
                     <h3 class="yellow-title">Design Project</h3>
                     <div class="step-card" data-img-src="{{ asset('images/step1.webp') }}">
@@ -328,6 +335,25 @@
             window.addEventListener('resize', toggleSkipBtnVisibility);
             toggleSkipBtnVisibility();
         };
+
+        let desktopSwiper = null;
+        let mobileSwiper = null;
+
+        if (window.innerWidth >= 768) {
+            desktopSwiper = new Swiper('.step-images-slider-desktop', {
+                effect: 'slide',
+                allowTouchMove: false,
+                speed: 600,
+            });
+        } else {
+            mobileSwiper = new Swiper('.step-images-mobile-slider', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                },
+            });
+        }
+
 
 
     </script>

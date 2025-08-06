@@ -1429,7 +1429,7 @@ a.full-portfolio-btn {
 
 .portfoio-btn-container {
     display: flex;
-    justify-content: end;
+    justify-content: start;
     padding-top: 50rem;
 
     @include media(620) {
@@ -1460,3 +1460,70 @@ a.full-portfolio-btn {
 
 }
   
+.step-image-container {
+    position: relative;
+}
+
+.step-image-wrapper {
+    position: sticky;
+    display: flex;
+    top: 100px; /* або скільки треба від верхнього краю */
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+.step-image {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.step-image.current {
+    z-index: 1;
+    transform: translateX(0%);
+}
+
+.step-image.next {
+    z-index: 2;
+    transform: translateX(100%);
+}
+
+.desktop-only {
+    display: none;
+}
+
+.mobile-only {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .desktop-only {
+        display: block;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}
+
+.step-images-slider-desktop {
+    position: sticky;
+    top: 300rem;
+    z-index: 1;
+}
+
+.step-images-slider-desktop .swiper-slide img,
+.step-images-mobile-slider .swiper-slide img {
+    width: 100%;
+    height: 500rem;
+    object-fit: cover;
+}
+
+.step-images-slider-desktop {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}

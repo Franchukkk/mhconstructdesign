@@ -26,6 +26,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255|unique:projects,title',
             'description' => 'nullable|string',
             'hero_image' => 'nullable|image|max:20048',
+            'portfolio_cover' => 'nullable|image|max:20048',
             'area' => 'nullable|string|max:255',
             'implementation_time' => 'nullable|string|max:255',
             'design_time' => 'nullable|string|max:255',
@@ -52,6 +53,11 @@ class ProjectController extends Controller
         if ($request->hasFile('hero_image')) {
             $validated['hero_image'] = $request->file('hero_image')->store('projects/hero_images', 'public');
         }
+
+        if ($request->hasFile('portfolio_cover')) {
+            $validated['portfolio_cover'] = $request->file('portfolio_cover')->store('projects/portfolio_covers', 'public');
+        }
+
 
         $project = Project::create($validated);
 
@@ -101,6 +107,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'hero_image' => 'nullable|image|max:20048',
+            'portfolio_cover' => 'nullable|image|max:20048',
             'area' => 'nullable|string|max:255',
             'implementation_time' => 'nullable|string|max:255',
             'design_time' => 'nullable|string|max:255',
@@ -130,6 +137,14 @@ class ProjectController extends Controller
             // Storage::disk('public')->delete($project->hero_image);
             $project->hero_image = $request->file('hero_image')->store('projects/hero_images', 'public');
         }
+
+        if ($request->hasFile('portfolio_cover')) {
+            // При бажанні, видалити старий файл:
+            // Storage::disk('public')->delete($project->portfolio_cover);
+
+            $project->portfolio_cover = $request->file('portfolio_cover')->store('projects/portfolio_covers', 'public');
+        }
+
 
         $project->save();
 
