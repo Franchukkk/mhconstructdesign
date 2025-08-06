@@ -1640,7 +1640,11 @@ a.full-portfolio-btn {
 }
 
 .portfolio-projects-gallery-center {
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
     margin-bottom: 195rem;
+    
+    @include media (769) {
+        width: 60%;
+    }
 }

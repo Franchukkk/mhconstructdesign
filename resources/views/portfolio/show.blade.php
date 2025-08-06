@@ -83,7 +83,9 @@
                             <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="">
                         </div>
                     @endforeach
-                    <h3>Realisation</h3>
+                    @if($real_images->isNotEmpty() && $design_images->isNotEmpty())
+                        <h3>Realisation</h3>
+                    @endif
                     @foreach ($design_images as $index => $image)
                         <div class="col-12">
                             <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="">
