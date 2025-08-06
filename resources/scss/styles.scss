@@ -158,14 +158,14 @@ a {
     }
 }
 
-.logo-navigation > a {
+.logo-navigation>a {
     display: flex;
     align-items: end;
     justify-content: center;
 }
 
 .header-line img,
-.footer-top-section > img {
+.footer-top-section>img {
     width: 121.5rem;
     height: 63rem;
 
@@ -175,7 +175,7 @@ a {
     }
 }
 
-.footer-top-section > img {
+.footer-top-section>img {
     width: 135rem;
     height: 70rem;
 }
@@ -295,10 +295,19 @@ a.burger {
 .hero-block {
     background-image: url(/images/hero-bg.webp);
     background-position-y: bottom;
+    background-position-x: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 80vh;
     margin-bottom: 100rem;
+
+    @include media(769) {
+        height: 100vh;
+    }
+
+    @include media(769) {
+        background-position-x: auto;
+    }
 
     h1 {
         color: #FFF;
@@ -351,7 +360,7 @@ a.burger {
             max-width: 500rem;
         }
 
-        @include media (1440) { 
+        @include media (1440) {
             font-size: 28rem;
             max-width: 600rem;
         }
@@ -377,10 +386,14 @@ h2 {
 
     h3 {
         color: #121212;
-        font-size: 40rem;
+        font-size: 35rem;
         font-weight: 300;
 
         text-transform: uppercase;
+
+        @include media(769) {
+            font-size: 40rem;
+        }
 
     }
 
@@ -391,15 +404,25 @@ h2 {
         font-weight: 300;
         line-height: 1em;
         text-transform: uppercase;
-        margin-bottom: 30rem;
+        margin-bottom: 0;
+
+        @include media(769) {
+            margin-bottom: 30rem;
+
+        }
     }
 
     p {
+        display: none;
         color: #121212;
         font-size: 32rem;
         font-weight: 300;
         line-height: 1em;
         text-transform: uppercase;
+
+        @include media(769) {
+            display: block;
+        }
     }
 
     &:last-child {
@@ -414,7 +437,7 @@ h2 {
     line-height: 1em;
     text-transform: uppercase;
 
-    @include media(769){
+    @include media(769) {
         line-height: 1.3em;
     }
 }
@@ -442,10 +465,14 @@ h2 {
         max-width: 672rem;
         margin: 0 auto;
         color: #121212;
-        font-size: 32rem;
+        font-size: 16px;
         font-weight: 300;
         line-height: 1em;
         text-transform: uppercase;
+
+        @include media(769) {
+            font-size: 32rem;
+        }
     }
 
     &:last-child {
@@ -489,6 +516,7 @@ h2 {
 
 .step-images-mobile-slider {
     display: flex;
+
     @include media(769) {
         display: none !important;
     }
@@ -504,7 +532,7 @@ h2 {
     display: flex;
     align-items: center;
     width: 100%;
-    
+
 }
 
 .step-images-mobile-slider img {
@@ -521,8 +549,10 @@ h2 {
 .step-image-container {
     position: relative;
     padding-top: 62.4rem;
+
     .step-image {
         display: none;
+
         @include media(769) {
             display: block;
         }
@@ -714,6 +744,7 @@ footer {
 
 .margin-bottom-mb {
     margin-bottom: 70rem;
+
     @include media(620) {
         margin-bottom: 0rem;
     }
@@ -732,6 +763,7 @@ footer {
 
     .col-md-4 img {
         aspect-ratio: 1/1;
+
         @include media (768) {
             height: 450rem;
 
@@ -772,6 +804,11 @@ footer {
         width: 100%;
         object-fit: cover;
         margin-bottom: 7rem;
+        transition: .5s;
+
+        &:hover {
+            transform: scale(1.02);
+        }
     }
 
     .g-5 {
@@ -827,7 +864,7 @@ footer {
 .page-title-container {
     padding-top: 196rem;
     max-width: 764rem;
-    margin-bottom: 196rem;
+    margin-bottom: 120rem;
 
     h1 {
         color: #121212;
@@ -860,7 +897,7 @@ footer {
         &:hover {
             color: #F7CA7C !important;
 
-            & ~ a {
+            &~a {
                 color: #F7CA7C !important;
             }
         }
@@ -872,6 +909,11 @@ footer {
         width: 100%;
         margin-bottom: 17rem;
         object-fit: cover;
+        transition: .3s;
+
+        &:hover {
+            transform: scale(1.02);
+        }
     }
 
     strong,
@@ -969,7 +1011,8 @@ footer {
 }
 
 .blog-article {
-    max-width: 993rem;
+    margin: 0 auto;
+    max-width: 1200rem;
 
 
     h2 {
@@ -977,9 +1020,9 @@ footer {
         font-family: Poppins, sans-serif;
         font-size: 64rem;
         font-weight: 300;
-        line-height: 0.93em;
-        text-transform: uppercase;
+        line-height: 1.1em;
         margin-bottom: 34rem;
+        text-transform: none;
     }
 
     h3 {
@@ -987,8 +1030,7 @@ footer {
         font-family: Poppins, sans-serif;
         font-size: 48rem;
         font-weight: 300;
-        line-height: 0.93em;
-        text-transform: uppercase;
+        line-height: 1.2em;
         margin-bottom: 29rem;
     }
 
@@ -998,7 +1040,6 @@ footer {
         font-size: 32rem;
         font-weight: 300;
         line-height: 1.4em;
-        text-transform: uppercase;
         margin-bottom: 29rem;
     }
 
@@ -1007,15 +1048,14 @@ footer {
         font-family: Poppins, sans-serif;
         font-size: 32rem;
         font-weight: 300;
-        line-height: 1em;
-        text-transform: uppercase;
+        line-height: 1.2em;
         margin-bottom: 35rem;
     }
 
     img {
         width: 100%;
         height: auto !important;
-        max-width: 993rem !important;
+        max-width: 1200rem !important;
         aspect-ratio: 1 / 1 !important;
         object-fit: cover !important;
     }
@@ -1030,7 +1070,7 @@ footer {
 
         @include media(620) {
             margin-bottom: 180rem;
-            font-size: 96rem;
+            font-size: 80rem;
         }
     }
 
@@ -1160,9 +1200,11 @@ footer {
             padding: 19rem 22rem;
             margin-bottom: 25rem;
             resize: none;
+
             &[name="project_details"] {
                 height: 200rem;
             }
+
             &:last-child {
                 margin-bottom: 50rem;
             }
@@ -1212,7 +1254,7 @@ footer {
 
     .mb-25 {
         margin-bottom: 15rem;
-        
+
         @include media(769) {
             margin-bottom: 25rem;
         }
@@ -1354,6 +1396,7 @@ footer {
 }
 
 .project-gallery {
+
     h2,
     h3 {
         text-align: center;
@@ -1383,9 +1426,11 @@ footer {
     width: 100%;
     padding: 20px 0;
 }
+
 .swiper-slide {
     text-align: center;
 }
+
 .swiper-slide {
     img {
         display: block;
@@ -1398,13 +1443,16 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .design-slider, .reality-slider {
+
+    .design-slider,
+    .reality-slider {
         touch-action: none;
         pointer-events: none;
     }
 }
 
 @media screen and (max-width: 768px) {
+
     .portfolio .col-md-8 img,
     .portfolio .col-md-4 img {
         aspect-ratio: 1 / 1;
@@ -1415,16 +1463,18 @@ footer {
 a.full-portfolio-btn {
     display: inline-block;
     width: auto;
+
     @include media(620) {
         display: none;
     }
 
-    & + a {
+    &+a {
         display: none;
+
         @include media(620) {
             display: block;
         }
-    } 
+    }
 }
 
 .portfoio-btn-container {
@@ -1459,7 +1509,7 @@ a.full-portfolio-btn {
     display: flex;
 
 }
-  
+
 .step-image-container {
     position: relative;
 }
@@ -1467,7 +1517,8 @@ a.full-portfolio-btn {
 .step-image-wrapper {
     position: sticky;
     display: flex;
-    top: 100px; /* або скільки треба від верхнього краю */
+    top: 100px;
+    /* або скільки треба від верхнього краю */
     height: auto;
     width: 100%;
     overflow: hidden;
@@ -1526,4 +1577,55 @@ a.full-portfolio-btn {
 .step-images-slider-desktop {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+}
+
+.image-detail-popup {
+    position: fixed;
+    top: 0rem;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.image-detail-popup img {
+    width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Курсор-пойнтер на зображеннях галереї */
+.gallery-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+.image-detail-popup .close-btn {
+    position: absolute;
+    top: 20px; 
+    right: 30px;
+    font-size: 50rem;
+    font-weight: 300;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s;
+    line-height: 1;
+    letter-spacing: 0;
+    transition: .2s;
+}
+
+.image-detail-popup .close-btn:hover {
+    transform: scale(1.2);
+    color: #F7CA7C;
 }

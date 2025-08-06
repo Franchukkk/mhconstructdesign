@@ -198,42 +198,44 @@
             }
 
             function handleScroll() {
-                let currentId = "";
-                const scrollY = window.scrollY + 100;
-
-                // Визначаємо активний розділ для навігації
-                sections.forEach(({ id, element }) => {
-                    if (element.offsetTop <= scrollY && element.offsetTop + element.offsetHeight > scrollY) {
-                        currentId = id;
-                    }
-                });
-
-                // Активуємо посилання у меню
-                links.forEach(link => {
-                    const href = link.getAttribute("href");
-                    const linkId = href.split("#")[1];
-                    if (linkId === currentId) {
-                        link.classList.add("active");
-                    } else {
-                        link.classList.remove("active");
-                    }
-                });
-
-                // Якщо десктоп і є Swiper для зображень
-                if (window.innerWidth >= 768 && desktopSwiper) {
-                    let currentStep = null;
-
-                    steps.forEach(step => {
-                        const rect = step.getBoundingClientRect();
-                        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-                            currentStep = step;
+                if (document.querySelector('.how-we-work')) {
+                    let currentId = "";
+                    const scrollY = window.scrollY + 100;
+    
+                    // Визначаємо активний розділ для навігації
+                    sections.forEach(({ id, element }) => {
+                        if (element.offsetTop <= scrollY && element.offsetTop + element.offsetHeight > scrollY) {
+                            currentId = id;
                         }
                     });
-
-                    if (currentStep) {
-                        const stepIndex = Array.from(steps).indexOf(currentStep);
-                        if (stepIndex !== -1) {
-                            desktopSwiper.slideTo(stepIndex);
+    
+                    // Активуємо посилання у меню
+                    links.forEach(link => {
+                        const href = link.getAttribute("href");
+                        const linkId = href.split("#")[1];
+                        if (linkId === currentId) {
+                            link.classList.add("active");
+                        } else {
+                            link.classList.remove("active");
+                        }
+                    });
+    
+                    // Якщо десктоп і є Swiper для зображень
+                    if (window.innerWidth >= 768 && desktopSwiper) {
+                        let currentStep = null;
+    
+                        steps.forEach(step => {
+                            const rect = step.getBoundingClientRect();
+                            if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                                currentStep = step;
+                            }
+                        });
+    
+                        if (currentStep) {
+                            const stepIndex = Array.from(steps).indexOf(currentStep);
+                            if (stepIndex !== -1) {
+                                desktopSwiper.slideTo(stepIndex);
+                            }
                         }
                     }
                 }

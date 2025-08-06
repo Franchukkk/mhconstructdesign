@@ -2,6 +2,11 @@
 
 @section('content')
     <section class="project wrapper">
+        <div class="image-detail-popup" id="imageDetailPopup" style="display:none;">
+            <span class="close-btn" id="popupCloseBtn">&times;</span>
+            <img src="" alt="Fullscreen Image" id="popupImage" />
+        </div>
+
         <h1>{{$project->title}}</h1>
         <div class="row project-description-row">
             <div class="col-12 col-md-4 col-lg-4">
@@ -31,7 +36,8 @@
                 <a href="{{ route('contact-request.form') }}" class="button-primary">I Want The Same</a>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
-                <img src="{{ asset('storage/' . ($project->portfolio_cover != null ? $project->portfolio_cover : $project->hero_image)) }}" alt="">
+                <img src="{{ asset('storage/' . ($project->portfolio_cover != null ? $project->portfolio_cover : $project->hero_image)) }}"
+                    alt="">
             </div>
         </div>
         @php
@@ -41,9 +47,9 @@
                 ->values();
         @endphp
         @if ($images->isNotEmpty())
-        <div class="project-gallery">
-            <h2>FROM CONCEPT TO REALIZATION</h2>
-        </div>
+            <div class="project-gallery">
+                <h2>FROM CONCEPT TO REALIZATION</h2>
+            </div>
         @endif
 
         <div class="portfolio">
@@ -62,7 +68,7 @@
                         @endphp
 
                         <div class="{{ $class }}">
-                            <img src="{{ asset('storage/' . $image) }}" alt="Project Image" class="img-fluid w-100" />
+                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image" class="img-fluid w-100" />
                         </div>
                     @endforeach
                 </div>
@@ -135,7 +141,7 @@
             const textBlock = document.querySelector('.project-description-row > .col-lg-4');
             const imageBlock = document.querySelector('.project-description-row > .col-lg-8 img');
             if (window.innerWidth > 769) {
-    
+
                 if (textBlock && imageBlock) {
                     const textHeight = textBlock.offsetHeight;
                     imageBlock.style.height = textHeight + 'px';
@@ -150,6 +156,56 @@
 
         window.addEventListener('load', adjustHeroImageHeight);
         window.addEventListener('resize', adjustHeroImageHeight);
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('imageDetailPopup');
+            const popupImage = document.getElementById('popupImage');
+            const closeBtn = document.getElementById('popupCloseBtn');
+            const headerLine = document.querySelector(".header-line");
+
+            // Відкриваємо попап по кліку на будь-яке зображення галереї
+            document.querySelectorAll('.gallery-image').forEach(img => {
+                img.addEventListener('click', () => {
+                    headerLine.style.top = "-200px";
+                    setTimeout(() => {
+                        popupImage.src = img.src;
+                        popup.style.display = 'flex';
+                        // Забираємо прокрутку сторінки
+                        document.body.style.overflow = 'hidden';
+                        
+                    }, 100);
+                });
+            });
+
+            // Закриття попапа по кліку на хрестик
+            closeBtn.addEventListener('click', () => {
+                popup.style.display = 'none';
+                popupImage.src = '';
+                document.body.style.overflow = '';
+                headerLine.style.top = "0"
+            });
+
+            // Закриття попапа по кліку поза зображенням
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.style.display = 'none';
+                    popupImage.src = '';
+                    document.body.style.overflow = '';
+                    headerLine.style.top = "0";
+                }
+            });
+
+            // Закриття по клавіші Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape" && popup.style.display === 'flex') {
+                    popup.style.display = 'none';
+                    popupImage.src = '';
+                    document.body.style.overflow = '';
+                    headerLine.style.top = "0"
+                }
+            });
+        });
 
     </script>
 @endsection

@@ -279,18 +279,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        new Swiper('.step-images-mobile-slider', {
-            loop: true,
-            slidesPerView: 'auto',
-            spaceBetween: 10,
-            autoplay: {
-                delay: 0,
-                disableOnInteraction: false,
-            },
-            speed: 3000,
-            grabCursor: false,
-        });
-
         window.onload = function () {
             const skipBtn = document.querySelector('.steps-skip');
             const stepsBlock = document.querySelector('.how-we-work__steps');
@@ -345,14 +333,19 @@
                 allowTouchMove: false,
                 speed: 600,
             });
-        } else {
-            mobileSwiper = new Swiper('.step-images-mobile-slider', {
-                loop: true,
-                autoplay: {
-                    delay: 3000,
-                },
-            });
         }
+
+        new Swiper('.step-images-mobile-slider', {
+            loop: true,
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+            },
+            speed: 3000,
+            grabCursor: false,
+        });
 
 
 

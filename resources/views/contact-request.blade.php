@@ -85,27 +85,27 @@
                             <p class="mb-25">What can we help you with?</p>
                             <div class="d-flex checkboxes-mb gap-29 mb-25">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="services_selected[]" value="Remodel"
-                                        @checked(is_array(old('services_selected')) && in_array('Remodel', old('services_selected')))>
-                                    Remodel
+                                    <input type="checkbox" name="services_selected[]" value="Renovation"
+                                        @checked(is_array(old('services_selected')) && in_array('Renovation', old('services_selected')))>
+                                        Renovation
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="services_selected[]" value="Design Walk Through Service"
-                                        @checked(is_array(old('services_selected')) && in_array('Design Walk Through Service', old('services_selected')))>
-                                    Design Walk Through Service
+                                    <input type="checkbox" name="services_selected[]" value="Full Interior Design Package "
+                                        @checked(is_array(old('services_selected')) && in_array('Full Interior Design Package ', old('services_selected')))>
+                                    Full Interior Design Package 
                                 </label>
                             </div>
 
                             <div class="d-flex checkboxes-mb gap-29 mb-105">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="services_selected[]" value="New Build"
-                                        @checked(is_array(old('services_selected')) && in_array('New Build', old('services_selected')))>
-                                    New Build
+                                    <input type="checkbox" name="services_selected[]" value="Custom New Build Project"
+                                        @checked(is_array(old('services_selected')) && in_array('Custom New Build Project', old('services_selected')))>
+                                        Custom New Build Project
                                 </label>
                                 <label class="checkbox">
                                     <input type="checkbox" name="services_selected[]" value="Full-service design"
                                         @checked(is_array(old('services_selected')) && in_array('Full-service design', old('services_selected')))>
-                                    Full-service design for furnishings/decor/artwork
+                                    Furnishing and Styling
                                 </label>
                             </div>
 

@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="wrapper blog article">
-        <h1>{{ $post->title }}</h1>
         <article class="blog-article">
+            <h1>{{ $post->title }}</h1>
             {!! $post->body !!}
         </article>
     </div>

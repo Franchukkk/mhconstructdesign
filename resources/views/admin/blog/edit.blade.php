@@ -11,7 +11,7 @@
         }
 
         form {
-            max-width: 1041rem;
+            max-width: 1248rem;
             padding: 24rem;
             background-color: #f9f9f9;
             border-radius: 12rem;
@@ -80,7 +80,6 @@
             font-size: 64rem !important;
             font-weight: 300 !important;
             line-height: 60rem !important;
-            text-transform: uppercase !important;
             margin-bottom: 34rem !important;
         }
 
@@ -90,7 +89,6 @@
             font-size: 48rem !important;
             font-weight: 300 !important;
             line-height: 45rem !important;
-            text-transform: uppercase !important;
             margin-bottom: 29rem !important;
         }
 
@@ -100,7 +98,6 @@
             font-size: 32rem !important;
             font-weight: 300 !important;
             line-height: 45rem !important;
-            text-transform: uppercase !important;
             margin-bottom: 29rem !important;
         }
 
@@ -110,12 +107,11 @@
             font-size: 32rem !important;
             font-weight: 300 !important;
             line-height: 32rem !important;
-            text-transform: uppercase !important;
             margin-bottom: 35rem !important;
         }
 
         .ck-content img {
-            width: 993rem !important;
+            width: 1200rem !important;
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
         }
