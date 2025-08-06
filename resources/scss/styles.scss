@@ -24,6 +24,7 @@ html {
 }
 
 body {
+    position: relative;
     font-family: Poppins;
     background-color: #fff;
 }
@@ -1448,9 +1449,6 @@ a.full-portfolio-btn {
     background-image: url(/images/arrow.svg);
     z-index: 10;
 
-    @include media(769) {
-        display: none !important;
-    }
 }
 
 .steps-skip.hidden {
