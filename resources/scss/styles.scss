@@ -1566,7 +1566,7 @@ a.full-portfolio-btn {
 }
 
 .step-images-slider-desktop {
-    position: sticky;
+    position: sticky !important;
     top: 300rem;
     z-index: 1;
 }

@@ -13,7 +13,7 @@
     {{-- OG --}}
     <meta property="og:title" content="{{ $og_title ?? $meta_title ?? '' }}">
     <meta property="og:description" content="{{ $og_description ?? $meta_description ?? '' }}">
-    <meta property="og:image" content="{{ $og_image ?? asset('default-og.jpg') }}">
+    <meta property="og:image" content="{{ $og_image ?? asset('images/favicon.png') }}">
     {{-- Styles --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +23,10 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" href="{{ asset('images/logo.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17405520602">
