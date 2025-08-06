@@ -64,7 +64,7 @@
         <ul class="d-flex">
             <li><a href="{{ route('home') . "#about" }}">About</a></li>
             <li><a href="{{ route('home') . "#services" }}">Services</a></li>
-            <li><a href="{{ route('home') . "#portfolio" }}">Portfolio</a></li>
+            <li><a href="{{ route('portfolio.index') }}">Portfolio</a></li>
             <li><a href="{{ route('blog.index') }}">Blog</a></li>
             <li></li>
             <li><a class="button-border" href="{{ route('contact-request.form') }}">Contact Us</a>/li>
