@@ -43,8 +43,10 @@
                 </div>
             @endforeach
         </div>
-
-        <a href="{{ route('portfolio.index') }}">view full portfolio</a>
+        <div class="portfoio-btn-container">
+            <a class="button-primary full-portfolio-btn" href="{{ route('portfolio.index') }}">view full portfolio</a>
+            <a class="mb-none" href="{{ route('portfolio.index') }}">view full portfolio</a>
+        </div>
     </section>
 
     <section class="services" id="services">
@@ -135,6 +137,7 @@
     <section class="how-we-work">
         <div class="wrapper">
             <h2>how we work</h2>
+            <a href="#getInvolved" class="steps-skip" style="display: none;"></a>
             <div class="row how-we-work__steps">
                 <div class="col-12 col-md-6 step-image-container">
                     <img class="step-image" src="{{ asset('images/step1.webp') }}" alt="step 1">
@@ -186,7 +189,8 @@
                             <span class="number">4.</span>
                             <h3>Cost Estimation</h3>
                         </div>
-                        <p>We outline the investment required to bring your design to life — including furniture, lighting, finishes, and materials.
+                        <p>We outline the investment required to bring your design to life — including furniture, lighting,
+                            finishes, and materials.
                         </p>
                     </div>
                     <div class="step-card" data-img-src="{{ asset('images/step5.webp') }}">
@@ -251,7 +255,7 @@
             </div>
         </div>
     </section>
-    <section class="get-involved wrapper">
+    <section class="get-involved wrapper" id="getInvolved">
         <div class="row items-center g-5">
             <div class="col-12 col-md-4 col-lg-4">
                 <h2>Get Involved</h2>
@@ -279,6 +283,32 @@
             speed: 3000,
             grabCursor: false,
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const skipBtn = document.querySelector('.steps-skip');
+            const stepsBlock = document.querySelector('.how-we-work__steps');
+
+            function toggleSkipBtnVisibility() {
+                if (!skipBtn || !stepsBlock) return;
+
+                const rect = stepsBlock.getBoundingClientRect();
+
+                const visibleTop = Math.max(0, rect.top);
+                const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+                const visibleHeight = visibleBottom - visibleTop;
+
+                const isEnoughVisible = visibleHeight >= 900;
+
+                skipBtn.style.display = isEnoughVisible ? 'block' : 'none';
+            }
+
+            window.addEventListener('scroll', toggleSkipBtnVisibility);
+            window.addEventListener('resize', toggleSkipBtnVisibility);
+            toggleSkipBtnVisibility();
+        });
+
     </script>
+
+
 
 @endsection

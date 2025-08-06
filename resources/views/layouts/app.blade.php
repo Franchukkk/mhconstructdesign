@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
 
@@ -40,7 +40,7 @@
         <div class="wrapper flex-between items-center">
             <div class="logo-navigation items-center">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('images/logo.webp') }}" alt="M&H Design Studio">
+                    <img src="{{ asset('images/logo.svg') }}" alt="M&H Design Studio">
                 </a>
                 <nav class="mb-none">
                     <ul class="d-flex">
@@ -66,6 +66,8 @@
             <li><a href="{{ route('home') . "#services" }}">Services</a></li>
             <li><a href="{{ route('home') . "#portfolio" }}">Portfolio</a></li>
             <li><a href="{{ route('blog.index') }}">Blog</a></li>
+            <li></li>
+            <li><a class="button-border" href="{{ route('contact-request.form') }}">Contact Us</a>/li>
         </ul>
     </div>
 
@@ -76,7 +78,7 @@
     <footer>
         <div class="wrapper">
             <div class="footer-top-section flex-between items-center">
-                <img src="{{ asset('images/logo.webp') }}" alt="M&H Design Studio">
+                <img src="{{ asset('images/logo.svg') }}" alt="M&H Design Studio">
                 <ul class="contacts">
                     <li><a href="tel:+11234567890"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                                 <path d="M9.50246 4.25722C9.19873 3.4979 8.46332 3 7.64551 3H4.89474C3.8483 3 3 3.8481 3 4.89453C3 13.7892 10.2108 21 19.1055 21C20.1519 21 21 20.1516 21 19.1052L21.0005 16.354C21.0005 15.5361 20.5027 14.8009 19.7434 14.4971L17.1069 13.4429C16.4249 13.1701 15.6483 13.2929 15.0839 13.7632L14.4035 14.3307C13.6089 14.9929 12.4396 14.9402 11.7082 14.2088L9.79222 12.2911C9.06079 11.5596 9.00673 10.3913 9.66895 9.59668L10.2363 8.9163C10.7066 8.35195 10.8305 7.57516 10.5577 6.89309L9.50246 4.25722Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>

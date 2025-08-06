@@ -108,7 +108,7 @@ a {
     text-underline-position: from-font;
 
     &:hover {
-        text-decoration: none;
+        color: #F7CA7C;
     }
 }
 
@@ -132,10 +132,15 @@ a {
     left: 0;
     z-index: 999999;
     background: rgba(18, 18, 18, 0.50);
-    padding: 15rem 0;
+    padding: 8rem 0;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     transition: 0.3s;
+
+    @include media(620) {
+        padding: 15rem 0;
+    }
+
 
     &.active {
         background: transparent;
@@ -147,13 +152,25 @@ a {
         gap: 35rem;
     }
 
-    img {
-        max-height: 54px;
-    }
-
     .button-border {
         font-size: 24rem;
     }
+}
+
+.header-line img,
+.footer-top-section > img {
+    width: 108rem;
+    height: 56rem;
+
+    @include media(620) {
+        width: 135rem;
+        height: 70rem;
+    }
+}
+
+.footer-top-section > img {
+    width: 135rem;
+    height: 70rem;
 }
 
 .burger-menu a,
@@ -289,16 +306,15 @@ a.burger {
             line-height: 60rem;
         }
 
-        br {
-            @include media(1440) {
-                display: none;
-            }
-        }
-
         @include media(620) {
             width: 100%;
             font-size: 96rem;
             line-height: 80rem;
+        }
+
+        @include media (1440) {
+            font-size: 120rem;
+            line-height: 0.83em;
         }
     }
 
@@ -314,6 +330,10 @@ a.burger {
         @include media(600) {
             font-size: 24rem;
         }
+
+        @include media (1440) {
+            font-size: 32rem;
+        }
     }
 
     a {
@@ -322,6 +342,11 @@ a.burger {
 
         @include media(520) {
             max-width: 500rem;
+        }
+
+        @include media (1440) { 
+            font-size: 28rem;
+            max-width: 600rem;
         }
     }
 }
@@ -379,8 +404,12 @@ h2 {
     color: #F7CA7C;
     font-size: 48rem;
     font-weight: 300;
-    line-height: 1.3em;
+    line-height: 1em;
     text-transform: uppercase;
+
+    @include media(769){
+        line-height: 1.3em;
+    }
 }
 
 .step-card {
@@ -419,7 +448,7 @@ h2 {
 
 .step-image {
     position: sticky;
-    top: 200rem;
+    top: 300rem;
     width: 100%;
     height: 380rem;
     object-fit: cover;
@@ -432,6 +461,8 @@ h2 {
 
     @include media(882) {
         margin-bottom: 0rem;
+        aspect-ratio: 845/500;
+        height: 500rem;
     }
 }
 
@@ -452,7 +483,7 @@ h2 {
 .step-images-mobile-slider {
     display: flex;
     @include media(769) {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -506,7 +537,7 @@ h2 {
     margin-bottom: 200rem;
 
     h2 {
-        margin-bottom: 27rem;
+        margin-bottom: 30rem;
     }
 
     p {
@@ -515,7 +546,11 @@ h2 {
         font-weight: 300;
         line-height: 1em;
         text-transform: uppercase;
-        margin-bottom: 36rem;
+        margin-bottom: 30rem;
+
+        @include media(769) {
+            margin-bottom: 36rem;
+        }
     }
 
     img {
@@ -570,7 +605,7 @@ footer {
 
 .confidentiality {
     a:hover {
-        text-decoration: none;
+        color: #F7CA7C;
     }
 }
 
@@ -678,10 +713,7 @@ footer {
 }
 
 .get-involved .button-primary {
-    margin-bottom: 52rem;
-    @include media(620) {
-        margin-bottom: 0rem;
-    }
+    margin-bottom: 0rem;
 }
 
 .portfolio {
@@ -737,7 +769,7 @@ footer {
 
     .g-5 {
         --bs-gutter-x: 20rem !important;
-        --bs-gutter-y: 20rem !important;
+        --bs-gutter-y: 50rem !important;
 
         @include media(620) {
             --bs-gutter-x: 50rem !important;
@@ -761,10 +793,10 @@ footer {
         text-transform: uppercase;
 
         &:hover {
-            text-decoration: none;
+            color: #F7CA7C;
 
             &+a {
-                text-decoration: none;
+                color: #F7CA7C;
             }
         }
     }
@@ -817,6 +849,14 @@ footer {
 
     a {
         width: 100%;
+
+        &:hover {
+            color: #F7CA7C !important;
+
+            & ~ a {
+                color: #F7CA7C !important;
+            }
+        }
     }
 
     img {
@@ -883,7 +923,6 @@ footer {
         text-transform: uppercase;
         text-decoration: none;
         transition: .5s;
-
     }
 
     .page-item.active>.page-link,
@@ -1059,6 +1098,10 @@ footer {
     padding-top: 193rem;
     margin-bottom: 200rem;
 
+    @include media (2000) {
+        margin-bottom: 250rem;
+    }
+
     img {
         width: 100%;
         height: 100%;
@@ -1153,11 +1196,19 @@ footer {
 
     .gap-29 {
         column-gap: 29rem;
-        row-gap: 15px;
+        row-gap: 15rem;
+
+        @include media(769) {
+            row-gap: 15px;
+        }
     }
 
     .mb-25 {
-        margin-bottom: 25rem;
+        margin-bottom: 15rem;
+        
+        @include media(769) {
+            margin-bottom: 25rem;
+        }
     }
 
     .mb-105 {
@@ -1239,16 +1290,25 @@ footer {
 
 .project-description-row {
     --bs-gutter-x: 50rem !important;
-    --bs-gutter-y: 50rem !important;
+    --bs-gutter-y: 40.5rem !important;
     margin-bottom: 191rem;
+    flex-wrap: wrap-reverse !important;
+
+    @include media (769) {
+        --bs-gutter-y: 50rem !important;
+    }
 
     p {
         color: #121212;
         font-size: 32rem;
         font-weight: 300;
         line-height: 1em;
-        margin-bottom: 85rem;
+        margin-bottom: 40.5rem;
         text-transform: uppercase;
+
+        @include media(769) {
+            margin-bottom: 85rem;
+        }
     }
 
     table {
@@ -1343,3 +1403,56 @@ footer {
         aspect-ratio: 1 / 1;
     }
 }
+
+
+a.full-portfolio-btn {
+    display: inline-block;
+    width: auto;
+    @include media(620) {
+        display: none;
+    }
+
+    & + a {
+        display: none;
+        @include media(620) {
+            display: block;
+        }
+    } 
+}
+
+.portfoio-btn-container {
+    display: flex;
+    justify-content: end;
+    padding-top: 50rem;
+
+    @include media(620) {
+        padding-top: 12rem;
+    }
+}
+
+.steps-skip {
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    bottom: 20rem;
+    right: 20rem;
+    width: 50px;
+    height: 50px;
+    background-color: #F7CA7C;
+    background-image: url(/images/arrow.svg);
+    z-index: 10;
+
+    @include media(769) {
+        display: none !important;
+    }
+}
+
+.steps-skip.hidden {
+    display: none;
+}
+
+.steps-skip.visible {
+    display: flex;
+
+}
+  

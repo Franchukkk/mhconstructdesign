@@ -12,7 +12,9 @@
     @if($posts->count() > 0)
       @foreach($posts as $post)
       <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+      <a href="{{ route('blog.show', $post->slug) }}">
       <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+      </a>
       <strong>{{ $post->title }}</strong>
       <p>{{ $post->preview_heading }}</p>
       <a href="{{ route('blog.show', $post->slug) }}">read this</a>
