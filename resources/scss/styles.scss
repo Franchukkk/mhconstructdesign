@@ -1599,8 +1599,13 @@ a.full-portfolio-btn {
 }
 
 .image-detail-popup img {
+    width: 90%;
     max-height: 80vh;
     object-fit: contain;
+
+    @include media(769) {
+        width: auto;
+    }
 }
 
 /* Курсор-пойнтер на зображеннях галереї */
