@@ -1629,3 +1629,9 @@ a.full-portfolio-btn {
     transform: scale(1.2);
     color: #F7CA7C;
 }
+
+@media screen and (max-width: 768px) {
+    .step-images-slider-desktop {
+        display: none !important;
+    }
+}
