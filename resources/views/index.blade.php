@@ -287,41 +287,40 @@
         window.onload = function () {
             const skipBtn = document.querySelector('.steps-skip');
             const stepsBlock = document.querySelector('.how-we-work__steps');
-
-            // Створення debug-блоку
-            const debug = document.createElement('div');
-            debug.id = 'debug';
-            debug.style.position = 'fixed';
-            debug.style.bottom = '10px';
-            debug.style.left = '10px';
-            debug.style.backgroundColor = '#000';
-            debug.style.color = '#fff';
-            debug.style.padding = '5px 10px';
-            debug.style.fontSize = '15px';
-            debug.style.zIndex = '9999';
-            debug.style.fontFamily = 'monospace';
-            document.body.appendChild(debug);
+            const getInvolvedBlock = document.getElementById('getInvolved');
 
             let lastVisibility = null;
 
             function toggleSkipBtnVisibility() {
-                if (!skipBtn || !stepsBlock) return;
+                if (!skipBtn || !stepsBlock || !getInvolvedBlock) return;
 
-                const rect = stepsBlock.getBoundingClientRect();
+                if (window.innerWidth >= 769) {
+                    if (lastVisibility !== false) {
+                        skipBtn.style.display = 'none';
+                        lastVisibility = false;
+                    }
+                    return;
+                }
 
-                const visibleTop = Math.max(0, rect.top);
-                const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+                const stepsRect = stepsBlock.getBoundingClientRect();
+                const getInvolvedRect = getInvolvedBlock.getBoundingClientRect();
+
+                const visibleTop = Math.max(0, stepsRect.top);
+                const visibleBottom = Math.min(window.innerHeight, stepsRect.bottom);
                 const visibleHeight = visibleBottom - visibleTop;
 
-                const isEnoughVisible = visibleHeight >= 200;
+                const isStepsVisible = visibleHeight >= 200;
 
-                // Виводимо відлагоджувальну інформацію
-                debug.textContent = `Visible: ${Math.round(visibleHeight)}px | Button: ${isEnoughVisible ? 'shown' : 'hidden'}`;
+                const isGetInvolvedVisible = (
+                    getInvolvedRect.top < window.innerHeight &&
+                    getInvolvedRect.bottom > 0
+                );
 
-                // Змінюємо тільки якщо стан змінився
-                if (isEnoughVisible !== lastVisibility) {
-                    skipBtn.style.display = isEnoughVisible ? 'block' : 'none';
-                    lastVisibility = isEnoughVisible;
+                const shouldShow = isStepsVisible && !isGetInvolvedVisible;
+
+                if (shouldShow !== lastVisibility) {
+                    skipBtn.style.display = shouldShow ? 'block' : 'none';
+                    lastVisibility = shouldShow;
                 }
             }
 
@@ -329,6 +328,8 @@
             window.addEventListener('resize', toggleSkipBtnVisibility);
             toggleSkipBtnVisibility();
         };
+
+
     </script>
 
 
