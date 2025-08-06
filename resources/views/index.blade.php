@@ -284,28 +284,30 @@
             grabCursor: false,
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const skipBtn = document.querySelector('.steps-skip');
-            const stepsBlock = document.querySelector('.how-we-work__steps');
-
-            function toggleSkipBtnVisibility() {
-                if (!skipBtn || !stepsBlock) return;
-
-                const rect = stepsBlock.getBoundingClientRect();
-
-                const visibleTop = Math.max(0, rect.top);
-                const visibleBottom = Math.min(window.innerHeight, rect.bottom);
-                const visibleHeight = visibleBottom - visibleTop;
-
-                const isEnoughVisible = visibleHeight >= 900;
-
-                skipBtn.style.display = isEnoughVisible ? 'block' : 'none';
-            }
-
-            window.addEventListener('scroll', toggleSkipBtnVisibility);
-            window.addEventListener('resize', toggleSkipBtnVisibility);
-            toggleSkipBtnVisibility();
-        });
+        window.onload = function() {
+            setTimeout(() => {
+                const skipBtn = document.querySelector('.steps-skip');
+                const stepsBlock = document.querySelector('.how-we-work__steps');
+    
+                function toggleSkipBtnVisibility() {
+                    if (!skipBtn || !stepsBlock) return;
+    
+                    const rect = stepsBlock.getBoundingClientRect();
+    
+                    const visibleTop = Math.max(0, rect.top);
+                    const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+                    const visibleHeight = visibleBottom - visibleTop;
+    
+                    const isEnoughVisible = visibleHeight >= 900;
+    
+                    skipBtn.style.display = isEnoughVisible ? 'block' : 'none';
+                }
+    
+                window.addEventListener('scroll', toggleSkipBtnVisibility);
+                window.addEventListener('resize', toggleSkipBtnVisibility);
+                toggleSkipBtnVisibility();
+            }, 1000)
+        }
 
     </script>
 
