@@ -39,6 +39,8 @@ class PortfolioController extends Controller
     public function show($slug)
     {
         $project = Project::with('galleryItems')->where('slug', $slug)->firstOrFail();
+        $design_images = $project->galleryItems->pluck('design_image')->filter();
+        $real_images = $project->galleryItems->pluck('real_image')->filter();
 
         $meta_title = $project->meta_title ?? $project->title;
         $meta_description = $project->meta_description ?? Str::limit(strip_tags($project->description), 160);
@@ -50,6 +52,8 @@ class PortfolioController extends Controller
 
         return view('portfolio.show', compact(
             'project',
+            'design_images',
+            'real_images',
             'meta_title',
             'meta_description',
             'og_title',

@@ -9,7 +9,7 @@
 
         <h1>{{$project->title}}</h1>
         <div class="row project-description-row">
-            <div class="col-12 col-md-4 col-lg-4">
+            <div class="col-12 col-md-6 col-xl-4">
                 <p>{{$project->description}}</p>
                 <table>
                     <tr>
@@ -35,7 +35,7 @@
                 </table>
                 <a href="{{ route('contact-request.form') }}" class="button-primary">I Want The Same</a>
             </div>
-            <div class="col-12 col-md-8 col-lg-8">
+            <div class="col-12 col-md-6 col-xl-8">
                 <img src="{{ asset('storage/' . ($project->portfolio_cover != null ? $project->portfolio_cover : $project->hero_image)) }}"
                     alt="">
             </div>
@@ -52,7 +52,7 @@
             </div>
         @endif
 
-        <div class="portfolio">
+        <!-- <div class="portfolio">
             @if ($images->isNotEmpty())
                 <div class="row g-5 project-gallery">
                     @foreach ($images as $index => $image)
@@ -68,7 +68,25 @@
                         @endphp
 
                         <div class="{{ $class }}">
-                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image" class="img-fluid w-100" />
+                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
+                                class="img-fluid w-100" />
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div> -->
+        <div class="portfolio portfolio-projects-gallery-center">
+            @if ($images->isNotEmpty())
+                <div class="row g-5 project-gallery">
+                    @foreach ($real_images as $index => $image)
+                        <div class="col-12">
+                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="">
+                        </div>
+                    @endforeach
+                    <h3>Realisation</h3>
+                    @foreach ($design_images as $index => $image)
+                        <div class="col-12">
+                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="">
                         </div>
                     @endforeach
                 </div>
@@ -138,21 +156,30 @@
         // });
 
         function adjustHeroImageHeight() {
-            const textBlock = document.querySelector('.project-description-row > .col-lg-4');
-            const imageBlock = document.querySelector('.project-description-row > .col-lg-8 img');
-            if (window.innerWidth > 769) {
+            const textBlock = document.querySelector('.project-description-row > .col-xl-4');
+            const imageBlock = document.querySelector('.project-description-row > .col-xl-8 img');
 
-                if (textBlock && imageBlock) {
+            if (!imageBlock) {
+                return;
+            }
+
+            if (window.innerWidth > 769) {
+                if (textBlock) {
                     const textHeight = textBlock.offsetHeight;
+                    console.log('✅ Text block height:', textHeight);
                     imageBlock.style.height = textHeight + 'px';
                     imageBlock.style.objectFit = 'cover';
                     imageBlock.style.width = '100%';
                 }
             } else {
+                imageBlock.style.height = '';
                 imageBlock.style.width = '100%';
-                imageBlock.style.aspectRatio = '1 / 1'
+                imageBlock.style.aspectRatio = '1 / 1';
+                imageBlock.style.objectFit = 'cover';
             }
         }
+
+
 
         window.addEventListener('load', adjustHeroImageHeight);
         window.addEventListener('resize', adjustHeroImageHeight);
@@ -173,7 +200,7 @@
                         popup.style.display = 'flex';
                         // Забираємо прокрутку сторінки
                         document.body.style.overflow = 'hidden';
-                        
+
                     }, 100);
                 });
             });

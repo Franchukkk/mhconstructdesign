@@ -739,11 +739,12 @@ footer {
 .portfolio-cards {
     h2 {
         margin-bottom: 26rem;
+        line-height: 0.8em;
     }
 }
 
 .margin-bottom-mb {
-    margin-bottom: 70rem;
+    margin-bottom: 25rem;
 
     @include media(620) {
         margin-bottom: 0rem;
@@ -762,7 +763,7 @@ footer {
     }
 
     .col-md-4 img {
-        aspect-ratio: 1/1;
+        height: auto;
 
         @include media (768) {
             height: 450rem;
@@ -776,7 +777,9 @@ footer {
     }
 
     .col-md-8 img {
-        aspect-ratio: 1100/500;
+        @include media (768) {
+            aspect-ratio: 1100/500;
+        }
     }
 
     .col-8 img {
@@ -822,17 +825,16 @@ footer {
     }
 
     a:not(.button-primary, .page-link) {
-        color: #121212;
+        color: #1E1E1E;
         font-size: 24rem;
         font-style: normal;
         font-weight: 300;
         line-height: 1em;
-        /* 100% */
         text-decoration-line: underline;
         text-decoration-style: solid;
         text-decoration-skip-ink: none;
-        text-decoration-thickness: auto;
-        text-underline-offset: auto;
+        text-decoration-thickness: 2.5%; /* 0.6px */
+        text-underline-offset: 20%; /* 4.8px */
         text-underline-position: from-font;
         text-transform: uppercase;
 
@@ -936,17 +938,16 @@ footer {
     }
 
     a {
-        color: #121212;
-        font-family: Poppins;
-        font-size: 20rem;
+        color: #1E1E1E;
+        font-size: 24rem;
         font-style: normal;
         font-weight: 300;
-        line-height: 1.2em;
+        line-height: 1em;
         text-decoration-line: underline;
         text-decoration-style: solid;
         text-decoration-skip-ink: none;
-        text-decoration-thickness: auto;
-        text-underline-offset: auto;
+        text-decoration-thickness: 2.5%; /* 0.6px */
+        text-underline-offset: 20%; /* 4.8px */
         text-underline-position: from-font;
         text-transform: uppercase;
     }
@@ -1407,8 +1408,7 @@ footer {
     }
 
     h3 {
-        padding-top: 75rem;
-        margin-bottom: 20rem;
+        padding-top: 85rem;
         color: #1E1E1E;
         font-size: 48rem;
         font-weight: 300;
@@ -1453,10 +1453,10 @@ footer {
 
 @media screen and (max-width: 768px) {
 
-    .portfolio .col-md-8 img,
-    .portfolio .col-md-4 img {
-        aspect-ratio: 1 / 1;
-    }
+    // .portfolio .col-md-8 img,
+    // .portfolio .col-md-4 img {
+    //     aspect-ratio: 1 / 1;
+    // }
 }
 
 
@@ -1482,8 +1482,12 @@ a.full-portfolio-btn {
     justify-content: start;
     padding-top: 50rem;
 
-    @include media(620) {
+    @include media (620) {
         padding-top: 12rem;
+    }
+
+    @include media (769) {
+        justify-content: end;
     }
 }
 
@@ -1595,7 +1599,6 @@ a.full-portfolio-btn {
 }
 
 .image-detail-popup img {
-    width: 90%;
     max-height: 80vh;
     object-fit: contain;
 }
@@ -1634,4 +1637,10 @@ a.full-portfolio-btn {
     .step-images-slider-desktop {
         display: none !important;
     }
+}
+
+.portfolio-projects-gallery-center {
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 195rem;
 }
