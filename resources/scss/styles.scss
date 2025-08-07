@@ -1082,36 +1082,20 @@ footer {
     padding-top: 170rem;
 
     h1 {
-        font-size: 35rem;
+        font-size: 45rem;
         margin-bottom: 100rem;
-
-        @include media(620) {
-            font-size: 45rem;
-        }
     }
 
     h2 {
-        font-size: 30rem;
-
-        @include media(620) {
-            font-size: 35rem;
-        }
+        font-size: 35rem;
     }
 
     h3 {
-        font-size: 25rem;
-
-        @include media(620) {
-            font-size: 30rem;
-        }
+        font-size: 30rem;
     }
 
     p {
-        font-size: 20rem;
-
-        @include media(620) {
-            font-size: 25rem;
-        }
+        font-size: 25rem;
     }
 }
 
