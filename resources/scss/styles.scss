@@ -298,10 +298,18 @@ a.burger {
     background-position-x: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 80vh;
+    height: 65vh;
     margin-bottom: 100rem;
 
-    @include media(769) {
+    @include media(1000) {
+        height: 75vh;
+    }
+
+    @include media(1100) {
+        height: 85vh;
+    }
+
+    @include media(1440) {
         height: 100vh;
     }
 
@@ -382,7 +390,11 @@ h2 {
 
 .service {
     border-top: 2rem solid #121212;
-    padding: 46rem 0;
+    padding: 25rem 0;
+
+    @include media(769) {
+        padding: 46rem 0;
+    }
 
     h3 {
         color: #121212;
@@ -398,15 +410,16 @@ h2 {
     }
 
     span {
-        display: inline-block;
+        display: none;
         color: #121212;
         font-size: 24rem;
         font-weight: 300;
         line-height: 1em;
         text-transform: uppercase;
         margin-bottom: 0;
-
+        
         @include media(769) {
+            display: inline-block;
             margin-bottom: 30rem;
 
         }
@@ -468,7 +481,7 @@ h2 {
         font-size: 16px;
         font-weight: 300;
         line-height: 1em;
-        text-transform: uppercase;
+        text-transform: none;
 
         @include media(769) {
             font-size: 32rem;
@@ -864,9 +877,9 @@ footer {
 // }
 
 .page-title-container {
-    padding-top: 196rem;
+    padding-top: 170rem;
     max-width: 764rem;
-    margin-bottom: 120rem;
+    margin-bottom: 100rem;
 
     h1 {
         color: #121212;
@@ -1054,48 +1067,50 @@ footer {
     }
 
     img {
-        width: 100%;
+        width: auto !important;
+        max-width: 100%;
+        min-width: 250px;
+        max-height: 480px !important;
         height: auto !important;
-        max-width: 1200rem !important;
-        aspect-ratio: 1 / 1 !important;
-        object-fit: cover !important;
+        object-fit: contain !important;
+        object-position: top center !important;
+        aspect-ratio: auto !important;
     }
 }
 
 .article {
-    padding-top: 196rem;
+    padding-top: 170rem;
 
     h1 {
-        font-size: 65rem;
+        font-size: 35rem;
         margin-bottom: 100rem;
 
         @include media(620) {
-            margin-bottom: 180rem;
-            font-size: 80rem;
+            font-size: 45rem;
         }
     }
 
     h2 {
-        font-size: 40rem;
+        font-size: 30rem;
 
         @include media(620) {
-            font-size: 64rem;
+            font-size: 35rem;
         }
     }
 
     h3 {
-        font-size: 35rem;
+        font-size: 25rem;
 
         @include media(620) {
-            font-size: 48rem;
+            font-size: 30rem;
         }
     }
 
     p {
-        font-size: 30rem;
+        font-size: 20rem;
 
         @include media(620) {
-            font-size: 32rem;
+            font-size: 25rem;
         }
     }
 }
@@ -1310,7 +1325,7 @@ footer {
     line-height: 35rem;
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: 120rem;
+    margin-bottom: 100rem;
 
     @include media(500) {
         margin-bottom: 186rem;
@@ -1461,6 +1476,7 @@ footer {
 
 
 a.full-portfolio-btn {
+    text-transform: uppercase;
     display: inline-block;
     width: auto;
 
@@ -1479,16 +1495,13 @@ a.full-portfolio-btn {
 
 .portfoio-btn-container {
     display: flex;
-    justify-content: start;
+    justify-content: end;
     padding-top: 50rem;
 
     @include media (620) {
         padding-top: 12rem;
     }
 
-    @include media (769) {
-        justify-content: end;
-    }
 }
 
 .steps-skip {

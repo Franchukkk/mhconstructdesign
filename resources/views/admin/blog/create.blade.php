@@ -3,7 +3,7 @@
 @section('content')
     <style>
         h1 {
-            font-size: 50rem;
+            font-size: 45rem;
         }
 
         label {
@@ -77,43 +77,58 @@
         h2 {
             color: #121212 !important;
             font-family: Poppins, sans-serif !important;
-            font-size: 64rem !important;
+            font-size: 35rem !important;
             font-weight: 300 !important;
-            line-height: 60rem !important;
+            line-height: 1.2em !important;
             margin-bottom: 34rem !important;
         }
 
         h3 {
             color: #121212 !important;
             font-family: Poppins, sans-serif !important;
-            font-size: 48rem !important;
+            font-size: 30rem !important;
             font-weight: 300 !important;
-            line-height: 45rem !important;
+            line-height: 1.2em !important;
             margin-bottom: 29rem !important;
         }
 
         h4 {
             color: #121212 !important;
             font-family: Poppins, sans-serif !important;
-            font-size: 32rem !important;
+            font-size: 30rem !important;
             font-weight: 300 !important;
-            line-height: 45rem !important;
+            line-height: 1.2em !important;
             margin-bottom: 29rem !important;
         }
 
         p {
             color: #121212 !important;
             font-family: Poppins, sans-serif !important;
-            font-size: 32rem !important;
+            font-size: 25rem !important;
             font-weight: 300 !important;
-            line-height: 32rem !important;
+            line-height: 1.2em !important;
             margin-bottom: 35rem !important;
         }
 
         .ck-content img {
-            width: 1200rem !important;
-            aspect-ratio: 1 / 1 !important;
-            object-fit: cover !important;
+            width: auto !important;
+            aspect-ratio: auto !important;
+            object-fit: contain !important;
+            min-width: auto !important;
+        }
+
+        .ck-content .image img {
+            width: auto !important;
+            min-width: 300px !important;
+            max-height: 480px !important;
+            aspect-ratio: auto !important;
+            object-fit: contain !important;
+            min-width: auto !important;
+            margin: 0 !important;
+        }
+
+        figure.image {
+            margin: 0 !important;
         }
 
         .success-message {
@@ -137,7 +152,9 @@
             margin-bottom: 8rem;
         }
 
-        button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+        button[type="button"]:not(.navbar button),
+        button[type="submit"],
+        .btn-secondary {
             width: 100%;
         }
 
@@ -147,19 +164,22 @@
         }
 
         @media screen and (min-width: 480px) {
-            .file-dropzone, .dropzone {
+
+            .file-dropzone,
+            .dropzone {
                 max-width: 300px;
             }
 
-            button[type="button"]:not(.navbar button), button[type="submit"], .btn-secondary  {
+            button[type="button"]:not(.navbar button),
+            button[type="submit"],
+            .btn-secondary {
                 width: auto;
                 margin-right: 0;
                 margin-bottom: 0;
             }
 
-            
-        }
 
+        }
     </style>
 
     <h1>New article</h1>
@@ -221,7 +241,6 @@
                 ],
                 image: {
                     toolbar: [
-                        'imageStyle:full',
                         'imageTextAlternative' // додає поле для alt
                     ]
                 },
@@ -232,6 +251,7 @@
                     }
                 }
             })
+
             .then(editor => {
                 // Лог при старті завантаження зображення
                 editor.plugins.get('FileRepository').createUploadAdapter = loader => {
