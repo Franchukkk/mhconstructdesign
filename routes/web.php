@@ -14,6 +14,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\StaticPageController;
 use App\Models\BlogPost;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
@@ -104,9 +105,9 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name(
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
+Route::get('/privacy-policy', [StaticPageController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/terms-of-use', [StaticPageController::class, 'termsOfUse'])->name('terms.of.use');
 
-Route::view('/terms-of-use', 'terms-of-use')->name('terms.of.use');
 
 // Показати форму запиту
 Route::get('/contact-request', [ContactRequestController::class, 'index'])->name('contact-request.form');

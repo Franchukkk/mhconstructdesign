@@ -13,6 +13,9 @@ class BlogController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(6);
 
+        $meta_title = 'Insights & Inspiration | Blog – M&H Construction and Design';
+        $meta_description = 'Get design tips, renovation advice, and industry trends from the M&H Construction and Design blog. Stay inspired and informed.';
+
         // Додамо для кожного поста поле preview_heading
         foreach ($posts as $post) {
             $dom = new \DOMDocument();
@@ -24,7 +27,7 @@ class BlogController extends Controller
             $post->preview_heading = $h2s->length > 0 ? trim($h2s->item(0)->textContent) : null;
         }
 
-        return view('blog.index', compact('posts'));
+        return view('blog.index', compact('posts', 'meta_title', 'meta_description'));
     }
 
 

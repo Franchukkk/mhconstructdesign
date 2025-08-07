@@ -11,7 +11,10 @@ class ContactRequestController extends Controller
 {
     public function index()
     {
-        return view('contact-request');
+        $meta_title = 'Contact Us | M&H Construction and Design';
+        $meta_description = 'Get in touch with M&H Construction and Design for your custom design, construction, and renovation needs. We are here to help you bring your vision to life.';
+
+        return view('contact-request', compact('meta_title', 'meta_description'));
     }
 
     public function store(Request $request)
