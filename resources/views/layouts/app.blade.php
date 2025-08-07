@@ -10,6 +10,8 @@
 
     <meta name="description" content="{{ $meta_description ?? 'We design and build elegant, high-quality homes and interiors across South Carolina, Florida . From concept to completion — we bring your vision to life.' }}">
 
+    <link rel="canonical" href="{{ url()->current() }}">
+
     {{-- OG --}}
     <meta property="og:title" content="{{ $og_title ?? $meta_title ?? '' }}">
     <meta property="og:description" content="{{ $og_description ?? $meta_description ?? '' }}">
