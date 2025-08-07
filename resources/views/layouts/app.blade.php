@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport"
         content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
-    <title>{{ $meta_title ?? 'M&H Design Studio' }}</title>
+    <title>{{ $meta_title ?? 'M&H Construction and Design | Custom Design, Construction & Renovation' }}</title>
     @vite(['resources/js/app.js'])
 
-    <meta name="description" content="{{ $meta_description ?? 'M&H Design Studio' }}">
+    <meta name="description" content="{{ $meta_description ?? 'We design and build elegant, high-quality homes and interiors across South Carolina, Florida . From concept to completion — we bring your vision to life.' }}">
 
     {{-- OG --}}
     <meta property="og:title" content="{{ $og_title ?? $meta_title ?? '' }}">

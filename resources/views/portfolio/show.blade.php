@@ -35,9 +35,14 @@
                 </table>
                 <a href="{{ route('contact-request.form') }}" class="button-primary">I Want The Same</a>
             </div>
+
+            @php
+                use Illuminate\Support\Str;
+            @endphp
+            
             <div class="col-12 col-md-6 col-xl-8">
-                <img src="{{ asset('storage/' . ($project->portfolio_cover != null ? $project->portfolio_cover : $project->hero_image)) }}"
-                    alt="">
+                <img src="{{ asset('storage/' . ($project->portfolio_cover ?? $project->hero_image)) }}"
+                    alt="{{ $project->title }} — {{ Str::contains($project->portfolio_cover ?? $project->hero_image, 'render') ? '3D visualization' : 'Completed project photo' }} by M&H Construct and Design.">
             </div>
         </div>
         @php
@@ -53,34 +58,34 @@
         @endif
 
         <!-- <div class="portfolio">
-            @if ($images->isNotEmpty())
-                <div class="row g-5 project-gallery">
-                    @foreach ($images as $index => $image)
-                        @php
-                            $pairIndex = intdiv($index, 2);
-                            $isFirstInPair = $index % 2 === 0;
+                    @if ($images->isNotEmpty())
+                        <div class="row g-5 project-gallery">
+                            @foreach ($images as $index => $image)
+                                @php
+                                    $pairIndex = intdiv($index, 2);
+                                    $isFirstInPair = $index % 2 === 0;
 
-                            if ($pairIndex % 2 === 0) {
-                                $class = $isFirstInPair ? 'col-4' : 'col-8';
-                            } else {
-                                $class = $isFirstInPair ? 'col-8' : 'col-4';
-                            }
-                        @endphp
+                                    if ($pairIndex % 2 === 0) {
+                                        $class = $isFirstInPair ? 'col-4' : 'col-8';
+                                    } else {
+                                        $class = $isFirstInPair ? 'col-8' : 'col-4';
+                                    }
+                                @endphp
 
-                        <div class="{{ $class }}">
-                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
-                                class="img-fluid w-100" />
+                                <div class="{{ $class }}">
+                                    <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
+                                        class="img-fluid w-100" />
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
-                </div>
-            @endif
-        </div> -->
+                    @endif
+                </div> -->
         <div class="portfolio portfolio-projects-gallery-center">
             @if ($images->isNotEmpty())
                 <div class="row g-5 project-gallery">
                     @foreach ($real_images as $index => $image)
                         <div class="col-12">
-                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="">
+                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Photo of completed project - Realisation image {{ $index + 1 }}">>
                         </div>
                     @endforeach
                     @if($real_images->isNotEmpty() && $design_images->isNotEmpty())
@@ -88,7 +93,7 @@
                     @endif
                     @foreach ($design_images as $index => $image)
                         <div class="col-12">
-                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="">
+                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Design visualization - Render image {{ $index + 1 }}">
                         </div>
                     @endforeach
                 </div>
@@ -104,7 +109,7 @@
                 <a class="button-primary" href="{{ route("contact-request.form") }}">Start the Conversation</a>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
-                <img src="{{ asset("images/get-involved-img-2.webp") }}" alt="">
+                <img src="{{ asset("images/get-involved-img-2.webp") }}" alt="Team of designers ready to turn your vision into reality — join the creative journey with M&H Construct and Design.">
             </div>
         </div>
     </section>

@@ -36,7 +36,13 @@
 
                 <div class="{{ $classes }}">
                     <a href="{{ route('portfolio.show', $project["slug"]) }}">
-                        <img src="{{ asset('storage/' . $project["hero_image"]) }}" alt="">
+                        @php
+                            $altDescription = Str::limit($project['description'], 100);
+                        @endphp
+
+                        <img src="{{ asset('storage/' . $project['hero_image']) }}"
+                            alt="{{ $altDescription }} — Portfolio project by M&H Construction and Design.">
+
                     </a>
                     <a href="{{ route('portfolio.show', $project["slug"]) }}">{{ $project['title'] ?? '' }}</a>
                 </div>
@@ -142,7 +148,8 @@
                         <div class="swiper-wrapper">
                             @for ($i = 1; $i <= 10; $i++)
                                 <div class="swiper-slide">
-                                    <img src="{{ asset("images/step{$i}.webp") }}" alt="">
+                                    <img src="{{ asset("images/step{$i}.webp") }}"
+                                        alt="Interior design workflow by M&H Construct and Design: from site survey and client questionnaire to schematic design, concept creation, cost estimation, contract documentation, and final presentation.">
                                 </div>
                             @endfor
                         </div>
@@ -152,7 +159,8 @@
                         <div class="swiper-wrapper">
                             @for ($i = 1; $i <= 10; $i++)
                                 <div class="swiper-slide">
-                                    <img src="{{ asset("images/step{$i}.webp") }}" alt="">
+                                    <img src="{{ asset("images/step{$i}.webp") }}"
+                                        alt="Interior design workflow by M&H Construct and Design: from site survey and client questionnaire to schematic design, concept creation, cost estimation, contract documentation, and final presentation.">
                                 </div>
                             @endfor
                         </div>
@@ -271,7 +279,8 @@
                 <a class="button-primary" href="{{ route("contact-request.form") }}">Get in Touch</a>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
-                <img src="{{ asset("images/get-involved-img.webp") }}" alt="">
+                <img src="{{ asset("images/get-involved-img.webp") }}"
+                    alt="Team of designers ready to turn your vision into reality — join the creative journey with M&H Construct and Design.">
             </div>
         </div>
     </section>

@@ -40,7 +40,7 @@
                 <a class="button-primary" href="{{ route("contact-request.form") }}">Get in Touch</a>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
-                <img src="{{ asset("images/get-involved-img.webp") }}" alt="">
+                <img src="{{ asset("images/get-involved-img.webp") }}" alt="Team of designers ready to turn your vision into reality — join the creative journey with M&H Construct and Design.">
             </div>
         </div>
     </section>
