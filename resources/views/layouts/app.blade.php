@@ -5,40 +5,51 @@
     <meta charset="utf-8">
     <meta name="viewport"
         content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
+
     <title>{{ $meta_title ?? 'M&H Construction and Design | Custom Design, Construction & Renovation' }}</title>
-    @vite(['resources/js/app.js'])
 
     <meta name="description"
         content="{{ $meta_description ?? 'We design and build elegant, high-quality homes and interiors across South Carolina, Florida . From concept to completion — we bring your vision to life.' }}">
 
     <link rel="canonical" href="{{ url()->current() }}">
 
-    {{-- OG --}}
+    {{-- Open Graph --}}
     <meta property="og:title" content="{{ $og_title ?? $meta_title ?? '' }}">
     <meta property="og:description" content="{{ $og_description ?? $meta_description ?? '' }}">
     <meta property="og:image" content="{{ $og_image ?? asset('images/favicon.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="M&H Construction and Design">
-    {{-- Styles --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    {{-- Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" 
+          rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" 
+              rel="stylesheet" />
+    </noscript>
 
-    <link rel="icon" type="image/png" href="{{ asset("images/favicon-96x96.png" ) }}" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="{{ asset("images/favicon.svg ") }}" />
-    <link rel="shortcut icon" href="{{ asset("images/favicon.ico" ) }}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset("images/apple-touch-icon.png" ) }}" />
+    {{-- Swiper CSS --}}
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    </noscript>
+
+    {{-- Favicons --}}
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}" />
     <meta name="apple-mobile-web-app-title" content="M&H Construction and Design" />
     <link rel="manifest" href="{{ asset('site.webmanifest') }}" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17405520602">
-    </script>
+    {{-- Vite JS --}}
+    @vite(['resources/js/app.js'])
+
+    {{-- Google tag (gtag.js) --}}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17405520602"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -47,6 +58,7 @@
         gtag('config', 'AW-17405520602');
     </script>
 </head>
+
 
 <body>
     <header class="header-line">
