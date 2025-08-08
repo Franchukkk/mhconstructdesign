@@ -222,6 +222,23 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label" for="meta_title">Meta Title</label>
+            <input type="text" name="meta_title" id="meta_title" class="form-control"
+                value="{{ old('meta_title', $project->meta_title) }}" placeholder="Meta title for SEO">
+            @error('meta_title')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Meta Description</label>
+            <textarea name="meta_description"
+                class="form-control">{{ old('meta_description', $project->meta_description) }}</textarea>
+            @error('meta_description')<div class="text-danger">{{ $message }}</div>@enderror
+        </div>
+
+
+        <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea name="description" class="form-control">{{ old('description', $project->description) }}</textarea>
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
@@ -340,15 +357,15 @@
 
             const createDropzone = (inputName, index, label) => {
                 return `
-                                            <label>${label}</label>
-                                            <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
-                                                <div>
-                                                    <span class="dropzone-text">Click to select an image</span>
-                                                    <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                                                    <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
-                                                </div>
-                                            </div>
-                                        `;
+                                                    <label>${label}</label>
+                                                    <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                                                        <div>
+                                                            <span class="dropzone-text">Click to select an image</span>
+                                                            <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                                            <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                                        </div>
+                                                    </div>
+                                                `;
             };
 
             function refreshGalleryIndexes() {
@@ -382,15 +399,15 @@
 
             document.getElementById('add-gallery-item').addEventListener('click', function () {
                 const html = `
-                            <div class="gallery-pair">
-                                <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
-                                <div class="dropzones-flex">
-                                    <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
-                                    <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
-                                </div>
-                                <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
-                            </div>
-                        `;
+                                    <div class="gallery-pair">
+                                        <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
+                                        <div class="dropzones-flex">
+                                            <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
+                                            <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
+                                        </div>
+                                        <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
+                                    </div>
+                                `;
 
                 galleryContainer.insertAdjacentHTML('beforeend', html);
                 initDropzones();
@@ -449,12 +466,12 @@
 
             initDropzones();
             refreshGalleryIndexes();
-            
+
             document.getElementById('portfolio_cover').addEventListener('change', function (e) {
                 const file = e.target.files[0];
                 const preview = document.getElementById('preview-portfolio-cover');
                 const dropzoneText = document.querySelector('#dropzone-portfolio-cover .dropzone-text');
-    
+
                 if (file && file.type.startsWith('image/')) {
                     const reader = new FileReader();
                     reader.onload = function (event) {

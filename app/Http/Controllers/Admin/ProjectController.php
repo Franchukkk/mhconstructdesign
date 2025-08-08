@@ -113,6 +113,8 @@ class ProjectController extends Controller
             'design_time' => 'nullable|string|max:255',
             'style' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
             'gallery' => 'nullable|array',
             'gallery.*.id' => 'nullable|integer',
             'gallery.*.design_image' => 'nullable|image|max:20048',
@@ -143,6 +145,14 @@ class ProjectController extends Controller
             // Storage::disk('public')->delete($project->portfolio_cover);
 
             $project->portfolio_cover = $request->file('portfolio_cover')->store('projects/portfolio_covers', 'public');
+        }
+
+        $project->meta_title = $validatedData['meta_title'] ?? $project->title;
+
+        if (!empty($validatedData['meta_description'])) {
+            $project->meta_description = $validatedData['meta_description'];
+        } elseif (!empty($validatedData['description'])) {
+            $project->meta_description = Str::limit(strip_tags($validatedData['description']), 160);
         }
 
 

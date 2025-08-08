@@ -297,6 +297,26 @@
         </div>
 
         <div class="mb-3">
+            <label for="meta_title" class="form-label">Meta Title</label>
+            <input type="text" name="meta_title" id="meta_title" class="form-control" value="{{ old('meta_title') }}"
+                placeholder="Meta title for SEO">
+            @error('meta_title')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="meta_description" class="form-label">Meta Description</label>
+            <textarea name="meta_description" id="meta_description" class="form-control"
+                placeholder="Meta description for SEO">{{ old('meta_description') }}</textarea>
+            @error('meta_description')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+
+
+        <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
@@ -390,33 +410,33 @@
 
         const createDropzone = (inputName, index, label) => {
             return `
-                        <label>${label}</label>
-                        <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                                <label>${label}</label>
+                                <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
 
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
-                                </svg>
-                                <br>
-                                <span class="dropzone-text">Click to select an image</span>
-                                <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                                <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
-                            </div>
-                        </div>
-                    `;
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
+                                        </svg>
+                                        <br>
+                                        <span class="dropzone-text">Click to select an image</span>
+                                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                        <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                    </div>
+                                </div>
+                            `;
         };
 
         document.getElementById('add-gallery-item').addEventListener('click', function () {
             const container = document.getElementById('gallery-items');
             const html = `
-                        <div class="gallery-pair mb-3 border">
-                            <div class="dropzones-flex">
-                            <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
-                            <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
-                            </div>
-                            <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
-                        </div>
-                    `;
+                                <div class="gallery-pair mb-3 border">
+                                    <div class="dropzones-flex">
+                                    <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
+                                    <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
+                                </div>
+                            `;
             container.insertAdjacentHTML('beforeend', html);
             initDropzones();
             galleryIndex++;
