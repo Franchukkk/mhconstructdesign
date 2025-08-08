@@ -63,7 +63,6 @@
                 <div class="row">
                     <div class="service__title col-12 col-md-6">
                         <h3>Interior Design Project</h3>
-                        <span>0.1</span>
                     </div>
                     <div class="service__description col-12 col-md-6">
                         <p>Design project is more than just “design” — it’s the visual blueprint for your renovated home.
@@ -78,7 +77,6 @@
                 <div class="row">
                     <div class="service__title col-12 col-md-6">
                         <h3>Custom Made Cabinetry</h3>
-                        <span>0.2</span>
                     </div>
                     <div class="service__description col-12 col-md-6">
                         <p>Our custom-made cabinetry service offers a bespoke approach to home organization and design. From
@@ -94,7 +92,6 @@
                 <div class="row">
                     <div class="service__title col-12 col-md-6">
                         <h3>Project Management</h3>
-                        <span>0.3</span>
                     </div>
                     <div class="service__description col-12 col-md-6">
                         <p>Our project management service offers full-scale support from start to finish.
@@ -109,7 +106,6 @@
                 <div class="row">
                     <div class="service__title col-12 col-md-6">
                         <h3>Sourcing and Procurement</h3>
-                        <span>0.4</span>
                     </div>
                     <div class="service__description col-12 col-md-6">
                         <p>This service covers detailed specifications for all materials, furniture, and lighting — room by
@@ -125,7 +121,6 @@
                 <div class="row">
                     <div class="service__title col-12 col-md-6">
                         <h3>Project Realization</h3>
-                        <span>0.5</span>
                     </div>
                     <div class="service__description col-12 col-md-6">
                         <p>From construction to final touches — we bring your interior to life with precision and care. We
