@@ -167,7 +167,7 @@
 
                 <div class="col-12 col-md-6">
                     <h3 class="yellow-title">Design Project</h3>
-                    <div class="step-card" data-img-src="{{ asset('images/step1.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step1.jpg') }}">
                         <div class="d-flex">
                             <span class="number">1.</span>
                             <h3>Interior Design Survey, Questionnaire, Collection of References</h3>
@@ -176,7 +176,7 @@
                             You complete a detailed questionnaire, helping us understand your goals.
                             We study your references and inspirations — identifying your style and vision.</p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step2.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step2.jpg') }}">
                         <div class="d-flex">
                             <span class="number">2.</span>
                             <h3>Schematic Design</h3>
@@ -186,7 +186,7 @@
                             ensure flawless execution.
                         </p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step3.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step3.jpg') }}">
                         <div class="d-flex">
                             <span class="number">3.</span>
                             <h3>Creating a Design Concept</h3>
@@ -196,7 +196,7 @@
                             future home.
                         </p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step4.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step4.jpg') }}">
                         <div class="d-flex">
                             <span class="number">4.</span>
                             <h3>Cost Estimation</h3>
@@ -205,7 +205,7 @@
                             finishes, and materials.
                         </p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step5.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step5.jpg') }}">
                         <div class="d-flex">
                             <span class="number">5.</span>
                             <h3>Contract Documentation</h3>
@@ -213,7 +213,7 @@
                         <p>Detailed visualizations, drawings, and specs that contractors use to execute everything to plan.
                         </p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step6.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step6.jpg') }}">
                         <div class="d-flex">
                             <span class="number">6.</span>
                             <h3>Final Presentation</h3>
@@ -223,7 +223,7 @@
                         </p>
                     </div>
                     <h3 class="yellow-title">Implementation <br> of the Design Project</h3>
-                    <div class="step-card" data-img-src="{{ asset('images/step7.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step7.jpg') }}">
                         <div class="d-flex">
                             <span class="number">1.</span>
                             <h3>Construction-Ready Documentation</h3>
@@ -234,7 +234,7 @@
                             flawless execution.
                         </p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step8.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step8.jpg') }}">
                         <div class="d-flex">
                             <span class="number">2.</span>
                             <h3>Project Oversight &amp; Quality Control</h3>
@@ -243,7 +243,7 @@
                             approved design and specifications.
                         </p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step9.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step9.jpg') }}">
                         <div class="d-flex">
                             <span class="number">3.</span>
                             <h3>Hiring the Best Contractors and Realization Team</h3>
@@ -252,7 +252,7 @@
                             professionals who share our commitment to quality and precision.
                         </p>
                     </div>
-                    <div class="step-card" data-img-src="{{ asset('images/step10.webp') }}">
+                    <div class="step-card" data-img-src="{{ asset('images/step10.jpg') }}">
                         <div class="d-flex">
                             <span class="number">4.</span>
                             <h3>Home Decoration and Touch-Up</h3>
