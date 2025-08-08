@@ -877,34 +877,52 @@ footer {
 // }
 
 .page-title-container {
-    padding-top: 170rem;
+    padding-top: 140rem;
     max-width: 764rem;
-    margin-bottom: 100rem;
+    margin-bottom: 50rem;
+
+    @include media(1540) {
+        padding-top: 170rem;
+        margin-bottom: 100rem;
+    }
 
     h1 {
         color: #121212;
-        font-size: 96rem;
+        font-size: 75rem;
         font-style: normal;
         font-weight: 300;
         line-height: 0.833em;
         text-transform: uppercase;
-        margin-bottom: 32rem;
+        margin-bottom: 28rem;
+
+        @include media(1540) {
+            font-size: 96rem;
+            margin-bottom: 32rem;
+        }
     }
 
     p {
         color: #121212;
-        font-family: Poppins;
-        font-size: 24rem;
+        font-size: 22rem;
         font-weight: 300;
         line-height: 1em;
-        text-transform: uppercase;
+        text-transform: none;
+        margin-bottom: 0;
+
+        @include media(1540) {
+            font-size: 24rem;
+        }
     }
 }
 
-.product-card {
+.product-card.row {
     --bs-gutter-x: 30rem !important;
-    --bs-gutter-y: 100rem !important;
+    --bs-gutter-y: 40rem !important;
     margin-bottom: 40rem;
+
+    @include media(1540) {
+        --bs-gutter-y: 100rem !important;
+    }
 
     a {
         width: 100%;
@@ -1016,11 +1034,15 @@ footer {
 .blog {
     h1 {
         color: #121212;
-        font-size: 96rem;
+        font-size: 75rem;
         font-style: normal;
         font-weight: 300;
         line-height: 0.93em;
         text-transform: uppercase;
+
+        @include media(1540) {
+            font-size: 96rem;
+        }
     }
 }
 
