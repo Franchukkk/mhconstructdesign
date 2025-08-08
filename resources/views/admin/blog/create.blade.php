@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<style>
+    <style>
         h1 {
             font-size: 45rem;
         }
@@ -197,6 +197,19 @@
             <label>Title</label>
             <input type="text" name="title" required>
         </div>
+
+        <div class="form-group">
+            <label for="meta_title">Meta Title</label>
+            <input type="text" name="meta_title" id="meta_title" class="form-control"
+                value="{{ old('meta_title', $post->meta_title ?? '') }}" maxlength="255">
+        </div>
+
+        <div class="form-group">
+            <label for="meta_description">Meta Description</label>
+            <textarea name="meta_description" id="meta_description"  rows="3"
+                maxlength="255">{{ old('meta_description', $post->meta_description ?? '') }}</textarea>
+        </div>
+
 
         <div>
             <label class="form-label">Cover image</label>

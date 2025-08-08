@@ -38,7 +38,10 @@ class BlogController extends Controller
             'title' => 'required|string|max:255',
             'image' => 'nullable|image|max:5048',
             'body' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
         ]);
+        
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('blog_images', 'public');
@@ -63,7 +66,10 @@ class BlogController extends Controller
             'title' => 'required|string|max:255',
             'image' => 'nullable|image|max:5048',
             'body' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
         ]);
+        
 
         if ($request->hasFile('image')) {
             // Видалити стару картинку

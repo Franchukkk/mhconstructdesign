@@ -207,6 +207,29 @@
                 @enderror
             </div>
 
+            <!-- Meta Title -->
+            <div>
+                <label for="meta_title" class="block font-medium mb-1">Meta Title</label>
+                <input type="text" name="meta_title" id="meta_title" value="{{ old('meta_title', $post->meta_title) }}"
+                    class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:border-blue-300"
+                    maxlength="255">
+                @error('meta_title')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Meta Description -->
+            <div>
+                <label for="meta_description" class="block font-medium mb-1">Meta Description</label>
+                <textarea name="meta_description" id="meta_description" rows="3"
+                    class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:border-blue-300"
+                    maxlength="255">{{ old('meta_description', $post->meta_description) }}</textarea>
+                @error('meta_description')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+
             <!-- Зображення -->
             <div>
                 <label for="image" class="block font-medium mb-1">Cover image</label>
