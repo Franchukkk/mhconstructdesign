@@ -1,60 +1,78 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/pizza-post</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/2025-interior</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/5-interior-design-trends-for-2025</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/design-trends-for-2025</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/ucucicu</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/some-new-article</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/hello-worldhello-worldhello-worldhello-world</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/blog/asddas</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/test</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/dsadasdsa</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/dsadsa1221</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/lklkzxc</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/lmmdas</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/dsadsa</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/as</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/sad</loc>
-            </url>
-    <url>
-    <loc>http://localhost:3333/mhconstructdesign/public/portfolio/das</loc>
-            </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+<loc>https://mhconstructdesign.com/</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>1.00</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/portfolio</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/blog</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/contact-request</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/portfolio/good-hope-rd-coastal-craft</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/portfolio/hawthorne-timber-tone</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/portfolio/berkeley-hall-boulevard-timeless-space</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/portfolio/hanover-shadow-light</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/portfolio/troon-lumina-luxe</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/privacy-policy</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/terms-of-use</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/blog/why-a-design-project-isnt-a-luxury-its-a-smart-investment</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/blog/8-kitchen-trends-that-will-define-2025-future-kitchen-design-ideas</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/blog/8-common-interior-design-mistakes-that-make-your-home-feel-dull-and-how-to-fix-them</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://mhconstructdesign.com/blog/top-5-tips-for-terrace-design-in-south-carolina-outdoor-living-ideas-for-your-home</loc>
+<lastmod>2025-08-08T10:52:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
 </urlset>
