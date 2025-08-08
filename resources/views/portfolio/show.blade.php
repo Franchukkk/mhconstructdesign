@@ -147,7 +147,7 @@
                 if (textBlock) {
                     const textHeight = textBlock.offsetHeight;
                     imageBlock.style.height = textHeight + 'px';
-                    imageBlock.style.objectFit = 'cover';
+                    imageBlock.style.objectFit = 'contain';
                     imageBlock.style.width = '100%';
                 }
             } else {

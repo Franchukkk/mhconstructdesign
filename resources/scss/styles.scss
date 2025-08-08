@@ -909,11 +909,6 @@ footer {
         line-height: 0.833em;
         text-transform: uppercase;
         margin-bottom: 28rem;
-
-        @include media(1540) {
-            font-size: 96rem;
-            margin-bottom: 32rem;
-        }
     }
 
     p {
@@ -1070,10 +1065,6 @@ footer {
         font-weight: 300;
         line-height: 0.93em;
         text-transform: uppercase;
-
-        @include media(1540) {
-            font-size: 96rem;
-        }
     }
 }
 
