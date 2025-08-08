@@ -84,7 +84,7 @@
             @if ($images->isNotEmpty())
                 <div class="row g-5 project-gallery">
                     @foreach ($real_images as $index => $image)
-                        <div class="col-12">
+                        <div class="col-6">
                             <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Photo of completed project - Realisation image {{ $index + 1 }}">>
                         </div>
                     @endforeach
@@ -92,7 +92,7 @@
                         <h3>Realisation</h3>
                     @endif
                     @foreach ($design_images as $index => $image)
-                        <div class="col-12">
+                        <div class="col-6">
                             <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Design visualization - Render image {{ $index + 1 }}">
                         </div>
                     @endforeach
