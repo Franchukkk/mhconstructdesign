@@ -12,7 +12,9 @@
             <div class="col-12 col-md-6 col-xl-4">
                 <p>{{$project->description}}</p>
                 <table>
-                    <caption style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);">{{ $project->title }}</caption>
+                    <caption
+                        style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);">
+                        {{ $project->title }}</caption>
                     <tr>
                         <td>Area</td>
                         <td>{{$project->area}} ft<sup>2</sup></td>
@@ -59,28 +61,28 @@
         @endif
 
         <!-- <div class="portfolio">
-                        @if ($images->isNotEmpty())
-                            <div class="row g-5 project-gallery">
-                                @foreach ($images as $index => $image)
-                                    @php
-                                        $pairIndex = intdiv($index, 2);
-                                        $isFirstInPair = $index % 2 === 0;
+                            @if ($images->isNotEmpty())
+                                <div class="row g-5 project-gallery">
+                                    @foreach ($images as $index => $image)
+                                        @php
+                                            $pairIndex = intdiv($index, 2);
+                                            $isFirstInPair = $index % 2 === 0;
 
-                                        if ($pairIndex % 2 === 0) {
-                                            $class = $isFirstInPair ? 'col-4' : 'col-8';
-                                        } else {
-                                            $class = $isFirstInPair ? 'col-8' : 'col-4';
-                                        }
-                                    @endphp
+                                            if ($pairIndex % 2 === 0) {
+                                                $class = $isFirstInPair ? 'col-4' : 'col-8';
+                                            } else {
+                                                $class = $isFirstInPair ? 'col-8' : 'col-4';
+                                            }
+                                        @endphp
 
-                                    <div class="{{ $class }}">
-                                        <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
-                                            class="img-fluid w-100" />
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div> -->
+                                        <div class="{{ $class }}">
+                                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
+                                                class="img-fluid w-100" />
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div> -->
         <div class="portfolio portfolio-projects-gallery-center">
             @if ($images->isNotEmpty())
                 <div class="row g-5 project-gallery project-gallery--parent">
@@ -129,48 +131,9 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
 
     <script>
-        // $(document).ready(function () {
-        //     const designSlider = $('.design-slider').slick({
-        //         slidesToShow: 3,
-        //         slidesToScroll: 1,
-        //         autoplay: true,
-        //         autoplaySpeed: 3000,
-        //         arrows: false,
-        //         dots: false,
-        //         pauseOnHover: false,
-        //         responsive: [
-        //             { breakpoint: 992, settings: { slidesToShow: 2 } },
-        //             { breakpoint: 768, settings: { slidesToShow: 1 } }
-        //         ]
-        //     });
-
-        //     const realitySlider = $('.reality-slider').slick({
-        //         slidesToShow: 3,
-        //         slidesToScroll: 1,
-        //         autoplay: true,
-        //         autoplaySpeed: 3000,
-        //         arrows: false,
-        //         dots: false,
-        //         pauseOnHover: false,
-        //         responsive: [
-        //             { breakpoint: 992, settings: { slidesToShow: 2 } },
-        //             { breakpoint: 768, settings: { slidesToShow: 1 } }
-        //         ]
-        //     });
-
-        //     if (window.innerWidth > 991) {
-        //         $('.design-slider, .reality-slider').on('mouseenter', function () {
-        //             designSlider.slick('slickPause');
-        //             realitySlider.slick('slickPause');
-        //         });
-
-        //         $('.design-slider, .reality-slider').on('mouseleave', function () {
-        //             designSlider.slick('slickPlay');
-        //             realitySlider.slick('slickPlay');
-        //         });
-        //     }
-
-        // });
+        // Передаємо опис із Blade у JS змінні (тут у шаблоні, заміни на свої змінні)
+        window.designDescription = @json($project->design_description ?? '');
+        window.realDescription = @json($project->realization_description ?? '');
 
         function adjustHeroImageHeight() {
             const textBlock = document.querySelector('.project-description-row > .col-xl-4');
@@ -183,7 +146,6 @@
             if (window.innerWidth > 769) {
                 if (textBlock) {
                     const textHeight = textBlock.offsetHeight;
-                    console.log('✅ Text block height:', textHeight);
                     imageBlock.style.height = textHeight + 'px';
                     imageBlock.style.objectFit = 'cover';
                     imageBlock.style.width = '100%';
@@ -196,11 +158,8 @@
             }
         }
 
-
-
         window.addEventListener('load', adjustHeroImageHeight);
         window.addEventListener('resize', adjustHeroImageHeight);
-
 
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('imageDetailPopup');
@@ -208,16 +167,13 @@
             const closeBtn = document.getElementById('popupCloseBtn');
             const headerLine = document.querySelector(".header-line");
 
-
             document.querySelectorAll('.gallery-image').forEach(img => {
                 img.addEventListener('click', () => {
                     headerLine.style.top = "-200px";
                     setTimeout(() => {
                         popupImage.src = img.src;
                         popup.style.display = 'flex';
-
                         document.body.style.overflow = 'hidden';
-
                     }, 100);
                 });
             });
@@ -304,6 +260,13 @@
                         designRow.appendChild(col);
                     });
                     container.appendChild(designRow);
+
+                    // Додаємо опис дизайну
+                    if (window.designDescription.trim() !== '') {
+                        const pDesign = document.createElement('p');
+                        pDesign.textContent = window.designDescription;
+                        container.appendChild(pDesign);
+                    }
                 }
 
                 if (sortedReal.length) {
@@ -320,6 +283,13 @@
                         realRow.appendChild(col);
                     });
                     container.appendChild(realRow);
+
+                    // Додаємо опис реалізації
+                    if (window.realDescription.trim() !== '') {
+                        const pReal = document.createElement('p');
+                        pReal.textContent = window.realDescription;
+                        container.appendChild(pReal);
+                    }
                 }
             });
         }
@@ -331,5 +301,6 @@
 
         window.addEventListener('resize', adjustHeroImageHeight);
     </script>
+
 
 @endsection
