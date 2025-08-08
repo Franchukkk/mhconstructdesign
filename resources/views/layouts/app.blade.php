@@ -8,7 +8,8 @@
     <title>{{ $meta_title ?? 'M&H Construction and Design | Custom Design, Construction & Renovation' }}</title>
     @vite(['resources/js/app.js'])
 
-    <meta name="description" content="{{ $meta_description ?? 'We design and build elegant, high-quality homes and interiors across South Carolina, Florida . From concept to completion — we bring your vision to life.' }}">
+    <meta name="description"
+        content="{{ $meta_description ?? 'We design and build elegant, high-quality homes and interiors across South Carolina, Florida . From concept to completion — we bring your vision to life.' }}">
 
     <link rel="canonical" href="{{ url()->current() }}">
 
@@ -16,6 +17,9 @@
     <meta property="og:title" content="{{ $og_title ?? $meta_title ?? '' }}">
     <meta property="og:description" content="{{ $og_description ?? $meta_description ?? '' }}">
     <meta property="og:image" content="{{ $og_image ?? asset('images/favicon.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="M&H Construction and Design">
     {{-- Styles --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,10 +29,12 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-
-    <link rel="icon" href="{{ asset('images/logo.svg') }}" type="image/svg+xml">
-    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
-
+    <link rel="icon" type="image/png" href="{{ asset("images/favicon-96x96.png" ) }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset("images/favicon.svg ") }}" />
+    <link rel="shortcut icon" href="{{ asset("images/favicon.ico" ) }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset("images/apple-touch-icon.png" ) }}" />
+    <meta name="apple-mobile-web-app-title" content="M&H Construction and Design" />
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17405520602">
@@ -101,7 +107,9 @@
                             </svg>Write to us: hello@mhdesign.com</a></li>
                 </ul>
                 <ul class="sociality d-flex">
-                    <li><a class="inst" href=""></a></li>
+                    <li><a class="inst"
+                            href="https://www.instagram.com/mh_construct_design?igsh=MWY3bm96ZDJkOXptYw%3D%3D&utm_source=qr"></a>
+                    </li>
                     <li><a class="fb" href=""></a></li>
                     <li><a class="lidin" href=""></a></li>
                 </ul>
@@ -207,14 +215,14 @@
                 if (document.querySelector('.how-we-work')) {
                     let currentId = "";
                     const scrollY = window.scrollY + 100;
-    
+
                     // Визначаємо активний розділ для навігації
                     sections.forEach(({ id, element }) => {
                         if (element.offsetTop <= scrollY && element.offsetTop + element.offsetHeight > scrollY) {
                             currentId = id;
                         }
                     });
-    
+
                     // Активуємо посилання у меню
                     links.forEach(link => {
                         const href = link.getAttribute("href");
@@ -225,18 +233,18 @@
                             link.classList.remove("active");
                         }
                     });
-    
+
                     // Якщо десктоп і є Swiper для зображень
                     if (window.innerWidth >= 768 && desktopSwiper) {
                         let currentStep = null;
-    
+
                         steps.forEach(step => {
                             const rect = step.getBoundingClientRect();
                             if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
                                 currentStep = step;
                             }
                         });
-    
+
                         if (currentStep) {
                             const stepIndex = Array.from(steps).indexOf(currentStep);
                             if (stepIndex !== -1) {

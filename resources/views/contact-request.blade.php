@@ -139,7 +139,7 @@
                 </div>
 
                 <div class="col-12 col-lg-6" id="contactImageParentContainer">
-                    <img id="contactImage" src="{{ asset('images/contact.webp') }}" alt="Team of designers ready to turn your vision into reality — join the creative journey with M&H Construct and Design.">
+                    <img loading="lazy" id="contactImage" src="{{ asset('images/contact.webp') }}" alt="Team of designers ready to turn your vision into reality — join the creative journey with M&H Construct and Design.">
                 </div>
             </div>
         </section>

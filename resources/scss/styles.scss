@@ -418,7 +418,7 @@ h2 {
         line-height: 1em;
         text-transform: uppercase;
         margin-bottom: 0;
-        
+
         @include media(1540) {
             display: inline-block;
             margin-bottom: 30rem;
@@ -859,8 +859,10 @@ footer {
         text-decoration-line: underline;
         text-decoration-style: solid;
         text-decoration-skip-ink: none;
-        text-decoration-thickness: 2.5%; /* 0.6px */
-        text-underline-offset: 20%; /* 4.8px */
+        text-decoration-thickness: 2.5%;
+        /* 0.6px */
+        text-underline-offset: 20%;
+        /* 4.8px */
         text-underline-position: from-font;
         text-transform: uppercase;
 
@@ -990,8 +992,10 @@ footer {
         text-decoration-line: underline;
         text-decoration-style: solid;
         text-decoration-skip-ink: none;
-        text-decoration-thickness: 2.5%; /* 0.6px */
-        text-underline-offset: 20%; /* 4.8px */
+        text-decoration-thickness: 2.5%;
+        /* 0.6px */
+        text-underline-offset: 20%;
+        /* 4.8px */
         text-underline-position: from-font;
         text-transform: uppercase;
     }
@@ -1129,7 +1133,7 @@ footer {
     h1 {
         font-size: 45rem;
         margin-bottom: 60rem;
-        
+
         @include media(1540) {
             margin-bottom: 100rem;
         }
@@ -1665,7 +1669,7 @@ a.full-portfolio-btn {
 
 .image-detail-popup .close-btn {
     position: absolute;
-    top: 20px; 
+    top: 20px;
     right: 30px;
     font-size: 50rem;
     font-weight: 300;
@@ -1693,7 +1697,7 @@ a.full-portfolio-btn {
     width: 90%;
     margin: 0 auto;
     margin-bottom: 195rem;
-    
+
     @include media (769) {
         width: 100%;
     }

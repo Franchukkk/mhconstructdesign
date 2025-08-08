@@ -11,7 +11,7 @@ class PortfolioController extends Controller
     {
         $projects = Project::paginate(9);
 
-        $meta_title = 'Our Work | Interior Design & Renovation Portfolio – M&H Construction and Design';
+        $meta_title = 'Interior Design Portfolio | M&H Construction';
         $meta_description = 'Explore our portfolio of custom design, construction, and renovation projects across South Carolina and Florida. From elegant homes to stunning interiors, we bring your vision to life.';
 
         return view('portfolio.index', compact('projects', 'meta_title', 'meta_description'));

@@ -12,6 +12,7 @@
             <div class="col-12 col-md-6 col-xl-4">
                 <p>{{$project->description}}</p>
                 <table>
+                    <caption style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);">{{ $project->title }}</caption>
                     <tr>
                         <td>Area</td>
                         <td>{{$project->area}} ft<sup>2</sup></td>
@@ -85,7 +86,7 @@
                 <div class="row g-5 project-gallery project-gallery--parent">
                     @foreach ($real_images as $index => $image)
                         <div class="col-6">
-                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}"
+                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $image) }}"
                                 alt="Photo of completed project - Realisation image {{ $index + 1 }}">>
                         </div>
                     @endforeach
@@ -94,7 +95,7 @@
                     @endif
                     @foreach ($design_images as $index => $image)
                         <div class="col-6">
-                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}"
+                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $image) }}"
                                 alt="Design visualization - Render image {{ $index + 1 }}">
                         </div>
                     @endforeach
@@ -111,7 +112,7 @@
                 <a class="button-primary" href="{{ route("contact-request.form") }}">Start the Conversation</a>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
-                <img src="{{ asset("images/get-involved-img-2.webp") }}"
+                <img loading="lazy" src="{{ asset("images/get-involved-img-2.webp") }}"
                     alt="Team of designers ready to turn your vision into reality — join the creative journey with M&H Construct and Design.">
             </div>
         </div>

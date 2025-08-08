@@ -41,7 +41,7 @@
                         @endphp
 
                         <img src="{{ asset('storage/' . $project['hero_image']) }}"
-                            alt="{{ $altDescription }} — Portfolio project by M&H Construction and Design.">
+                            alt="{{ $altDescription }} — Portfolio project by M&H Construction and Design." loading="lazy">
 
                     </a>
                     <a href="{{ route('portfolio.show', $project["slug"]) }}">{{ $project['title'] ?? '' }}</a>
@@ -141,14 +141,16 @@
     <section class="how-we-work">
         <div class="wrapper">
             <h2>how we work</h2>
-            <a href="#getInvolved" class="steps-skip" style="display: none;"></a>
+            <a href="#getInvolved" aria-label="Go to Get Involved Section" class="steps-skip" style="display: none;">
+                    <i class="icon-down-arrow"></i>
+            </a>
             <div class="row how-we-work__steps">
                 <div class="col-12 col-md-6 step-image-container">
                     <div class="swiper step-images-slider-desktop desktop-only">
                         <div class="swiper-wrapper">
                             @for ($i = 1; $i <= 10; $i++)
                                 <div class="swiper-slide">
-                                    <img src="{{ asset("images/step{$i}.webp") }}"
+                                    <img src="{{ asset("images/step{$i}.webp") }}" loading="lazy"
                                         alt="Interior design workflow by M&H Construct and Design: from site survey and client questionnaire to schematic design, concept creation, cost estimation, contract documentation, and final presentation.">
                                 </div>
                             @endfor
@@ -159,7 +161,7 @@
                         <div class="swiper-wrapper">
                             @for ($i = 1; $i <= 10; $i++)
                                 <div class="swiper-slide">
-                                    <img src="{{ asset("images/step{$i}.webp") }}"
+                                    <img src="{{ asset("images/step{$i}.webp") }}" loading="lazy"
                                         alt="Interior design workflow by M&H Construct and Design: from site survey and client questionnaire to schematic design, concept creation, cost estimation, contract documentation, and final presentation.">
                                 </div>
                             @endfor
@@ -280,6 +282,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-8">
                 <img src="{{ asset("images/get-involved-img.webp") }}"
+                    loading="lazy"
                     alt="Team of designers ready to turn your vision into reality — join the creative journey with M&H Construct and Design.">
             </div>
         </div>
