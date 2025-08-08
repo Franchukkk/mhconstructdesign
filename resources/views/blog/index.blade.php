@@ -15,7 +15,7 @@
       <a href="{{ route('blog.show', $post->slug) }}">
       <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
       </a>
-      <strong>{{ $post->title }}</strong>
+      <strong class="article-title">{{ $post->title }}</strong>
       <p>{{ $post->preview_heading }}</p>
       <a href="{{ route('blog.show', $post->slug) }}">read this</a>
       </div>

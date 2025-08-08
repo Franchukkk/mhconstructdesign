@@ -1030,6 +1030,18 @@ footer {
     }
 }
 
+.article-title {
+    min-height: 67px;
+
+    &+p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
 .blog {
     margin-bottom: 201rem;
 
