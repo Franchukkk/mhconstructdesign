@@ -42,7 +42,8 @@ Route::prefix('admin')->middleware(['web', 'auth'])->name('admin.')->group(funct
         if (!Auth::check() || !Auth::user()->is_admin) {
             abort(403, 'Access denied');
         }
-        return app(AdminContactRequestController::class)->index();;
+        return app(AdminContactRequestController::class)->index();
+        ;
     })->name('requests.index');
 
     Route::get('/', function () {
@@ -86,6 +87,15 @@ Route::prefix('admin')->middleware(['web', 'auth'])->name('admin.')->group(funct
         }
         return app(ProjectController::class)->destroy($project);
     })->name('projects.destroy');
+
+    Route::delete('requests/clear', function () {
+        if (!Auth::check() || !Auth::user()->is_admin) {
+            abort(403, 'Access denied');
+        }
+        \App\Models\ContactRequest::truncate(); // або ->delete() якщо треба викликати події Eloquent
+        return redirect()->route('admin.requests.index')->with('success', 'Всі заявки видалено');
+    })->name('requests.clear');
+
 });
 
 Route::prefix('admin')->middleware(['web', 'auth'])->name('admin.')->group(function () {

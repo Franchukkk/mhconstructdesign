@@ -59,20 +59,76 @@
         }
 
         /* Ширина колонок */
-        table.requests-table th:nth-child(1) { width: 50px; }    /* id */
-        table.requests-table th:nth-child(2) { width: 140px; }   /* full_name */
-        table.requests-table th:nth-child(3) { width: 180px; }   /* email */
-        table.requests-table th:nth-child(4) { width: 120px; }   /* phone */
-        table.requests-table th:nth-child(5) { width: 100px; }   /* how_heard */
-        table.requests-table th:nth-child(6) { width: 180px; }   /* services_selected */
-        table.requests-table th:nth-child(7) { width: 140px; }   /* gclid */
-        table.requests-table th:nth-child(8) { width: 140px; }   /* client_id */
-        table.requests-table th:nth-child(9) { width: 220px; }   /* referrer */
-        table.requests-table th:nth-child(10) { width: 220px; }  /* page_url */
-        table.requests-table th:nth-child(11) { width: 120px; }  /* ip_address */
-        table.requests-table th:nth-child(12) { width: 250px; }  /* user_agent */
-        table.requests-table th:nth-child(13) { width: 130px; }  /* created_at */
-        table.requests-table th:nth-child(14) { width: 130px; }  /* updated_at */
+        table.requests-table th:nth-child(1) {
+            width: 50px;
+        }
+
+        /* id */
+        table.requests-table th:nth-child(2) {
+            width: 140px;
+        }
+
+        /* full_name */
+        table.requests-table th:nth-child(3) {
+            width: 180px;
+        }
+
+        /* email */
+        table.requests-table th:nth-child(4) {
+            width: 120px;
+        }
+
+        /* phone */
+        table.requests-table th:nth-child(5) {
+            width: 100px;
+        }
+
+        /* how_heard */
+        table.requests-table th:nth-child(6) {
+            width: 180px;
+        }
+
+        /* services_selected */
+        table.requests-table th:nth-child(7) {
+            width: 140px;
+        }
+
+        /* gclid */
+        table.requests-table th:nth-child(8) {
+            width: 140px;
+        }
+
+        /* client_id */
+        table.requests-table th:nth-child(9) {
+            width: 220px;
+        }
+
+        /* referrer */
+        table.requests-table th:nth-child(10) {
+            width: 220px;
+        }
+
+        /* page_url */
+        table.requests-table th:nth-child(11) {
+            width: 120px;
+        }
+
+        /* ip_address */
+        table.requests-table th:nth-child(12) {
+            width: 250px;
+        }
+
+        /* user_agent */
+        table.requests-table th:nth-child(13) {
+            width: 130px;
+        }
+
+        /* created_at */
+        table.requests-table th:nth-child(14) {
+            width: 130px;
+        }
+
+        /* updated_at */
 
         .pagination-wrapper {
             display: flex;
@@ -96,6 +152,7 @@
             text-decoration: none;
             word-break: break-all;
         }
+
         a.page-url-link:hover {
             text-decoration: underline;
         }
@@ -103,11 +160,20 @@
         .td-width {
             min-width: 300px;
         }
-
     </style>
 
     <div class="requests-wrapper">
         <h1 class="requests-title">Requests</h1>
+
+        <form action="{{ route('admin.requests.clear') }}" method="POST" style="display:inline-block;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="export-btn" style="background-color: #dc3545;"
+                onclick="return confirm('Are you sure that you want to clear all requests?')">
+                Clear all requests
+            </button>
+        </form>
+
 
         <a href="{{ route('export.contact.requests') }}" class="export-btn">Export to Excel</a>
 

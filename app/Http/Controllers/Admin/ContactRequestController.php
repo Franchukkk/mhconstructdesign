@@ -22,4 +22,13 @@ class ContactRequestController extends Controller
         $requests = ContactRequest::orderByDesc('created_at')->paginate(10);
         return view('admin.requests.index', compact('requests'));
     }
+
+    public function clear()
+    {
+        $this->checkAdmin();
+        ContactRequest::truncate();
+        return redirect()->route('admin.requests.index')
+            ->with('success', 'Всі заявки успішно видалені');
+    }
+
 }
