@@ -403,7 +403,8 @@ h2 {
 
         text-transform: uppercase;
 
-        @include media(769) {
+
+        @include media(1540) {
             font-size: 40rem;
         }
 
@@ -418,7 +419,7 @@ h2 {
         text-transform: uppercase;
         margin-bottom: 0;
         
-        @include media(769) {
+        @include media(1540) {
             display: inline-block;
             margin-bottom: 30rem;
 
@@ -428,13 +429,16 @@ h2 {
     p {
         display: none;
         color: #121212;
-        font-size: 32rem;
+        font-size: 25rem;
         font-weight: 300;
         line-height: 1em;
-        text-transform: uppercase;
 
         @include media(769) {
             display: block;
+        }
+
+        @include media(1540) {
+            font-size: 32rem;
         }
     }
 
@@ -472,6 +476,11 @@ h2 {
         line-height: 1em;
         text-transform: uppercase;
         margin-bottom: 52rem;
+
+        @include media(1540) {
+            font-size: 34rem;
+            margin-bottom: 30rem;
+        }
     }
 
     p {
@@ -484,6 +493,10 @@ h2 {
         text-transform: none;
 
         @include media(769) {
+            font-size: 26rem;
+        }
+
+        @include media(1540) {
             font-size: 32rem;
         }
     }
@@ -1089,6 +1102,8 @@ footer {
     }
 
     img {
+        display: block;
+        margin: 0 auto;
         width: auto !important;
         max-width: 100%;
         min-width: 250px;
@@ -1387,7 +1402,6 @@ footer {
         font-weight: 300;
         line-height: 1em;
         margin-bottom: 40.5rem;
-        text-transform: uppercase;
 
         @include media(769) {
             margin-bottom: 85rem;

@@ -118,16 +118,18 @@
         }
 
         .ck-content .image img {
+            display: block !important;
+            margin: 0 auto !important;
             width: auto !important;
             min-width: 300px !important;
             max-height: 480px !important;
             aspect-ratio: auto !important;
             object-fit: contain !important;
             min-width: auto !important;
-            margin: 0 !important;
         }
 
         figure.image {
+            width: 100% !important;
             margin: 0 !important;
         }
 
