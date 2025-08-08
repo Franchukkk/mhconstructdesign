@@ -109,7 +109,7 @@
                                 </label>
                             </div>
 
-                            <button id="nextBtn" class="button-primary" type="button">Next</button>
+                            <button id="nextBtn" class="button-primary" type="button">Request Consultation</button>
                         </div>
                         <div id="formStep2" style="display: none;">
                             <div class="row mb-25">

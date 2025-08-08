@@ -42,8 +42,8 @@
             @endphp
 
             <div class="col-12 col-md-6 col-xl-8">
-                <img src="{{ asset('storage/' . ($project->portfolio_cover ?? $project->hero_image)) }}"
-                    alt="{{ $project->title }} — {{ Str::contains($project->portfolio_cover ?? $project->hero_image, 'render') ? '3D visualization' : 'Completed project photo' }} by M&H Construct and Design.">
+                <img src="{{ asset('storage/' . ($project->portfolio_project_page_cover ?? $project->portfolio_cover)) }}"
+                    alt="{{ $project->title }} — {{ Str::contains($project->portfolio_project_page_cover ?? $project->portfolio_cover, 'render') ? '3D visualization' : 'Completed project photo' }} by M&H Construct and Design.">
             </div>
         </div>
         @php
@@ -90,6 +90,9 @@
                                 alt="Photo of completed project - Realisation image {{ $index + 1 }}">>
                         </div>
                     @endforeach
+                    @if ($project->design_description != null && $project->design_description !== '')
+                        <p>{{$project->design_description}}</p>
+                    @endif
                     @if($real_images->isNotEmpty() && $design_images->isNotEmpty())
                         <h3>Realisation</h3>
                     @endif
@@ -99,6 +102,9 @@
                                 alt="Design visualization - Render image {{ $index + 1 }}">
                         </div>
                     @endforeach
+                    @if ($project->realization_description != null && $project->realization_description !== '')
+                        <p>{{$project->realization_description}}</p>
+                    @endif
                 </div>
             @endif
         </div>

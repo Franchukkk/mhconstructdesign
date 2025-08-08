@@ -107,7 +107,7 @@
             font-size: 25rem !important;
             font-weight: 300 !important;
             line-height: 1.2em !important;
-            margin-bottom: 35rem !important;
+            margin-bottom: 0 !important;
         }
 
         .ck-content img {

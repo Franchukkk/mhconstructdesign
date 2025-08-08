@@ -25,6 +25,8 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:projects,title',
             'description' => 'nullable|string',
+            'design_description' => 'nullable|string',
+            'realization_description' => 'nullable|string',
             'hero_image' => 'nullable|image|max:20048',
             'portfolio_cover' => 'nullable|image|max:20048',
             'area' => 'nullable|string|max:255',
@@ -39,6 +41,8 @@ class ProjectController extends Controller
             'gallery.*.design_image' => 'nullable|image|max:20048',
             'gallery.*.real_image' => 'nullable|image|max:20048',
             'gallery.*.description' => 'nullable|string',
+            'portfolio_project_page_cover' => 'nullable|image|max:20048',
+
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
@@ -58,6 +62,10 @@ class ProjectController extends Controller
             $validated['portfolio_cover'] = $request->file('portfolio_cover')->store('projects/portfolio_covers', 'public');
         }
 
+
+        if ($request->hasFile('portfolio_project_page_cover')) {
+            $validated['portfolio_project_page_cover'] = $request->file('portfolio_project_page_cover')->store('projects/extra_images', 'public');
+        }
 
         $project = Project::create($validated);
 
@@ -106,6 +114,8 @@ class ProjectController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'design_description' => 'nullable|string',
+            'realization_description' => 'nullable|string',
             'hero_image' => 'nullable|image|max:20048',
             'portfolio_cover' => 'nullable|image|max:20048',
             'area' => 'nullable|string|max:255',
@@ -122,12 +132,17 @@ class ProjectController extends Controller
             'gallery.*.description' => 'nullable|string|max:1000',
             'gallery.*.old_design_image' => 'nullable|string',
             'gallery.*.old_real_image' => 'nullable|string',
+            'portfolio_project_page_cover' => 'nullable|image|max:20048',
+
         ]);
 
 
         // Оновлення основних полів проекту
         $project->title = $validatedData['title'];
         $project->description = $validatedData['description'] ?? null;
+        $project->design_description = $validatedData['design_description'] ?? null;
+        $project->realization_description = $validatedData['realization_description'] ?? null;
+
         $project->area = $validatedData['area'] ?? null;
         $project->implementation_time = $validatedData['implementation_time'] ?? null;
         $project->design_time = $validatedData['design_time'] ?? null;
@@ -146,6 +161,15 @@ class ProjectController extends Controller
 
             $project->portfolio_cover = $request->file('portfolio_cover')->store('projects/portfolio_covers', 'public');
         }
+
+        if ($request->hasFile('portfolio_project_page_cover')) {
+            // Опційно видалити старий файл:
+            // Storage::disk('public')->delete($project->portfolio_project_page_cover);
+
+            $project->portfolio_project_page_cover = $request->file('portfolio_project_page_cover')->store('projects/extra_images', 'public');
+        }
+
+
 
         $project->meta_title = $validatedData['meta_title'] ?? $project->title;
 

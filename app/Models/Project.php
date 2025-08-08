@@ -9,9 +9,11 @@ class Project extends Model
 {
     protected $fillable = [
         'title', 'slug', 'description', 'hero_image',
-        'portfolio_cover', // <- додано сюди
+        'portfolio_cover',
+        'portfolio_project_page_cover',
         'area', 'implementation_time', 'design_time', 'style', 'location',
-        'meta_title', 'meta_description'
+        'meta_title', 'meta_description',
+        'design_description', 'realization_description'
     ];
 
     public function galleryItems()

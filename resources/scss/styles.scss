@@ -1116,7 +1116,7 @@ footer {
         font-size: 32rem;
         font-weight: 300;
         line-height: 1.2em;
-        margin-bottom: 35rem;
+        margin-bottom: 0;
     }
 
     img {
@@ -1292,7 +1292,6 @@ footer {
         }
 
         button {
-            width: 212rem;
             appearance: none;
             outline: none;
             border: none;
@@ -1396,10 +1395,10 @@ footer {
 
     h1 {
         color: #121212;
-        font-size: 96rem;
+        font-size: 75rem;
         font-weight: 300;
         line-height: 0.83em;
-        margin-bottom: 90rem;
+        margin-bottom: 75rem;
         text-transform: uppercase;
     }
 }
@@ -1714,5 +1713,18 @@ a.full-portfolio-btn {
 
     @include media (769) {
         width: 100%;
+    }
+
+    p {
+        color: #121212;
+        font-size: 24rem;
+        font-weight: 300;
+        line-height: 1em;
+        text-transform: uppercase;
+        margin-bottom: 30rem;
+
+        @include media(769) {
+            margin-bottom: 36rem;
+        }
     }
 }

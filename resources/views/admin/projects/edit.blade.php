@@ -245,6 +245,21 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Design Description</label>
+            <textarea name="design_description"
+                class="form-control">{{ old('design_description', $project->design_description) }}</textarea>
+            @error('design_description')<div class="text-danger">{{ $message }}</div>@enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Realization Description</label>
+            <textarea name="realization_description"
+                class="form-control">{{ old('realization_description', $project->realization_description) }}</textarea>
+            @error('realization_description')<div class="text-danger">{{ $message }}</div>@enderror
+        </div>
+
+
+        <div class="mb-3">
             <label class="form-label">Hero Image</label>
             <label for="hero_image" class="file-dropzone" id="dropzone">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon-upload" viewBox="0 0 24 24" fill="none"
@@ -280,6 +295,33 @@
             </label>
             @error('portfolio_cover')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
+
+        <div class="mb-3">
+            <label class="form-label">Portfolio Project Page Cover</label>
+            <label for="portfolio_project_page_cover" class="file-dropzone" id="dropzone-portfolio-project-page-cover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-upload" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="38"
+                    height="38">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <span class="dropzone-text">Click to select an image</span>
+
+                <img id="preview-portfolio-project-page-cover"
+                    src="{{ $project->portfolio_project_page_cover ? asset('storage/' . $project->portfolio_project_page_cover) : '#' }}"
+                    alt="Попередній перегляд"
+                    style="{{ $project->portfolio_project_page_cover ? '' : 'display: none;' }}" />
+
+                <input type="file" name="portfolio_project_page_cover" id="portfolio_project_page_cover" accept="image/*"
+                    hidden>
+            </label>
+
+            @error('portfolio_project_page_cover')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
 
 
         @foreach (['area' => 'Area (ft²)', 'implementation_time' => 'Implementation Time (months)', 'design_time' => 'Project Development Time (weeks)', 'style' => 'Style', 'location' => 'Address'] as $field => $label)
@@ -357,15 +399,15 @@
 
             const createDropzone = (inputName, index, label) => {
                 return `
-                                                        <label>${label}</label>
-                                                        <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
-                                                            <div>
-                                                                <span class="dropzone-text">Click to select an image</span>
-                                                                <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                                                                <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
-                                                            </div>
-                                                        </div>
-                                                    `;
+                                                                                <label>${label}</label>
+                                                                                <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                                                                                    <div>
+                                                                                        <span class="dropzone-text">Click to select an image</span>
+                                                                                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                                                                        <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            `;
             };
 
             function refreshGalleryIndexes() {
@@ -399,15 +441,15 @@
 
             document.getElementById('add-gallery-item').addEventListener('click', function () {
                 const html = `
-                                        <div class="gallery-pair">
-                                            <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
-                                            <div class="dropzones-flex">
-                                                <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
-                                                <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
-                                            </div>
-                                            <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
-                                        </div>
-                                    `;
+                                                                <div class="gallery-pair">
+                                                                    <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
+                                                                    <div class="dropzones-flex">
+                                                                        <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
+                                                                        <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
+                                                                </div>
+                                                            `;
 
                 galleryContainer.insertAdjacentHTML('beforeend', html);
                 initDropzones();
@@ -498,6 +540,26 @@
                     reader.readAsDataURL(file);
                 }
             });
+
+            const portfolioInput = document.getElementById('portfolio_project_page_cover');
+            if (portfolioInput) {
+                portfolioInput.addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    const preview = document.getElementById('preview-portfolio-project-page-cover');
+                    const dropzoneText = document.querySelector('#dropzone-portfolio-project-page-cover .dropzone-text');
+
+                    if (file && file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            preview.src = event.target.result;
+                            preview.style.display = 'block';
+                            dropzoneText.style.display = 'none';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
 
         });
 
