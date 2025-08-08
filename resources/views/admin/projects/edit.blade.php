@@ -357,15 +357,15 @@
 
             const createDropzone = (inputName, index, label) => {
                 return `
-                                                    <label>${label}</label>
-                                                    <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
-                                                        <div>
-                                                            <span class="dropzone-text">Click to select an image</span>
-                                                            <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                                                            <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                                        <label>${label}</label>
+                                                        <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                                                            <div>
+                                                                <span class="dropzone-text">Click to select an image</span>
+                                                                <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                                                <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                `;
+                                                    `;
             };
 
             function refreshGalleryIndexes() {
@@ -399,15 +399,15 @@
 
             document.getElementById('add-gallery-item').addEventListener('click', function () {
                 const html = `
-                                    <div class="gallery-pair">
-                                        <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
-                                        <div class="dropzones-flex">
-                                            <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
-                                            <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
+                                        <div class="gallery-pair">
+                                            <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
+                                            <div class="dropzones-flex">
+                                                <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
+                                                <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
+                                            </div>
+                                            <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
                                         </div>
-                                        <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
-                                    </div>
-                                `;
+                                    `;
 
                 galleryContainer.insertAdjacentHTML('beforeend', html);
                 initDropzones();
@@ -482,6 +482,23 @@
                     reader.readAsDataURL(file);
                 }
             });
+
+            document.getElementById('hero_image').addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                const preview = document.getElementById('preview-image');
+                const dropzoneText = document.querySelector('#dropzone .dropzone-text');
+
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        preview.src = event.target.result;
+                        preview.style.display = 'block';
+                        dropzoneText.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
         });
 
 
