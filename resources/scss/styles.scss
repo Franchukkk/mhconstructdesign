@@ -1092,20 +1092,32 @@ footer {
         width: auto !important;
         max-width: 100%;
         min-width: 250px;
-        max-height: 480px !important;
+        max-height: 450px !important;
         height: auto !important;
         object-fit: contain !important;
         object-position: top center !important;
         aspect-ratio: auto !important;
+
+        @include media(1540) {
+            max-height: 480px !important;
+        }
     }
 }
 
 .article {
-    padding-top: 170rem;
+    padding-top: 145rem;
+
+    @include media(1540) {
+        padding-top: 170rem;
+    }
 
     h1 {
         font-size: 45rem;
-        margin-bottom: 100rem;
+        margin-bottom: 60rem;
+        
+        @include media(1540) {
+            margin-bottom: 100rem;
+        }
     }
 
     h2 {
