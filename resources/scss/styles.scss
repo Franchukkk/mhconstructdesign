@@ -1031,7 +1031,9 @@ footer {
 }
 
 .article-title {
-    min-height: 67px;
+    @include media(769) {
+        min-height: 67px;
+    }
 
     &+p {
         display: -webkit-box !important;
