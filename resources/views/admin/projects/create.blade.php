@@ -281,6 +281,104 @@
         .mb-2 {
             margin-bottom: 10rem !important;
         }
+
+        .gallery-description {
+            max-width: 600px;
+            color: #333;
+            padding-bottom: 100px;
+        }
+
+        .gallery-description a {
+            font-size: 18px;
+        }
+
+        .gallery-description h3 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        #line-container,
+        #render-container,
+        #real-container {
+            margin-bottom: 15px;
+        }
+
+        .line {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .line textarea {
+            flex-grow: 1;
+            resize: vertical;
+            min-height: 60px;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1.5px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+            color: #222;
+        }
+
+        .line textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+        }
+
+        .delete-line {
+            margin-left: 12px;
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            padding: 6px 10px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .delete-line:hover {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+
+        .add-line-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            user-select: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .add-line-btn:hover {
+            background-color: #45a049;
+        }
+
+        .line {
+            align-items: center;
+            gap: 10px;
+        }
+
+        .line-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
     </style>
 
 
@@ -321,25 +419,6 @@
             <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
-
-        <div class="mb-3">
-            <label for="design_description" class="form-label">Design Description</label>
-            <textarea name="design_description" id="design_description" class="form-control"
-                rows="4">{{ old('design_description') }}</textarea>
-            @error('design_description')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="realization_description" class="form-label">Realization Description</label>
-            <textarea name="realization_description" id="realization_description" class="form-control"
-                rows="4">{{ old('realization_description') }}</textarea>
-            @error('realization_description')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
 
         <div class="mb-3">
             <label class="form-label">Hero Image</label>
@@ -441,6 +520,33 @@
             </div>
         </div>
 
+        <div class="gallery-description">
+            <h3>Render Description</h3>
+            <div id="render-container">
+                <div class="line">
+                    <label class="line-label">Line 1</label>
+                    <textarea name="render_desc[]" placeholder="Enter render description..."></textarea>
+                    <a href="#" class="delete-line">Delete</a>
+                </div>
+            </div>
+            <a href="#" id="add-render-line" class="add-line-btn">Create new line</a>
+
+            <h3>Real Photo Description</h3>
+            <div id="real-container">
+                <div class="line">
+                    <label class="line-label">Line 1</label>
+                    <textarea name="real_desc[]" placeholder="Enter real photo description..."></textarea>
+                    <a href="#" class="delete-line">Delete</a>
+                </div>
+            </div>
+            <a href="#" id="add-real-line" class="add-line-btn">Create new line</a>
+
+            <input type="hidden" name="design_description" id="design_description">
+            <input type="hidden" name="realization_description" id="realization_description">
+        </div>
+
+
+
         <button type="submit" class="btn btn-success">Create</button>
         <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
@@ -450,33 +556,33 @@
 
         const createDropzone = (inputName, index, label) => {
             return `
-                                            <label>${label}</label>
-                                            <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                                                                        <label>${label}</label>
+                                                                        <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
 
-                                                <div>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
-                                                    </svg>
-                                                    <br>
-                                                    <span class="dropzone-text">Click to select an image</span>
-                                                    <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                                                    <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
-                                                </div>
-                                            </div>
-                                        `;
+                                                                            <div>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
+                                                                                </svg>
+                                                                                <br>
+                                                                                <span class="dropzone-text">Click to select an image</span>
+                                                                                <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                                                                <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                                                            </div>
+                                                                        </div>
+                                                                    `;
         };
 
         document.getElementById('add-gallery-item').addEventListener('click', function () {
             const container = document.getElementById('gallery-items');
             const html = `
-                                            <div class="gallery-pair mb-3 border">
-                                                <div class="dropzones-flex">
-                                                <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
-                                                <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
-                                                </div>
-                                                <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
-                                            </div>
-                                        `;
+                                                                        <div class="gallery-pair mb-3 border">
+                                                                            <div class="dropzones-flex">
+                                                                            <div>${createDropzone('design_image', galleryIndex, 'Render:')}</div>
+                                                                            <div>${createDropzone('real_image', galleryIndex, 'Real picture:')}</div>
+                                                                            </div>
+                                                                            <button type="button" class="btn btn-danger remove-gallery-item">Delete</button>
+                                                                        </div>
+                                                                    `;
             container.insertAdjacentHTML('beforeend', html);
             initDropzones();
             galleryIndex++;
@@ -594,6 +700,110 @@
 
 
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const renderContainer = document.getElementById('render-container');
+            const realContainer = document.getElementById('real-container');
+            const addRenderBtn = document.getElementById('add-render-line');
+            const addRealBtn = document.getElementById('add-real-line');
+            const designHidden = document.getElementById('design_description');
+            const realizationHidden = document.getElementById('realization_description');
+
+            function updateLineLabels(container) {
+                const labels = container.querySelectorAll('.line-label');
+                labels.forEach((label, i) => {
+                    label.textContent = `Line ${i + 1}`;
+                });
+            }
+
+            function createLine() {
+                const div = document.createElement('div');
+                div.classList.add('line');
+
+                const label = document.createElement('label');
+                label.classList.add('line-label');
+                label.textContent = 'Line';
+
+                const textarea = document.createElement('textarea');
+                textarea.name = 'desc[]';
+                textarea.placeholder = "Enter description...";
+
+                const del = document.createElement('a');
+                del.href = '#';
+                del.textContent = 'Delete';
+                del.classList.add('delete-line');
+
+                del.addEventListener('click', e => {
+                    e.preventDefault();
+                    div.remove();
+                    updateHiddenInputs();
+                    updateLineLabels(renderContainer);
+                    updateLineLabels(realContainer);
+                });
+
+                div.appendChild(label);
+                div.appendChild(textarea);
+                div.appendChild(del);
+
+                return div;
+            }
+
+            addRenderBtn.addEventListener('click', e => {
+                e.preventDefault();
+                const line = createLine();
+                line.querySelector('textarea').name = 'render_desc[]';
+                line.querySelector('textarea').placeholder = "Enter render description...";
+                renderContainer.appendChild(line);
+                updateLineLabels(renderContainer);
+                updateHiddenInputs();
+            });
+
+            addRealBtn.addEventListener('click', e => {
+                e.preventDefault();
+                const line = createLine();
+                line.querySelector('textarea').name = 'real_desc[]';
+                line.querySelector('textarea').placeholder = "Enter real photo description...";
+                realContainer.appendChild(line);
+                updateLineLabels(realContainer);
+                updateHiddenInputs();
+            });
+
+            renderContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('delete-line')) {
+                    e.preventDefault();
+                    e.target.parentElement.remove();
+                    updateLineLabels(renderContainer);
+                    updateHiddenInputs();
+                }
+            });
+
+            realContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('delete-line')) {
+                    e.preventDefault();
+                    e.target.parentElement.remove();
+                    updateLineLabels(realContainer);
+                    updateHiddenInputs();
+                }
+            });
+
+            function updateHiddenInputs() {
+                const renderValues = Array.from(renderContainer.querySelectorAll('textarea')).map(t => t.value.trim());
+                const realValues = Array.from(realContainer.querySelectorAll('textarea')).map(t => t.value.trim());
+
+                designHidden.value = JSON.stringify(renderValues);
+                realizationHidden.value = JSON.stringify(realValues);
+            }
+
+            document.querySelector('.gallery-description').addEventListener('input', e => {
+                if (e.target.tagName === 'TEXTAREA') {
+                    updateHiddenInputs();
+                }
+            });
+
+            // Ініціалізація лейблів та прихованих полів
+            updateLineLabels(renderContainer);
+            updateLineLabels(realContainer);
+            updateHiddenInputs();
+        });
     </script>
 
 

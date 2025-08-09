@@ -14,7 +14,8 @@
                 <table>
                     <caption
                         style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);">
-                        {{ $project->title }}</caption>
+                        {{ $project->title }}
+                    </caption>
                     <tr>
                         <td>Area</td>
                         <td>{{$project->area}} ft<sup>2</sup></td>
@@ -61,55 +62,86 @@
         @endif
 
         <!-- <div class="portfolio">
-                            @if ($images->isNotEmpty())
-                                <div class="row g-5 project-gallery">
-                                    @foreach ($images as $index => $image)
-                                        @php
-                                            $pairIndex = intdiv($index, 2);
-                                            $isFirstInPair = $index % 2 === 0;
+                                                        @if ($images->isNotEmpty())
+                                                            <div class="row g-5 project-gallery">
+                                                                @foreach ($images as $index => $image)
+                                                                    @php
+                                                                        $pairIndex = intdiv($index, 2);
+                                                                        $isFirstInPair = $index % 2 === 0;
 
-                                            if ($pairIndex % 2 === 0) {
-                                                $class = $isFirstInPair ? 'col-4' : 'col-8';
-                                            } else {
-                                                $class = $isFirstInPair ? 'col-8' : 'col-4';
-                                            }
-                                        @endphp
+                                                                        if ($pairIndex % 2 === 0) {
+                                                                            $class = $isFirstInPair ? 'col-4' : 'col-8';
+                                                                        } else {
+                                                                            $class = $isFirstInPair ? 'col-8' : 'col-4';
+                                                                        }
+                                                                    @endphp
 
-                                        <div class="{{ $class }}">
-                                            <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
-                                                class="img-fluid w-100" />
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endif
-                        </div> -->
+                                                                    <div class="{{ $class }}">
+                                                                        <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
+                                                                            class="img-fluid w-100" />
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        @endif
+                                                    </div> -->
         <div class="portfolio portfolio-projects-gallery-center">
-            @if ($images->isNotEmpty())
+            @if (count($design_images) > 0)
                 <div class="row g-5 project-gallery project-gallery--parent">
-                    @foreach ($real_images as $index => $image)
+                    @for ($i = 0; $i < count($design_images); $i += 2)
                         <div class="col-6">
-                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $image) }}"
-                                alt="Photo of completed project - Realisation image {{ $index + 1 }}">>
+                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $design_images[$i]['path']) }}"
+                                alt="Design visualization - Render image {{ $i + 1 }}">
                         </div>
-                    @endforeach
-                    @if ($project->design_description != null && $project->design_description !== '')
-                        <p>{{$project->design_description}}</p>
-                    @endif
-                    @if($real_images->isNotEmpty() && $design_images->isNotEmpty())
+
+                        @if (isset($design_images[$i + 1]))
+                            <div class="col-6">
+                                <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $design_images[$i + 1]['path']) }}"
+                                    alt="Design visualization - Render image {{ $i + 2 }}">
+                            </div>
+                        @endif
+
+                        @php
+                            $descIndex = intdiv($i, 2);
+                        @endphp
+
+                        @if (!empty($designDescriptions[$descIndex]))
+                            <div class="col-12">
+                                <p class="image-description">{{ $designDescriptions[$descIndex] }}</p>
+                            </div>
+                        @endif
+                    @endfor
+
+                    @if(count($real_images) > 0 && count($design_images) > 0)
                         <h3>Realisation</h3>
                     @endif
-                    @foreach ($design_images as $index => $image)
+
+                    @for ($i = 0; $i < count($real_images); $i += 2)
                         <div class="col-6">
-                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $image) }}"
-                                alt="Design visualization - Render image {{ $index + 1 }}">
+                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $real_images[$i]['path']) }}"
+                                alt="Photo of completed project - Realisation image {{ $i + 1 }}">
                         </div>
-                    @endforeach
-                    @if ($project->realization_description != null && $project->realization_description !== '')
-                        <p>{{$project->realization_description}}</p>
-                    @endif
+
+                        @if (isset($real_images[$i + 1]))
+                            <div class="col-6">
+                                <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $real_images[$i + 1]['path']) }}"
+                                    alt="Photo of completed project - Realisation image {{ $i + 2 }}">
+                            </div>
+                        @endif
+
+                        @php
+                            $descIndex = intdiv($i, 2);
+                        @endphp
+
+                        @if (!empty($realDescriptions[$descIndex]))
+                            <div class="col-12">
+                                <p class="image-description">{{ $realDescriptions[$descIndex] }}</p>
+                            </div>
+                        @endif
+                    @endfor
                 </div>
             @endif
         </div>
+
     </section>
 
     <section class="get-involved wrapper">
@@ -132,8 +164,9 @@
 
     <script>
         // Передаємо опис із Blade у JS змінні (тут у шаблоні, заміни на свої змінні)
-        window.designDescription = @json($project->design_description ?? '');
-        window.realDescription = @json($project->realization_description ?? '');
+        window.designDescriptions = @json($designDescriptions ?? []);
+        window.realDescriptions = @json($realDescriptions ?? []);
+
 
         function adjustHeroImageHeight() {
             const textBlock = document.querySelector('.project-description-row > .col-xl-4');
@@ -204,99 +237,8 @@
             });
         });
 
-        function sortAndGroupGallery() {
-            const container = document.querySelector('.project-gallery--parent');
-            if (!container) {
-                console.warn('Контейнер .project-gallery--parent не знайдено');
-                return;
-            }
-
-            const allImages = Array.from(document.querySelectorAll('.gallery-image'));
-
-            const realImages = [];
-            const designImages = [];
-
-            allImages.forEach(img => {
-                const alt = img.alt.toLowerCase();
-                if (alt.includes('realisation') || alt.includes('real')) {
-                    realImages.push(img);
-                } else if (alt.includes('design') || alt.includes('render')) {
-                    designImages.push(img);
-                }
-            });
-
-            function getImageRatio(img) {
-                return img.naturalWidth / img.naturalHeight;
-            }
-
-            function sortImagesByRatio(images) {
-                return new Promise(resolve => {
-                    Promise.all(images.map(img => {
-                        return new Promise(r => {
-                            if (img.complete) {
-                                r({ img, ratio: getImageRatio(img) });
-                            } else {
-                                img.onload = () => r({ img, ratio: getImageRatio(img) });
-                                img.onerror = () => r({ img, ratio: 1 });
-                            }
-                        });
-                    })).then(imagesData => {
-                        imagesData.sort((a, b) => a.ratio - b.ratio);
-                        resolve(imagesData);
-                    });
-                });
-            }
-
-            container.innerHTML = '';
-
-            Promise.all([sortImagesByRatio(designImages), sortImagesByRatio(realImages)]).then(([sortedDesign, sortedReal]) => {
-                if (sortedDesign.length) {
-                    const designRow = document.createElement('div');
-                    designRow.classList.add('row', 'g-5');
-                    sortedDesign.forEach(({ img }) => {
-                        const col = document.createElement('div');
-                        col.classList.add('col-6');
-                        col.appendChild(img);
-                        designRow.appendChild(col);
-                    });
-                    container.appendChild(designRow);
-
-                    // Додаємо опис дизайну
-                    if (window.designDescription.trim() !== '') {
-                        const pDesign = document.createElement('p');
-                        pDesign.textContent = window.designDescription;
-                        container.appendChild(pDesign);
-                    }
-                }
-
-                if (sortedReal.length) {
-                    const h3 = document.createElement('h3');
-                    h3.textContent = 'Realisation';
-                    container.appendChild(h3);
-
-                    const realRow = document.createElement('div');
-                    realRow.classList.add('row', 'g-5');
-                    sortedReal.forEach(({ img }) => {
-                        const col = document.createElement('div');
-                        col.classList.add('col-6');
-                        col.appendChild(img);
-                        realRow.appendChild(col);
-                    });
-                    container.appendChild(realRow);
-
-                    // Додаємо опис реалізації
-                    if (window.realDescription.trim() !== '') {
-                        const pReal = document.createElement('p');
-                        pReal.textContent = window.realDescription;
-                        container.appendChild(pReal);
-                    }
-                }
-            });
-        }
-
         window.addEventListener('load', () => {
             adjustHeroImageHeight();
-            sortAndGroupGallery();
         });
 
         window.addEventListener('resize', adjustHeroImageHeight);

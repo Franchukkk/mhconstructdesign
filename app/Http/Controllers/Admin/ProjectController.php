@@ -98,13 +98,18 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $project->load('galleryItems');
-        // Не сортуємо, або сортуємо за order, якщо є
+
+        $renderDescriptions = json_decode($project->design_description ?? '[]', true);
+        $realDescriptions = json_decode($project->realization_description ?? '[]', true);
 
         return view('admin.projects.edit', [
             'project' => $project,
             'gallery' => $project->galleryItems,
+            'renderDescriptions' => $renderDescriptions,
+            'realDescriptions' => $realDescriptions,
         ]);
     }
+
 
 
 

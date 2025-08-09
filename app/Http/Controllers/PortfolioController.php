@@ -42,8 +42,33 @@ class PortfolioController extends Controller
     public function show($slug)
     {
         $project = Project::with('galleryItems')->where('slug', $slug)->firstOrFail();
-        $design_images = $project->galleryItems->pluck('design_image')->filter();
-        $real_images = $project->galleryItems->pluck('real_image')->filter();
+
+        $design_images_raw = $project->galleryItems->pluck('design_image')->filter()->values();
+        $real_images_raw = $project->galleryItems->pluck('real_image')->filter()->values();
+
+        // Функція для отримання масиву з 'path' і 'ratio'
+        $prepareImagesWithRatio = function ($images) {
+            $result = [];
+            foreach ($images as $image) {
+                $path = storage_path('app/public/' . $image);
+                if (file_exists($path)) {
+                    [$width, $height] = getimagesize($path);
+                    $ratio = $height != 0 ? $width / $height : 1; // уникнути ділення на 0
+                    $result[] = [
+                        'path' => $image,
+                        'ratio' => $ratio,
+                    ];
+                }
+            }
+            return $result;
+        };
+
+        $design_images = $prepareImagesWithRatio($design_images_raw);
+        $real_images = $prepareImagesWithRatio($real_images_raw);
+
+        // Сортуємо за ratio
+        usort($design_images, fn($a, $b) => $a['ratio'] <=> $b['ratio']);
+        usort($real_images, fn($a, $b) => $a['ratio'] <=> $b['ratio']);
 
         $meta_title = $project->meta_title ?? $project->title;
         $meta_description = $project->meta_description ?? Str::limit(strip_tags($project->description), 160);
@@ -53,10 +78,15 @@ class PortfolioController extends Controller
             ? asset('storage/' . $project->portfolio_cover)
             : asset('default-og-image.jpg');
 
+        $designDescriptions = json_decode($project->design_description ?? '[]', true);
+        $realDescriptions = json_decode($project->realization_description ?? '[]', true);
+
         return view('portfolio.show', compact(
             'project',
             'design_images',
             'real_images',
+            'designDescriptions',
+            'realDescriptions',
             'meta_title',
             'meta_description',
             'og_title',
@@ -64,5 +94,6 @@ class PortfolioController extends Controller
             'og_image'
         ));
     }
+
 
 }

@@ -10,15 +10,21 @@
             font-weight: 600;
             color: #333;
             font-size: 16.8rem;
+            /* 14 *1.2 = 16.8px */
             margin-bottom: 7.2rem;
+            /* 6 *1.2 = 7.2px */
             display: inline-block;
         }
 
         .form-control {
             border-radius: 4.8rem;
+            /* 4 *1.2 = 4.8px */
             border: 1.2rem solid #ddd;
+            /* 1 *1.2 = 1.2px */
             padding: 9.6rem 14.4rem;
+            /* 8*1.2=9.6px, 12*1.2=14.4px */
             font-size: 16.8rem;
+            /* 14 *1.2 = 16.8px */
             line-height: 1.5;
             width: 100%;
             box-sizing: border-box;
@@ -28,22 +34,29 @@
         .form-control:focus {
             border-color: #80bdff;
             box-shadow: 0 0 0 2.4rem rgba(0, 123, 255, 0.25);
+            /* 2rem *1.2=2.4px */
             outline: none;
         }
 
         .text-danger {
             font-size: 14.4rem;
+            /* 12 *1.2 = 14.4px */
             margin-top: 4.8rem;
+            /* 4 *1.2 = 4.8px */
             color: #dc3545;
         }
 
         .btn {
             padding: 9.6rem 19.2rem;
+            /* 8*1.2=9.6px, 16*1.2=19.2px */
             border-radius: 4.8rem;
+            /* 4 *1.2 =4.8px */
             font-weight: 500;
             font-size: 16.8rem;
+            /* 14 *1.2 =16.8px */
             cursor: pointer;
             border: 1.2rem solid transparent;
+            /* 1 *1.2=1.2px */
             transition: background-color 0.2s ease, border-color 0.2s ease;
             display: inline-block;
             text-align: center;
@@ -95,16 +108,30 @@
             border-color: #bd2130;
         }
 
+        .gallery-pair {
+            background-color: #f8f9fa;
+            border-radius: 4.8rem;
+            /* 4 *1.2=4.8px */
+        }
+
         h1 {
             color: #2c3e50;
             margin-bottom: 18rem;
+            /* 15 *1.2=18px */
             font-size: 28.8rem;
+            /* 24 *1.2=28.8px */
         }
 
         h3 {
             color: #2c3e50;
             margin-bottom: 12rem;
+            /* 10 *1.2=12px */
             font-size: 21.6rem;
+            /* 18 *1.2=21.6px */
+        }
+
+        .gallery-pair {
+            padding: 12rem;
         }
 
         .file-dropzone {
@@ -120,63 +147,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-
-        .file-dropzone span {
-            font-size: 16.8rem;
-            color: #555;
-            margin-top: 9.6rem;
-        }
-
-        .file-dropzone img {
-            margin-top: 14.4rem;
-            max-width: 100%;
-            max-height: 192rem;
-            border-radius: 8.4rem;
-            object-fit: contain;
-            box-shadow: 0 2.4rem 9.6rem rgba(0, 0, 0, 0.1);
-        }
-
-        .dropzone {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 150px;
-            padding: 2rem;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            background-color: #fafafa;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .dropzone.dragover {
-            border-color: #28a745;
-            background-color: #e6ffed;
-        }
-
-        .dropzone-input {
-            display: none;
-        }
-
-        .dropzone-text {
-            color: #555;
-            font-size: 14px;
-        }
-
-        .dropzones-flex {
-            display: flex;
-            gap: 20rem;
-            flex-wrap: wrap;
-        }
-
-        .gallery-pair {
-            background-color: #f8f9fa;
-            border-radius: 4.8rem;
-            padding: 12rem;
-            margin-bottom: 13rem;
         }
 
         button[type="button"]:not(.navbar button),
@@ -206,6 +176,208 @@
             }
 
 
+        }
+
+        .file-dropzone:hover {
+            border-color: #007bff;
+            background-color: #f0f8ff;
+        }
+
+        .file-dropzone span {
+            font-size: 16.8rem;
+            color: #555;
+            margin-top: 9.6rem;
+        }
+
+        .icon-upload {
+            width: 38.4rem;
+            height: 38.4rem;
+            color: #007bff;
+        }
+
+        .file-dropzone.dragover {
+            border-color: #28a745;
+            background-color: #e6ffee;
+        }
+
+        .file-dropzone.dragover .icon-upload {
+            color: #28a745;
+        }
+
+        .file-dropzone.dragover span {
+            color: #28a745;
+        }
+
+        .file-dropzone img {
+            margin-top: 14.4rem;
+            max-width: 100%;
+            max-height: 192rem;
+            border-radius: 8.4rem;
+            object-fit: contain;
+            box-shadow: 0 2.4rem 9.6rem rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-pair img {
+            box-shadow: 0 1.2rem 6rem rgba(0, 0, 0, 0.1);
+            object-fit: contain;
+        }
+
+        .dropzone {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 150px;
+            padding: 2rem;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+            background-color: #fafafa;
+        }
+
+        .dropzones-flex>div {
+            width: 280px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .dropzones-flex>div {
+                width: 100%;
+            }
+
+        }
+
+        .dropzone.dragover {
+            border-color: #28a745;
+            background-color: #e6ffed;
+        }
+
+        .dropzone-text {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .dropzone-input {
+            display: none;
+        }
+
+        .upload-icon {
+            margin-bottom: 6px;
+            color: #999;
+        }
+
+        .dropzones-flex {
+            display: flex;
+            gap: 20rem;
+            flex-wrap: wrap;
+        }
+
+        .mb-3 {
+            margin-bottom: 13rem !important;
+        }
+
+        .mb-2 {
+            margin-bottom: 10rem !important;
+        }
+
+        .gallery-description {
+            max-width: 600px;
+            color: #333;
+            padding-bottom: 100px;
+        }
+
+        .gallery-description a {
+            font-size: 18px;
+        }
+
+        .gallery-description h3 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        #line-container,
+        #render-container,
+        #real-container {
+            margin-bottom: 15px;
+        }
+
+        .line {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .line textarea {
+            flex-grow: 1;
+            resize: vertical;
+            min-height: 60px;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1.5px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+            color: #222;
+        }
+
+        .line textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+        }
+
+        .delete-line {
+            margin-left: 12px;
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            padding: 6px 10px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .delete-line:hover {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+
+        .add-line-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            user-select: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .add-line-btn:hover {
+            background-color: #45a049;
+        }
+
+        .line {
+            align-items: center;
+            gap: 10px;
+        }
+
+        .line-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
         }
     </style>
 
@@ -243,21 +415,6 @@
             <textarea name="description" class="form-control">{{ old('description', $project->description) }}</textarea>
             @error('description')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
-
-        <div class="mb-3">
-            <label class="form-label">Design Description</label>
-            <textarea name="design_description"
-                class="form-control">{{ old('design_description', $project->design_description) }}</textarea>
-            @error('design_description')<div class="text-danger">{{ $message }}</div>@enderror
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Realization Description</label>
-            <textarea name="realization_description"
-                class="form-control">{{ old('realization_description', $project->realization_description) }}</textarea>
-            @error('realization_description')<div class="text-danger">{{ $message }}</div>@enderror
-        </div>
-
 
         <div class="mb-3">
             <label class="form-label">Hero Image</label>
@@ -385,7 +542,52 @@
                     <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
                 </div>
             @endforeach
+            
+        </div>
 
+        <div class="gallery-description">
+            <h3>Render Description</h3>
+            <div id="render-container">
+                @if(!empty($renderDescriptions))
+                    @foreach($renderDescriptions as $i => $desc)
+                        <div class="line">
+                            <label class="line-label">Line {{ $loop->iteration }}</label>
+                            <textarea name="render_desc[]" placeholder="Enter render description...">{{ $desc }}</textarea>
+                            <a href="#" class="delete-line">Delete</a>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="line">
+                        <label class="line-label">Line 1</label>
+                        <textarea name="render_desc[]" placeholder="Enter render description..."></textarea>
+                        <a href="#" class="delete-line">Delete</a>
+                    </div>
+                @endif
+            </div>
+            <a href="#" id="add-render-line" class="add-line-btn">Create new line</a>
+
+            <h3>Real Photo Description</h3>
+            <div id="real-container">
+                @if(!empty($realDescriptions))
+                    @foreach($realDescriptions as $i => $desc)
+                        <div class="line">
+                            <label class="line-label">Line {{ $loop->iteration }}</label>
+                            <textarea name="real_desc[]" placeholder="Enter real photo description...">{{ $desc }}</textarea>
+                            <a href="#" class="delete-line">Delete</a>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="line">
+                        <label class="line-label">Line 1</label>
+                        <textarea name="real_desc[]" placeholder="Enter real photo description..."></textarea>
+                        <a href="#" class="delete-line">Delete</a>
+                    </div>
+                @endif
+            </div>
+            <a href="#" id="add-real-line" class="add-line-btn">Create new line</a>
+
+            <input type="hidden" name="design_description" id="design_description">
+            <input type="hidden" name="realization_description" id="realization_description">
         </div>
 
         <button type="submit" class="btn btn-success">Create</button>
@@ -399,15 +601,15 @@
 
             const createDropzone = (inputName, index, label) => {
                 return `
-                                                                                <label>${label}</label>
-                                                                                <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
-                                                                                    <div>
-                                                                                        <span class="dropzone-text">Click to select an image</span>
-                                                                                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
-                                                                                        <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            `;
+                                                                                                <label>${label}</label>
+                                                                                                <div class="dropzone mb-2" data-preview-id="${inputName}-preview-${index}">
+                                                                                                    <div>
+                                                                                                        <span class="dropzone-text">Click to select an image</span>
+                                                                                                        <input type="file" name="gallery[${index}][${inputName}]" accept="image/*" class="dropzone-input">
+                                                                                                        <img id="${inputName}-preview-${index}" class="preview-image mt-2" style="display: none; max-width: 100%; border-radius: 8px;" />
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            `;
             };
 
             function refreshGalleryIndexes() {
@@ -441,15 +643,15 @@
 
             document.getElementById('add-gallery-item').addEventListener('click', function () {
                 const html = `
-                                                                <div class="gallery-pair">
-                                                                    <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
-                                                                    <div class="dropzones-flex">
-                                                                        <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
-                                                                        <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
-                                                                </div>
-                                                            `;
+                                                                                <div class="gallery-pair">
+                                                                                    <input type="hidden" name="gallery[${galleryIndex}][id]" value="">
+                                                                                    <div class="dropzones-flex">
+                                                                                        <div>${createDropzone('design_image', galleryIndex, 'Render')}</div>
+                                                                                        <div>${createDropzone('real_image', galleryIndex, 'Real picture')}</div>
+                                                                                    </div>
+                                                                                    <button type="button" class="btn btn-danger remove-gallery-item mt-2">Delete</button>
+                                                                                </div>
+                                                                            `;
 
                 galleryContainer.insertAdjacentHTML('beforeend', html);
                 initDropzones();
@@ -561,6 +763,111 @@
             }
 
 
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const renderContainer = document.getElementById('render-container');
+            const realContainer = document.getElementById('real-container');
+            const addRenderBtn = document.getElementById('add-render-line');
+            const addRealBtn = document.getElementById('add-real-line');
+            const designHidden = document.getElementById('design_description');
+            const realizationHidden = document.getElementById('realization_description');
+
+            function updateLineLabels(container) {
+                const labels = container.querySelectorAll('.line-label');
+                labels.forEach((label, i) => {
+                    label.textContent = `Line ${i + 1}`;
+                });
+            }
+
+            function createLine() {
+                const div = document.createElement('div');
+                div.classList.add('line');
+
+                const label = document.createElement('label');
+                label.classList.add('line-label');
+                label.textContent = 'Line';
+
+                const textarea = document.createElement('textarea');
+                textarea.name = 'desc[]';
+                textarea.placeholder = "Enter description...";
+
+                const del = document.createElement('a');
+                del.href = '#';
+                del.textContent = 'Delete';
+                del.classList.add('delete-line');
+
+                del.addEventListener('click', e => {
+                    e.preventDefault();
+                    div.remove();
+                    updateHiddenInputs();
+                    updateLineLabels(renderContainer);
+                    updateLineLabels(realContainer);
+                });
+
+                div.appendChild(label);
+                div.appendChild(textarea);
+                div.appendChild(del);
+
+                return div;
+            }
+
+            addRenderBtn.addEventListener('click', e => {
+                e.preventDefault();
+                const line = createLine();
+                line.querySelector('textarea').name = 'render_desc[]';
+                line.querySelector('textarea').placeholder = "Enter render description...";
+                renderContainer.appendChild(line);
+                updateLineLabels(renderContainer);
+                updateHiddenInputs();
+            });
+
+            addRealBtn.addEventListener('click', e => {
+                e.preventDefault();
+                const line = createLine();
+                line.querySelector('textarea').name = 'real_desc[]';
+                line.querySelector('textarea').placeholder = "Enter real photo description...";
+                realContainer.appendChild(line);
+                updateLineLabels(realContainer);
+                updateHiddenInputs();
+            });
+
+            renderContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('delete-line')) {
+                    e.preventDefault();
+                    e.target.parentElement.remove();
+                    updateLineLabels(renderContainer);
+                    updateHiddenInputs();
+                }
+            });
+
+            realContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('delete-line')) {
+                    e.preventDefault();
+                    e.target.parentElement.remove();
+                    updateLineLabels(realContainer);
+                    updateHiddenInputs();
+                }
+            });
+
+            function updateHiddenInputs() {
+                const renderValues = Array.from(renderContainer.querySelectorAll('textarea')).map(t => t.value.trim());
+                const realValues = Array.from(realContainer.querySelectorAll('textarea')).map(t => t.value.trim());
+
+                designHidden.value = JSON.stringify(renderValues);
+                realizationHidden.value = JSON.stringify(realValues);
+            }
+
+            document.querySelector('.gallery-description').addEventListener('input', e => {
+                if (e.target.tagName === 'TEXTAREA') {
+                    updateHiddenInputs();
+                }
+            });
+
+            // Ініціалізація лейблів та прихованих полів
+            updateLineLabels(renderContainer);
+            updateLineLabels(realContainer);
+            updateHiddenInputs();
         });
 
 
