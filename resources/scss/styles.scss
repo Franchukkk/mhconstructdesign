@@ -1491,11 +1491,52 @@ footer {
         line-height: 1.33em;
         text-transform: uppercase;
     }
+}
 
+.gallery-line {
+    display: flex;
+    gap: 30rem;
+    margin-bottom: 35rem;
     img {
-        width: 100%;
+        object-fit: cover;
+        height: 200rem;
+        @include media(550) {
+            height: 300rem;
+        }
+
+        @include media(769) {
+            height: 550rem;
+        }
+    }
+
+    img:first-child{
+        width: 33%;
+    }
+    img:last-child{
+        width: 66%;
     }
 }
+
+.gallery-line.odd-line {
+    img:first-child{
+        width: 66%;
+    }
+    img:last-child{
+        width: 33%;
+    }
+}
+
+.paragraph-line {
+    margin-top: -35rem;
+    p {
+        margin-bottom: 15rem !important;
+    }
+}
+
+.gallery-image.hidden {
+    visibility: hidden;
+}
+
 
 
 .swiper {

@@ -62,83 +62,96 @@
         @endif
 
         <!-- <div class="portfolio">
-                                                        @if ($images->isNotEmpty())
-                                                            <div class="row g-5 project-gallery">
-                                                                @foreach ($images as $index => $image)
-                                                                    @php
-                                                                        $pairIndex = intdiv($index, 2);
-                                                                        $isFirstInPair = $index % 2 === 0;
+                                                                    @if ($images->isNotEmpty())
+                                                                        <div class="row g-5 project-gallery">
+                                                                            @foreach ($images as $index => $image)
+                                                                                @php
+                                                                                    $pairIndex = intdiv($index, 2);
+                                                                                    $isFirstInPair = $index % 2 === 0;
 
-                                                                        if ($pairIndex % 2 === 0) {
-                                                                            $class = $isFirstInPair ? 'col-4' : 'col-8';
-                                                                        } else {
-                                                                            $class = $isFirstInPair ? 'col-8' : 'col-4';
-                                                                        }
-                                                                    @endphp
+                                                                                    if ($pairIndex % 2 === 0) {
+                                                                                        $class = $isFirstInPair ? 'col-4' : 'col-8';
+                                                                                    } else {
+                                                                                        $class = $isFirstInPair ? 'col-8' : 'col-4';
+                                                                                    }
+                                                                                @endphp
 
-                                                                    <div class="{{ $class }}">
-                                                                        <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
-                                                                            class="img-fluid w-100" />
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        @endif
-                                                    </div> -->
+                                                                                <div class="{{ $class }}">
+                                                                                    <img class="gallery-image" src="{{ asset('storage/' . $image) }}" alt="Project Image"
+                                                                                        class="img-fluid w-100" />
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    @endif
+                                                                </div> -->
         <div class="portfolio portfolio-projects-gallery-center">
             @if (count($design_images) > 0)
-                <div class="row g-5 project-gallery project-gallery--parent">
+                <div class="project-gallery project-gallery--parent">
+                    {{-- Дизайн (рендери) --}}
                     @for ($i = 0; $i < count($design_images); $i += 2)
-                        <div class="col-6">
-                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $design_images[$i]['path']) }}"
-                                alt="Design visualization - Render image {{ $i + 1 }}">
-                        </div>
-
-                        @if (isset($design_images[$i + 1]))
-                            <div class="col-6">
-                                <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $design_images[$i + 1]['path']) }}"
-                                    alt="Design visualization - Render image {{ $i + 2 }}">
-                            </div>
-                        @endif
-
                         @php
-                            $descIndex = intdiv($i, 2);
+                            $lineIndex = intdiv($i, 2); // Номер ряду
+                            $isOdd = $lineIndex % 2 !== 0; // true для непарних
                         @endphp
 
-                        @if (!empty($designDescriptions[$descIndex]))
-                            <div class="col-12">
-                                <p class="image-description">{{ $designDescriptions[$descIndex] }}</p>
+                        <div class="gallery-line {{ $isOdd ? 'odd-line' : '' }}">
+                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $design_images[$i]['path']) }}"
+                                alt="Design visualization - Render image {{ $i + 1 }}">
+
+                            @if (isset($design_images[$i + 1]))
+                                <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $design_images[$i + 1]['path']) }}"
+                                    alt="Design visualization - Render image {{ $i + 2 }}">
+                            @else
+                                {{-- Дублікат з hidden --}}
+                                <img loading="lazy" class="gallery-image hidden"
+                                    src="{{ asset('storage/' . $design_images[$i]['path']) }}"
+                                    alt="Hidden duplicate of Render image {{ $i + 1 }}">
+                            @endif
+                        </div>
+
+                        @if (!empty($designDescriptions[$lineIndex]))
+                            <div class="paragraph-line">
+                                <p class="image-description">{{ $designDescriptions[$lineIndex] }}</p>
                             </div>
                         @endif
                     @endfor
 
+                    {{-- Заголовок "Realisation" --}}
                     @if(count($real_images) > 0 && count($design_images) > 0)
                         <h3>Realisation</h3>
                     @endif
 
+                    {{-- Реалізація (фото) --}}
                     @for ($i = 0; $i < count($real_images); $i += 2)
-                        <div class="col-6">
-                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $real_images[$i]['path']) }}"
-                                alt="Photo of completed project - Realisation image {{ $i + 1 }}">
-                        </div>
-
-                        @if (isset($real_images[$i + 1]))
-                            <div class="col-6">
-                                <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $real_images[$i + 1]['path']) }}"
-                                    alt="Photo of completed project - Realisation image {{ $i + 2 }}">
-                            </div>
-                        @endif
-
                         @php
-                            $descIndex = intdiv($i, 2);
+                            $lineIndex = intdiv($i, 2);
+                            $isOdd = $lineIndex % 2 !== 0;
                         @endphp
 
-                        @if (!empty($realDescriptions[$descIndex]))
-                            <div class="col-12">
-                                <p class="image-description">{{ $realDescriptions[$descIndex] }}</p>
+                        <div class="gallery-line {{ $isOdd ? 'odd-line' : '' }}">
+                            <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $real_images[$i]['path']) }}"
+                                alt="Photo of completed project - Realisation image {{ $i + 1 }}">
+
+                            @if (isset($real_images[$i + 1]))
+                                <img loading="lazy" class="gallery-image" src="{{ asset('storage/' . $real_images[$i + 1]['path']) }}"
+                                    alt="Photo of completed project - Realisation image {{ $i + 2 }}">
+                            @else
+                                {{-- Дублікат з hidden --}}
+                                <img loading="lazy" class="gallery-image hidden"
+                                    src="{{ asset('storage/' . $real_images[$i]['path']) }}"
+                                    alt="Hidden duplicate of Realisation image {{ $i + 1 }}">
+                            @endif
+                        </div>
+
+                        @if (!empty($realDescriptions[$lineIndex]))
+                            <div class="paragraph-line">
+                                <p class="image-description">{{ $realDescriptions[$lineIndex] }}</p>
                             </div>
                         @endif
                     @endfor
                 </div>
+
+
             @endif
         </div>
 
