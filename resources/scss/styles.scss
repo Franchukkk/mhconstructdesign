@@ -385,7 +385,11 @@ h2 {
 }
 
 .service:last-child {
-    margin-bottom: 199rem;
+    margin-bottom: 120rem;
+
+    @include media(769) {
+        margin-bottom: 199rem;
+    }
 }
 
 .service {
@@ -586,6 +590,13 @@ h2 {
 }
 
 .get-involved {
+    h2 {
+        font-size: 48rem;
+
+        @include media(769) {
+            font-size: 64rem;
+        }
+    }
 
     .g-5,
     .gx-5 {
@@ -782,7 +793,11 @@ footer {
 }
 
 .portfolio {
-    margin-bottom: 192rem;
+    margin-bottom: 120rem;
+
+    @include media(769) {
+        margin-bottom: 192rem;
+    }
 
     .col-12 a:not(.button-primary) {
         width: 100%;
@@ -1406,7 +1421,7 @@ footer {
 
     p {
         color: #121212;
-        font-size: 32rem;
+        font-size: 27rem;
         font-weight: 300;
         line-height: 1em;
         margin-bottom: 40.5rem;
@@ -1459,7 +1474,13 @@ footer {
     }
 
     h2 {
-        margin-bottom: 90rem;
+        font-size: 48rem;
+
+        @include media(769) {
+            font-size: 64rem;
+        }
+
+        margin-bottom: 70rem;
     }
 
     h3 {

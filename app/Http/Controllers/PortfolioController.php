@@ -67,8 +67,8 @@ class PortfolioController extends Controller
         $real_images = $prepareImagesWithRatio($real_images_raw);
 
         // Сортуємо за ratio
-        usort($design_images, fn($a, $b) => $a['ratio'] <=> $b['ratio']);
-        usort($real_images, fn($a, $b) => $a['ratio'] <=> $b['ratio']);
+        // usort($design_images, fn($a, $b) => $a['ratio'] <=> $b['ratio']);
+        // usort($real_images, fn($a, $b) => $a['ratio'] <=> $b['ratio']);
 
         $meta_title = $project->meta_title ?? $project->title;
         $meta_description = $project->meta_description ?? Str::limit(strip_tags($project->description), 160);
