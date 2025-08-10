@@ -197,6 +197,10 @@ a {
     column-gap: 88rem;
 }
 
+.blog-list-item {
+    margin-bottom: 35rem;
+}
+
 a.burger {
     display: block;
     width: 30px;
@@ -1412,7 +1416,7 @@ footer {
 .project-description-row {
     --bs-gutter-x: 50rem !important;
     --bs-gutter-y: 40.5rem !important;
-    margin-bottom: 191rem;
+    margin-bottom: 150rem;
     flex-wrap: wrap-reverse !important;
 
     @include media (769) {
@@ -1475,11 +1479,6 @@ footer {
 
     h2 {
         font-size: 48rem;
-
-        @include media(769) {
-            font-size: 64rem;
-        }
-
         margin-bottom: 70rem;
     }
 
@@ -1496,7 +1495,11 @@ footer {
 .gallery-line {
     display: flex;
     gap: 30rem;
-    margin-bottom: 35rem;
+    margin-bottom: 30rem;
+    overflow-x: hidden;
+    @include media(769) {
+        margin-bottom: 35rem;
+    }
     img {
         object-fit: cover;
         height: 200rem;
@@ -1527,6 +1530,10 @@ footer {
 }
 
 .paragraph-line {
+    display: none;
+    @include media(769) {
+        display: block;
+    }
     margin-top: -35rem;
     p {
         margin-bottom: 15rem !important;

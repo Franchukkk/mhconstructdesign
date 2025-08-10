@@ -19,6 +19,15 @@ use App\Models\BlogPost;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
 
+Route::fallback(function (Request $request) {
+    \Log::warning('404', [
+        'path' => $request->path(),
+        'referer' => $request->headers->get('referer'),
+        'agent' => $request->userAgent(),
+    ]);
+    abort(404);
+});
+
 Route::get('/export-contact-requests', function () {
     return Excel::download(new ContactRequestsExport, 'contact_requests.xlsx');
 })->name('export.contact.requests');
